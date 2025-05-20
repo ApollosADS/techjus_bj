@@ -31,7 +31,11 @@ const HeroSection: React.FC = () => {
               href="https://chat.whatsapp.com/D5pdYuXAnTB9MaXDZO9cOc"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary bg-techjus-blue text-white text-center py-3 px-6 rounded-lg shadow-md transition-all duration-200 hover:bg-white hover:text-techjus-blue"
+              className="btn-primary bg-techjus-blue text-white text-center py-3 px-6 rounded-lg shadow-md transition-all duration-200 hover:bg-white hover:text-techjus-blue animate-pulse"
+              style={{
+                animation: 'pulse 2s infinite',
+                boxShadow: '0 0 0 0 rgba(52, 152, 219, 1)'
+              }}
             >
               Rejoindre la communauté
             </a>
@@ -79,6 +83,26 @@ const HeroSection: React.FC = () => {
       >
         <ChevronDown size={36} />
       </button>
+      
+      <style jsx>
+        {`
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+          }
+          
+          70% {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 10px rgba(223, 11, 11, 0);
+          }
+          
+          100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+          }
+        }
+      `}</style>
     </section>
   );
 };

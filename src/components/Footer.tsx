@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
             <h3 className="text-xl font-heading font-bold mb-4 text-white">Restez informé</h3>
             <p className="text-gray-300 mb-4">
               Abonnez-vous à notre newsletter pour recevoir les dernières actualités 
-              sur le droit numérique.
+              sur le droit du numérique.
             </p>
             <div className="flex">
               <input 

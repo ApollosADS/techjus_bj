@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 
 const rules = [
   'Respect et bienveillance envers tous les membres de la communauté',
-  'Partage d\'informations vérifiées et fiables sur le droit numérique',
+  'Partage d\'informations vérifiées et fiables sur le droit du numérique',
   'Participation active aux discussions et aux événements',
   'Promotion des valeurs de transparence et d\'équité numérique',
   'Respect de la confidentialité et des données personnelles'

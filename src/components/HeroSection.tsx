@@ -3,12 +3,13 @@ import { ChevronDown } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 300);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -19,6 +20,15 @@ const HeroSection: React.FC = () => {
     }
   };
 
+  const handleJoinClick = () => {
+    setShowModal(true);
+  };
+
+  const confirmJoin = () => {
+    window.open("https://chat.whatsapp.com/D5pdYuXAnTB9MaXDZO9cOc", "_blank");
+    setShowModal(false);
+  };
+
   return (
     <section className="relative bg-gradient-to-b from-techjus-light to-white min-h-screen flex items-center">
       <div className="container-custom py-20 grid md:grid-cols-2 gap-12 items-center">
@@ -27,10 +37,8 @@ const HeroSection: React.FC = () => {
             Faire du droit du numérique, <span className="text-techjus-bleu">un levier d'excellence</span>
           </h1>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="https://chat.whatsapp.com/D5pdYuXAnTB9MaXDZO9cOc"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={handleJoinClick}
               className="btn-primary bg-techjus-blue text-white text-center py-3 px-6 rounded-lg shadow-md transition-all duration-200 hover:bg-white hover:text-techjus-blue animate-pulse"
               style={{
                 animation: 'pulse 2s infinite',
@@ -38,15 +46,15 @@ const HeroSection: React.FC = () => {
               }}
             >
               Rejoindre la communauté
-            </a>
+            </button>
             <a
               href="/techjus_presentation.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary bg-techjus-yellow text-white text-center py-3 px-6 rounded-lg shadow-md transition-all duration-200 hover:bg-white hover:text-techjus-yellow">
+              className="btn-secondary bg-techjus-yellow text-white text-center py-3 px-6 rounded-lg shadow-md transition-all duration-200 hover:bg-white hover:text-techjus-yellow"
+            >
               En savoir plus
             </a>
-
           </div>
         </div>
 
@@ -61,15 +69,15 @@ const HeroSection: React.FC = () => {
           <div className={`absolute bottom-4 left-4 right-4 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <blockquote className="border-l-4 border-techjus-yellow pl-6 italic text-white text-sm md:text-base">
               "L'emblématique union entre le droit et le numérique a créé une nouvelle matière dynamique d'essence, parfois volatile mais surtout très subtile. Ensemble, nous pouvons mieux l'appréhender"
-              <footer className="text-sm 4 mt-4 font-bold text-techjus-yellow">
+              <footer className="text-sm mt-4 font-bold text-techjus-yellow">
                 <a
-                    href="https://www.linkedin.com/in/ez%C3%A9kiel-sohou-%F0%9F%87%A7%F0%9F%87%AF%F0%9F%92%AB-059126177/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline transition-all duration-300"
-                  >
-                    Ezékiel T. SOHOU
-                  </a>
+                  href="https://www.linkedin.com/in/ez%C3%A9kiel-sohou-%F0%9F%87%A7%F0%9F%87%AF%F0%9F%92%AB-059126177/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline transition-all duration-300"
+                >
+                  Ezékiel T. SOHOU
+                </a>
               </footer>
             </blockquote>
           </div>
@@ -83,26 +91,54 @@ const HeroSection: React.FC = () => {
       >
         <ChevronDown size={36} />
       </button>
-      
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center px-4">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full text-center">
+            <h2 className="text-xl font-bold mb-4 text-techjus-blue">Avant de continuer</h2>
+            <p className="text-gray-700 mb-4">
+              <strong>TechJus ne collecte aucune de vos données.</strong><br />
+              En cliquant sur ce lien vous consentez à rejoindre la communauté TechJus sur WhatsApp et à respecter le code de bonne conduite de ladite communauté. Bienvenue dans l'univers TechJus.
+            </p>
+            <div className="flex justify-center gap-4 mt-6">
+              <button
+                onClick={() => setShowModal(false)}
+                className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={confirmJoin}
+                className="bg-techjus-blue text-white px-4 py-2 rounded hover:bg-techjus-dark transition"
+              >
+                Continuer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <style jsx>
         {`
-        @keyframes pulse {
-          0% {
-            transform: scale(1);
-            box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+          @keyframes pulse {
+            0% {
+              transform: scale(1);
+              box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+            }
+
+            70% {
+              transform: scale(1.05);
+              box-shadow: 0 0 0 10px rgba(223, 11, 11, 0);
+            }
+
+            100% {
+              transform: scale(1);
+              box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+            }
           }
-          
-          70% {
-            transform: scale(1.05);
-            box-shadow: 0 0 0 10px rgba(223, 11, 11, 0);
-          }
-          
-          100% {
-            transform: scale(1);
-            box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
-          }
-        }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 };

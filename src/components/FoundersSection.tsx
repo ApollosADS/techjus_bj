@@ -11,17 +11,17 @@ const founders = [
   {
     name: 'Marielle I. KPASSASSI',
     role: 'CLERC DE NOTAIRE',
-    quote: 'Auditrice en Master Droit des Affaireset du Numérique',
+    quote: 'Auditrice en Master Droit des Affaires et du Numérique',
     imageUrl: '/murielle.webp'
   },
   {
-    name: 'Fidéle DOSSOU',
+    name: 'Fidèle DOSSOU',
     role: 'JURISTE CONSULTANT',
     quote: 'Auditeur en Master Droit des Affaires et du Numérique',
     imageUrl: '/fidele.webp'
   },
   {
-    name: 'Espérence M. DEGBEY',
+    name: 'Espérance M. DEGBEY',
     role: 'STAGIAIRE-DPO',
     quote: 'Auditrice en Master Droit Privé Fondamental',
     imageUrl: '/mahuena.webp'

@@ -16,7 +16,7 @@ const features: FeatureItem[] = [
   {
     icon: <Scale className="h-12 w-12 text-techjus-yellow" />,
     title: 'Veille juridique',
-    description: 'Suivez l\'évolution de la législation et de la jurisprudence dans le domaine numérique.'
+    description: 'Suivez l\'évolution de la législation, de la jurisprudence et de la doctrine du numérique.'
   },
   {
     icon: <Users className="h-12 w-12 text-techjus-yellow" />,

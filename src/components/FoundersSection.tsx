@@ -5,12 +5,12 @@ const founders = [
   {
     name: 'Philippe V. DJOKO',
     role: 'JURISTE CONSULTANT',
-    quote: 'Auditeur en Master Droit Privé Fondamental',
+    quote: 'Master Droit Privé Fondamental',
     imageUrl: '/philippe.webp'
   },
   {
     name: 'Marielle I. KPASSASSI',
-    role: 'CLERC DE NOTAIRE',
+    role: 'CLERQUE DE NOTAIRE',
     quote: 'Auditrice en Master Droit des Affaireset du Numérique',
     imageUrl: '/murielle.webp'
   },
@@ -33,7 +33,7 @@ const FoundersSection: React.FC = () => {
     <section id="founders" className="section bg-techjus-light">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Notre équipe fondatrice</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Notre équipe</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
             Découvrez les experts passionnés qui ont créé TechJus pour rendre le droit du numérique accessible à tous.
           </p>

@@ -33,10 +33,7 @@ const FoundersSection: React.FC = () => {
     <section id="founders" className="section bg-techjus-light">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Notre équipe</h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Découvrez les passionnés qui ont créé TechJus pour rendre le droit du numérique accessible à tous.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Découvrez notre équipe</h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

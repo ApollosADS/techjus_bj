@@ -10,7 +10,7 @@ const founders = [
   },
   {
     name: 'Marielle I. KPASSASSI',
-    role: 'CLERQUE DE NOTAIRE',
+    role: 'CLERC DE NOTAIRE',
     quote: 'Auditrice en Master Droit des Affaireset du Numérique',
     imageUrl: '/murielle.webp'
   },
@@ -35,7 +35,7 @@ const FoundersSection: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Notre équipe</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Découvrez les experts passionnés qui ont créé TechJus pour rendre le droit du numérique accessible à tous.
+            Découvrez les passionnés qui ont créé TechJus pour rendre le droit du numérique accessible à tous.
           </p>
         </div>
         

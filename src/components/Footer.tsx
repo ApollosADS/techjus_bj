@@ -1,72 +1,103 @@
 import React from 'react';
-import SocialLinks from './SocialLinks';
-import { ExternalLink, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ExternalLink, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+
+const SocialLinks: React.FC<{ className?: string }> = ({ className = '' }) => {
+  const socialLinks = [
+    { icon: <Facebook size={20} />, url: '#', label: 'Facebook' },
+    { icon: <Twitter size={20} />, url: '#', label: 'Twitter' },
+    { icon: <Linkedin size={20} />, url: '#', label: 'LinkedIn' },
+    { icon: <Instagram size={20} />, url: '#', label: 'Instagram' },
+  ];
+
+  return (
+    <div className={`flex space-x-4 ${className}`}>
+      {socialLinks.map((social, index) => (
+        <a
+          key={index}
+          href={social.url}
+          aria-label={social.label}
+          className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 p-2 bg-gray-700 rounded-full hover:bg-gray-600"
+        >
+          {social.icon}
+        </a>
+      ))}
+    </div>
+  );
+};
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   
   const footerLinks = [
-    { text: 'Accueil', url: '#' },
-    { text: 'À propos', url: '#about' },
-    { text: 'Équipe', url: '#founders' },
-    { text: 'Valeurs', url: '#rules' },
-    { text: 'Contact', url: '#contact' },
-    { text: 'Mentions légales', url: '#' },
-    { text: 'Politique de confidentialité', url: '#' },
+    { text: 'Accueil', url: '/' },
+    { text: 'Présentation', url: '/presentation' },
+    { text: 'Ressources', url: '/resources' },
+    { text: 'Thématiques', url: '/thematiques' },
+    { text: 'Formations', url: '/Formations' },
+    { text: 'Contact', url: '/#contact' },
+    { text: 'Mentions légales', url: '/mentions-legales' },
+    { text: 'Politique de confidentialité', url: '/politique-confidentialite' },
   ];
 
   return (
     <footer className="bg-gray-800 text-white py-12">
-      <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <img src="/logo.png" alt="Logo TechJus" className="h-12 mb-4" />
-            <p className="mb-4 text-gray-300">
-              Une communauté dédiée au droit du numérique, rendant accessible les enjeux juridiques 
-              de notre société digitale.
-            </p>
-            <SocialLinks className="mt-4" />
-          </div>
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
           
+          {/* Section À propos avec logo */}
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4 text-white">Liens rapides</h3>
-            <ul className="space-y-2">
-              {footerLinks.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.url} 
-                    className="text-gray-300 hover:text-techjus-yellow transition-colors duration-200 flex items-center"
-                  >
-                    <ExternalLink size={14} className="mr-2" />
-                    {link.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-heading font-bold mb-4 text-white">Restez informés</h3>
-            <p className="text-gray-300 mb-4">
-              Abonnez-vous à notre newsletter pour recevoir les dernières actualités 
-              sur le droit du numérique.
-            </p>
-            <div className="flex">
-              <input 
-                type="email" 
-                placeholder="Votre email" 
-                className="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-900"
+            <div className="flex items-center mb-6">
+              <img
+                src="/logo.png"
+                alt="Logo TechJus"
+                className="h-12 w-auto mr-3"
               />
-              <button className="bg-techjus-red px-4 py-2 rounded-r-lg hover:bg-red-700 transition-colors duration-200 flex items-center">
-                <Mail size={18} className="mr-2" />
-                S'abonner
-              </button>
+            </div>
+            <p className="mb-6 text-gray-300 text-lg leading-relaxed">
+              Une communauté dédiée au droit du numérique, rendant accessible 
+              les enjeux juridiques de notre société digitale au Bénin et en Afrique.
+            </p>
+            <div>
+              <h4 className="text-lg font-bold mb-4 text-white">Suivez-nous</h4>
+              <SocialLinks />
+            </div>
+          </div>
+
+          {/* Section Liens rapides */}
+          <div>
+            <h3 className="text-2xl font-bold mb-6 text-white">Liens rapides</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {footerLinks.map((link, index) => (
+                <div key={index}>
+                  {link.url.startsWith('#') ? (
+                    <a
+                      href={link.url}
+                      className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 flex items-center py-2 px-3 rounded-lg hover:bg-gray-700"
+                    >
+                      <ExternalLink size={16} className="mr-3 text-blue-400" />
+                      {link.text}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.url}
+                      className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 flex items-center py-2 px-3 rounded-lg hover:bg-gray-700"
+                    >
+                      <ExternalLink size={16} className="mr-3 text-blue-400" />
+                      {link.text}
+                    </Link>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        
-        <div className="pt-8 border-t border-gray-700 text-center text-gray-400">
-          <p>© {currentYear} TechJus. Tous droits réservés.</p>
+
+        {/* Ligne de séparation et copyright */}
+        <div className="pt-8 border-t border-gray-700 text-center">
+          <p className="text-gray-400 text-lg">
+            © {currentYear} <span className="text-400 font-semibold">TechJus.bj</span> - Tous droits réservés.
+          </p>
         </div>
       </div>
     </footer>

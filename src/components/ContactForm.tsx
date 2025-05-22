@@ -1,130 +1,128 @@
-import React, { useState } from 'react';
-import { Mail, User, MessageSquare } from 'lucide-react';
+import React from 'react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
-const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+const ContactSection: React.FC = () => {
+  const handleEmailClick = () => {
+    const subject = encodeURIComponent('Contact depuis TechJus.bj');
+    const body = encodeURIComponent('Bonjour,\n\nJe vous contacte depuis le site TechJus.bj.\n\n');
+    window.location.href = `mailto:benintechjus@gmail.com?subject=${subject}&body=${body}`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    }, 1500);
-  };
+  const contactInfo = [
+    {
+      icon: <Mail className="w-6 h-6" />, title: 'Email', value: 'benintechjus@gmail.com',
+      action: () => handleEmailClick(), color: 'text-techjus-blue'
+    },
+    {
+      icon: <Phone className="w-6 h-6" />, title: 'Téléphone', value: '+229 XX XX XX XX',
+      action: () => window.location.href = 'tel:+229XXXXXXXX', color: 'text-techjus-green'
+    },
+    {
+      icon: <MapPin className="w-6 h-6" />, title: 'Localisation', value: 'Cotonou, Bénin',
+      action: null, color: 'text-gray-600'
+    },
+  ];
 
   return (
-    <section id="contact" className="section bg-techjus-light">
-      <div className="container-custom">
+    <section id="contact" className="py-20 bg-white">
+      <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Contactez-nous</h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Vous avez une question ? 
-            N'hésitez pas à nous laisser un message.
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-techjus-blue mb-6">
+            Contactez-nous
+          </h2>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            Une question sur le droit du numérique ? Besoin d'accompagnement juridique ? 
+            Notre équipe est là pour vous aider.
           </p>
         </div>
-        
-        <div className="max-w-xl mx-auto">
-          {isSubmitted ? (
-            <div className="bg-white p-8 rounded-xl shadow-lg text-center">
-              <svg className="w-16 h-16 text-techjus-green mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <h3 className="text-2xl font-bold text-techjus-blue mb-2">Message envoyé !</h3>
-              <p className="text-gray-700">Merci de nous avoir contactés. Nous vous répondrons dans les plus brefs délais.</p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="space-y-8">
+            <div className="bg-techjus-light rounded-2xl p-8 border border-gray-200">
+              <h3 className="text-2xl font-heading font-bold text-techjus-blue mb-8">
+                Nos coordonnées
+              </h3>
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => (
+                  <div 
+                    key={index}
+                    className={`flex items-center p-4 rounded-xl bg-white border border-gray-200 transition duration-300 ${
+                      info.action ? 'hover:shadow-md cursor-pointer hover:border-gray-300' : ''
+                    }`}
+                    onClick={info.action || undefined}
+                  >
+                    <div className={`mr-4 p-3 rounded-lg bg-techjus-light ${info.color}`}>
+                      {info.icon}
+                    </div>
+                    <div>
+                      <div className="text-gray-500 text-sm">{info.title}</div>
+                      <div className="text-gray-800 font-medium text-lg">{info.value}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-lg">
-              <div className="mb-6">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Nom</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <User className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-techjus-blue focus:border-transparent"
-                    placeholder="Votre nom"
-                  />
+
+            <div className="bg-techjus-light rounded-2xl p-8 border border-gray-200">
+              <h4 className="text-xl font-heading font-bold text-techjus-blue mb-4">
+                Horaires d'ouverture
+              </h4>
+              <div className="space-y-2 text-gray-700">
+                <div className="flex justify-between">
+                  <span>Lundi - Vendredi</span>
+                  <span className="text-gray-900 font-medium">8h00 - 18h00</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Samedi</span>
+                  <span className="text-gray-900 font-medium">9h00 - 15h00</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Dimanche</span>
+                  <span className="text-techjus-red font-medium">Fermé</span>
                 </div>
               </div>
-              
-              <div className="mb-6">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-techjus-blue focus:border-transparent"
-                    placeholder="votre@email.com"
-                  />
-                </div>
+            </div>
+          </div>
+
+          <div className="bg-techjus-light rounded-2xl p-12 border border-gray-200 text-center">
+            <div className="mb-8">
+              <div className="w-20 h-20 bg-techjus-blue rounded-full flex items-center justify-center mx-auto mb-6">
+                <Send className="w-10 h-10 text-white" />
               </div>
-              
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                <div className="relative">
-                  <div className="absolute top-3 left-3 pointer-events-none">
-                    <MessageSquare className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-techjus-blue focus:border-transparent"
-                    placeholder="Votre message..."
-                  ></textarea>
-                </div>
-              </div>
-              
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`btn-primary w-full ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
-              >
-                {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
-              </button>
-            </form>
-          )}
+              <h3 className="text-3xl font-heading font-bold text-techjus-blue mb-4">
+                Contactez-nous maintenant
+              </h3>
+              <p className="text-gray-700 text-lg mb-8">
+                Cliquez sur le bouton ci-dessous pour nous envoyer un email depuis votre boîte mail.
+              </p>
+            </div>
+            <button
+              onClick={handleEmailClick}
+              className="bg-techjus-blue hover:bg-blue-700 text-white font-bold text-xl px-12 py-4 rounded-xl shadow-lg hover:shadow-xl transition duration-300 flex items-center mx-auto"
+            >
+              <Mail className="w-6 h-6 mr-3" />
+              Envoyer un email
+            </button>
+            <p className="text-gray-500 text-sm mt-6">
+              Cela ouvrira votre client mail avec notre adresse pré-remplie.
+            </p>
+            <div className="mt-8 p-4 bg-yellow-100 border border-yellow-300 rounded-xl">
+              <p className="text-yellow-700 font-medium">
+                💡 <strong>Conseil :</strong> Précisez votre domaine d'activité et votre besoin juridique.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center space-x-4 bg-techjus-green/10 rounded-full px-8 py-4 border border-techjus-green">
+            <div className="w-3 h-3 bg-techjus-green rounded-full"></div>
+            <span className="text-techjus-green font-medium">Réponse garantie sous 24h</span>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default ContactForm;
+export default ContactSection;

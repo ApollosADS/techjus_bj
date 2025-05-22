@@ -25,10 +25,19 @@ const founders = [
     role: 'STAGIAIRE-DPO',
     quote: 'Auditrice en Master Droit Privé Fondamental',
     imageUrl: '/mahuena.webp'
+  },
+  {
+    name: 'Ulrich Apollos ADINSI',
+    role: 'Developpeur Full Stack',
+    quote: 'Technicien en Informatique Industriel et Maintenance',
+    imageUrl: '/apollos.webp'
   }
 ];
 
 const FoundersSection: React.FC = () => {
+  // Dupliquer les fondateurs pour un défilement continu
+  const duplicatedFounders = [...founders, ...founders];
+
   return (
     <section id="founders" className="section bg-techjus-light">
       <div className="container-custom">
@@ -36,18 +45,42 @@ const FoundersSection: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Découvrez notre équipe</h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {founders.map((founder, index) => (
-            <MemberCard 
-              key={index}
-              name={founder.name}
-              role={founder.role}
-              quote={founder.quote}
-              imageUrl={founder.imageUrl}
-            />
-          ))}
+        {/* Container du carrousel */}
+        <div className="relative overflow-hidden">
+          <div className="flex animate-scroll-slow">
+            {duplicatedFounders.map((founder, index) => (
+              <div key={`${founder.name}-${index}`} className="flex-shrink-0 w-80 px-4">
+                <MemberCard 
+                  name={founder.name}
+                  role={founder.role}
+                  quote={founder.quote}
+                  imageUrl={founder.imageUrl}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes scroll-slow {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll-slow {
+          animation: scroll-slow 40s linear infinite;
+          width: max-content;
+        }
+        
+        .animate-scroll-slow:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };

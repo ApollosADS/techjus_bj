@@ -11,7 +11,7 @@ const features: FeatureItem[] = [
   {
     icon: <BookOpen className="h-12 w-12 text-techjus-yellow" />,
     title: 'Ressources éducatives',
-    description: 'Accédez à des articles, guides et formations sur les aspects juridiques du numérique.'
+    description: 'Accédez à des articles, Cours, Ouvrages, Magazine, Thèses de doctorat & mémoires de master, et formations sur les aspects juridiques du numérique.'
   },
   {
     icon: <Scale className="h-12 w-12 text-techjus-yellow" />,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, AlertCircle } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,7 +9,6 @@ const HeroSection: React.FC = () => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 300);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -94,23 +93,25 @@ const HeroSection: React.FC = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center px-4">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full text-center">
-            <h2 className="text-xl font-bold mb-4 text-techjus-blue">Avant de continuer</h2>
-            <p className="text-gray-700 mb-4">
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center px-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-10 max-w-2xl w-full text-center relative">
+            <AlertCircle className="w-12 h-12 text-techjus-blue mx-auto mb-4" />
+            <h2 className="text-2xl font-extrabold mb-4 text-techjus-blue">Avant de continuer</h2>
+            <p className="text-gray-700 leading-relaxed text-base md:text-lg">
               <strong>TechJus ne collecte aucune de vos données.</strong><br />
-              En cliquant sur ce lien vous consentez à rejoindre la communauté TechJus sur WhatsApp et à respecter le code de bonne conduite de ladite communauté. Bienvenue dans l'univers TechJus.
+              En cliquant sur ce lien vous consentez à rejoindre la communauté TechJus sur WhatsApp et à respecter le code de bonne conduite de ladite communauté. <br />
+              <span className="text-techjus-blue font-semibold">Bienvenue dans l'univers TechJus.</span>
             </p>
             <div className="flex justify-center gap-4 mt-6">
               <button
                 onClick={() => setShowModal(false)}
-                className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition"
+                className="bg-gray-200 text-gray-700 px-5 py-2 rounded-lg hover:bg-gray-300 transition font-medium"
               >
                 Annuler
               </button>
               <button
                 onClick={confirmJoin}
-                className="bg-techjus-blue text-white px-4 py-2 rounded hover:bg-techjus-dark transition"
+                className="bg-techjus-blue text-white px-5 py-2 rounded-lg hover:bg-techjus-dark transition font-medium"
               >
                 Continuer
               </button>
@@ -119,26 +120,22 @@ const HeroSection: React.FC = () => {
         </div>
       )}
 
-      <style jsx>
-        {`
-          @keyframes pulse {
-            0% {
-              transform: scale(1);
-              box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
-            }
-
-            70% {
-              transform: scale(1.05);
-              box-shadow: 0 0 0 10px rgba(223, 11, 11, 0);
-            }
-
-            100% {
-              transform: scale(1);
-              box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
-            }
+      <style jsx>{`
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
           }
-        `}
-      </style>
+          70% {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 10px rgba(223, 11, 11, 0);
+          }
+          100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+          }
+        }
+      `}</style>
     </section>
   );
 };

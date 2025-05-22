@@ -39,7 +39,7 @@ const ContactForm: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Contactez-nous</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Vous avez une question ou souhaitez rejoindre notre communauté ? 
+            Vous avez une question ? 
             N'hésitez pas à nous laisser un message.
           </p>
         </div>

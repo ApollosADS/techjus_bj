@@ -4,23 +4,15 @@ import ContactForm from '../components/ContactForm';
 
 const Contact: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <>
       <Header />
-      
-      {/* Contenu principal */}
-      <main className="flex-grow">
-        {/* Section de contact */}
-        <section className="pt-28 pb-16 bg-techjus-light"> {/* Ajustement de l'espace pour le header fixe */}
-          <div className="container-custom">
-            {/* Section équipe (à compléter) */}
-            {/* Description mission + carte (à compléter) */}
-            
-            {/* Intégration du formulaire */}
-            <ContactForm />
-          </div>
-        </section>
+      <main className="pt-24"> {/* Ajustement de l'espace pour le header fixe */}
+        <ContactForm />
+        <div className="max-w-6xl mx-auto px-4 mt-16">
+          <ContactForm />
+        </div>
       </main>
-    </div>
+    </>
   );
 };
 

@@ -11,11 +11,18 @@ const Presentation: React.FC = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-techjus-blue mb-6">
               Bienvenue dans la communauté 
               <div className="inline-block align-middle ml-2">
-                <span className="text-techjus-blue font-black">TechJus</span>
+                <span className="text-techjus-blue font-black">T</span>
+                <span className="text-techjus-blue font-black">e</span>
+                <span className="text-techjus-blue font-black">c</span>
+                <span className="text-techjus-blue font-black">h</span>
+                <span className="text-techjus-blue font-black">J</span>
+                <span className="text-techjus-blue font-black">u</span>
+                <span className="text-techjus-blue font-black">s</span>
                 <span className="text-techjus-green font-black">.</span>
                 <span className="text-techjus-yellow font-black">b</span>
                 <span className="text-techjus-red font-black">j</span>
               </div>
+
             </h1>
             <div className="w-24 h-1 bg-techjus-blue mx-auto mb-8"></div>
           </div>
@@ -39,7 +46,7 @@ const Presentation: React.FC = () => {
               
               <p className="mb-6 text-lg text-justify">
                 Nous avons l'immense plaisir de vous annoncer la création d'un espace de discussion 
-                via la communauté nommée <strong className="text-techjus-blue">"TechJusBénin"</strong>, 
+                via la communauté nommée <strong className="text-techjus-blue">"TechJus"</strong>, 
                 entièrement dédié au droit du numérique au Bénin.
               </p>
               
@@ -65,7 +72,7 @@ const Presentation: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-techjus-blue mb-3">Partage de Connaissances</h3>
               <p className="text-gray-600">
-                Faciliter l'échange d'expertises et de savoir-faire entre professionnels du droit numérique
+                Faciliter l'échange d'expertises et de savoir-faire entre professionnels du droit du numérique
               </p>
             </div>
 
@@ -73,9 +80,9 @@ const Presentation: React.FC = () => {
               <div className="bg-techjus-light w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Target className="text-techjus-yellow" size={24} />
               </div>
-              <h3 className="text-xl font-bold text-techjus-blue mb-3">Analyse Législative</h3>
+              <h3 className="text-xl font-bold text-techjus-blue mb-3">Analyse</h3>
               <p className="text-gray-600">
-                Analyser ensemble les évolutions du cadre juridique numérique au Bénin et à l'international
+                Analyser ensemble l'évolution du cadre juridique numérique au Bénin et à l'international
               </p>
             </div>
 
@@ -85,7 +92,7 @@ const Presentation: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-techjus-blue mb-3">Réseau Professionnel</h3>
               <p className="text-gray-600">
-                Créer un réseau solide de juristes spécialisés dans les technologies numériques
+                Créer un réseau solide de juristes spécialisés dans les technologies
               </p>
             </div>
           </div>
@@ -100,7 +107,7 @@ const Presentation: React.FC = () => {
                 Une communauté pour tous
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                TechJusBénin s'adresse à tous les professionnels passionnés par l'intersection 
+                TechJus s'adresse à tous les professionnels passionnés par l'intersection 
                 entre le droit et la technologie
               </p>
             </div>
@@ -135,7 +142,7 @@ const Presentation: React.FC = () => {
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-center bg-techjus-light p-3 rounded-lg">
                     <div className="w-2 h-2 bg-techjus-green rounded-full mr-3"></div>
-                    Entrepreneurs du secteur tech
+                    Legal Compliance Officer
                   </li>
                   <li className="flex items-center bg-techjus-light p-3 rounded-lg">
                     <div className="w-2 h-2 bg-techjus-green rounded-full mr-3"></div>
@@ -159,7 +166,7 @@ const Presentation: React.FC = () => {
               </h2>
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
                 Participez aux discussions, partagez vos expertises et contribuez au développement 
-                du droit numérique au Bénin
+                du droit du numérique au Bénin
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a

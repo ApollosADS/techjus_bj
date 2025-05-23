@@ -11,7 +11,7 @@ const Thematiques: React.FC = () => {
   return (
     <div>
       <Header />
-      <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20 mt-16">
+      <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20">
       <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Thématiques
             </h1>

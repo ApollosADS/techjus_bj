@@ -9,15 +9,15 @@ const Resources: React.FC = () => {
 
   const resources = [
     {
-      title: "Guide complet du RGPD pour les entreprises",
+      title: "Guide complet sur la protection des données personnelles",
       description: "Découvrez tout ce que vous devez savoir sur le Règlement Général sur la Protection des Données et sa mise en application pratique.",
-      category: "RGPD",
+      category: "Données personnelles",
       type: "Guide",
       author: "Philippe V. DJOKO",
       date: "15 Nov 2024",
       readTime: "10 min",
       imageUrl: "/api/placeholder/400/200",
-      link: "/resources/rgpd-guide"
+      link: "/resources/données personnelles-guide"
     },
     {
       title: "L'IA et le droit : enjeux et perspectives",
@@ -64,7 +64,7 @@ const Resources: React.FC = () => {
       link: "/resources/ecommerce-droit"
     },
     {
-      title: "Propriété intellectuelle numérique",
+      title: "Propriété intellectuelle et Intelligence artificielle",
       description: "Protection des créations numériques et enjeux de la propriété intellectuelle en ligne.",
       category: "Propriété Intellectuelle",
       type: "Étude de cas",
@@ -102,14 +102,14 @@ const Resources: React.FC = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20 mt-16">
+      <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h1 className="text-5xl font-bold mb-6">
               Centre de <span className="text-white-400">Ressources</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Découvrez nos guides, articles et outils pour maîtriser le droit du numérique. 
+              Découvrez nos des articles, cours, ouvrages, magazine, thèses de doctorat & mémoires de master, et formations sur les aspects juridiques du numérique. 
               Une bibliothèque complète pour les professionnels du droit et du digital.
             </p>
           </div>

@@ -10,7 +10,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedType, setSelectedType] = useState('');
 
-  const categories = ['RGPD', 'IA', 'Blockchain', 'E-commerce', 'Cybersécurité'];
+  const categories = ['Données personnelles', 'IA', 'Blockchain', 'E-commerce', 'Cybersécurité'];
   const types = ['Article', 'Guide', 'Vidéo', 'Webinar', 'Étude de cas'];
 
   const handleFilterChange = () => {

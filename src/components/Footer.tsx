@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
         {/* Ligne de séparation et copyright */}
         <div className="pt-8 border-t border-gray-700 text-center">
           <p className="text-gray-400 text-lg">
-            © {currentYear} <span className="text-400 font-semibold">TechJus.bj</span> - Tous droits réservés.
+            © {currentYear} <span className="text-400 font-semibold">TechJus</span> - Tous droits réservés.
           </p>
         </div>
       </div>

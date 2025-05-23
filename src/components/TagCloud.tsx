@@ -15,7 +15,7 @@ const TagCloud: React.FC<TagCloudProps> = ({ onTagClick }) => {
   const [selectedTag, setSelectedTag] = useState('');
 
   const tags: Tag[] = [
-    { name: 'RGPD', count: 45, category: 'data' },
+    { name: 'Données personnelles', count: 45, category: 'data' },
     { name: 'Intelligence Artificielle', count: 32, category: 'tech' },
     { name: 'Blockchain', count: 28, category: 'tech' },
     { name: 'E-commerce', count: 41, category: 'business' },

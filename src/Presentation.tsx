@@ -60,7 +60,7 @@ const Presentation: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">Partage de Connaissances</h3>
               <p className="text-gray-600">
-                Faciliter l'échange d'expertises et de savoir-faire entre professionnels du droit numérique
+                Faciliter l'échange d'expertises et de savoir-faire entre professionnels du droit du numérique
               </p>
             </div>
 
@@ -68,9 +68,9 @@ const Presentation: React.FC = () => {
               <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Target className="text-purple-600" size={24} />
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Analyse Législative</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Analyse</h3>
               <p className="text-gray-600">
-                Analyser ensemble les évolutions du cadre juridique numérique au Bénin et à l'international
+                Analyser ensemble l'évolution du cadre juridique numérique au Bénin et à l'international
               </p>
             </div>
 
@@ -80,7 +80,7 @@ const Presentation: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">Réseau Professionnel</h3>
               <p className="text-gray-600">
-                Créer un réseau solide de juristes spécialisés dans les technologies numériques
+                Créer un réseau solide de juristes spécialisés dans les technologies
               </p>
             </div>
           </div>
@@ -95,7 +95,7 @@ const Presentation: React.FC = () => {
                 Une communauté pour tous
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                TechJusBénin s'adresse à tous les professionnels passionnés par l'intersection 
+                TechJus s'adresse à tous les professionnels passionnés par l'intersection 
                 entre le droit et la technologie
               </p>
             </div>
@@ -124,7 +124,7 @@ const Presentation: React.FC = () => {
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    Entrepreneurs du secteur tech
+                    Legal Compliance Officer
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>

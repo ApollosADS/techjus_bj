@@ -1,9 +1,6 @@
 import React from 'react';
 import { GraduationCap, Clock, Users, Award, BookOpen, Video, FileText, Calendar } from 'lucide-react';
-import FormationsFAQAccordion from '../components/FormationsFAQAccordion';
 
-// Dans le JSX de votre page Formations, avant la section CTA finale :
-<FormationsFAQAccordion/>
 const Formations: React.FC = () => {
   const formations = [
     {
@@ -13,7 +10,6 @@ const Formations: React.FC = () => {
       duration: "3 Mois",
       level: "Débutant",
       participants: "15-20",
-      price: "100,000 FCFA",
       modules: [
         "Introduction au droit du numérique",
         "Cadre juridique béninois",
@@ -24,28 +20,26 @@ const Formations: React.FC = () => {
     },
     {
       id: 2,
-      title: "RGPD et Protection des Données",
-      description: "Maîtrisez la réglementation sur la protection des données personnelles",
-      duration: "2 jours",
+      title: "Masterclass : Devenir Juriste 4.0 à l'ère du digital et de l'IA",
+      description: "Enjeux juridiques et éthiques de l'IA dans le contexte africain",
+      duration: "1 jour",
       level: "Intermédiaire",
-      participants: "10-15",
-      price: "120,000 FCFA",
+      participants: "5-10",
       modules: [
-        "Principes du RGPD",
-        "Mise en conformité",
-        "Droits des personnes",
-        "Sanctions et recours"
+        "IA et droit africain",
+        "Éthique de l'IA",
+        "Responsabilité algorithmique",
+        "Régulation future"
       ],
-      color: "bg-green-500"
+      color: "bg-red-500"
     },
     {
       id: 3,
       title: "Cybersécurité et Droit",
       description: "Aspects juridiques de la cybersécurité et gestion des incidents",
-      duration: "2 jours",
+      duration: "7 jours",
       level: "Avancé",
       participants: "8-12",
-      price: "180,000 FCFA",
       modules: [
         "Cadre légal cybersécurité",
         "Gestion des incidents",
@@ -61,7 +55,6 @@ const Formations: React.FC = () => {
       duration: "1 jour",
       level: "Expert",
       participants: "5-10",
-      price: "100,000 FCFA",
       modules: [
         "IA et droit africain",
         "Éthique de l'IA",
@@ -69,6 +62,36 @@ const Formations: React.FC = () => {
         "Régulation future"
       ],
       color: "bg-red-500"
+    },
+    {
+      id: 5,
+      title: "Réussir au concours de magistrature",
+      description: "Préparation complète au concours de magistrature",
+      duration: "3 jours",
+      level: "Expert",
+      participants: "5-10",
+      modules: [
+        "Méthodologie juridique",
+        "Droit civil et pénal",
+        "Procédures judiciaires",
+        "Épreuves pratiques"
+      ],
+      color: "bg-purple-500"
+    },
+    {
+      id: 6,
+      title: "Protection des données à caractère personnel",
+      description: "Maîtrisez la réglementation sur la protection des données personnelles",
+      duration: "2 jours",
+      level: "Intermédiaire",
+      participants: "10-15",
+      modules: [
+        "Principes de protection des données",
+        "Mise en conformité",
+        "Droits des personnes",
+        "Sanctions et recours"
+      ],
+      color: "bg-green-500"
     }
   ];
 
@@ -81,24 +104,24 @@ const Formations: React.FC = () => {
     {
       icon: <Users className="text-green-600" size={32} />,
       title: "Formateurs Experts",
-      description: "Apprenez auprès de praticiens expérimentés du droit du numérique"
+      description: "Apprenez auprès de praticiens expérimentés du numérique"
     },
     {
-      icon: <Video className="text-yellow-600" size={32} />,
+      icon: <Video className="text-purple-600" size={32} />,
       title: "Format Hybride",
       description: "Formations en présentiel et à distance selon vos besoins"
     },
     {
       icon: <BookOpen className="text-red-600" size={32} />,
       title: "Ressources Complètes",
-      description: "Accès à une bibliothèque de ressources juridiques actualisées"
+      description: "Accès à une bibliothèque de ressources juridiques actuelles"
     }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20 mt-16">
+      {/* Hero Section - Suppression de mt-16 pour coller au header */}
+      <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -108,17 +131,9 @@ const Formations: React.FC = () => {
               Formations en Droit du Numérique
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-              Développez votre expertise juridique à l'ère du numérique avec nos formations 
-              spécialisées adaptées au contexte béninois et international
+              Développez votre expertise juridique à l'ère du numérique avec nos
+              formations spécialisées adaptées au contexte béninois et international
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                Voir les formations
-              </button>
-              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
-                Demander un devis
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -134,29 +149,34 @@ const Formations: React.FC = () => {
               Des programmes adaptés à tous les niveaux, du débutant à l'expert
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-8">
             {formations.map((formation) => (
-              <div key={formation.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div
+                key={formation.id}
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+              >
                 <div className={`${formation.color} h-2`}></div>
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-bold text-gray-800 mb-2">
                       {formation.title}
                     </h3>
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      formation.level === 'Débutant' ? 'bg-green-100 text-green-800' :
-                      formation.level === 'Intermédiaire' ? 'bg-yellow-100 text-yellow-800' :
-                      formation.level === 'Avancé' ? 'bg-orange-100 text-orange-800' :
-                      'bg-red-100 text-red-800'
-                    }`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        formation.level === 'Débutant'
+                          ? 'bg-green-100 text-green-800'
+                          : formation.level === 'Intermédiaire'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : formation.level === 'Avancé'
+                          ? 'bg-orange-100 text-orange-800'
+                          : 'bg-red-100 text-red-800'
+                      }`}
+                    >
                       {formation.level}
                     </span>
                   </div>
-                  
                   <p className="text-gray-600 mb-4">{formation.description}</p>
-                  
-                  <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
+                  <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                     <div className="flex items-center text-gray-500">
                       <Clock className="mr-2" size={16} />
                       {formation.duration}
@@ -165,11 +185,7 @@ const Formations: React.FC = () => {
                       <Users className="mr-2" size={16} />
                       {formation.participants}
                     </div>
-                    <div className="text-blue-600 font-semibold">
-                      {formation.price}
-                    </div>
                   </div>
-                  
                   <div className="mb-6">
                     <h4 className="font-semibold text-gray-800 mb-2">Modules inclus :</h4>
                     <ul className="text-sm text-gray-600 space-y-1">
@@ -181,10 +197,9 @@ const Formations: React.FC = () => {
                       ))}
                     </ul>
                   </div>
-                  
                   <div className="flex gap-3">
                     <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-                      S'inscrire
+                      À venir
                     </button>
                     <button className="border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors">
                       En savoir plus
@@ -208,7 +223,6 @@ const Formations: React.FC = () => {
               Une approche pédagogique adaptée aux professionnels du droit
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {avantages.map((avantage, index) => (
               <div key={index} className="text-center">
@@ -232,36 +246,35 @@ const Formations: React.FC = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              Comment S'inscrire ?
+              Comment s'inscrire ?
             </h2>
             <p className="text-gray-600 text-lg">
               Un processus simple en 4 étapes
             </p>
           </div>
-
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { 
-                step: 1, 
-                title: "Choisir sa formation", 
+              {
+                step: 1,
+                title: "Choisir sa formation",
                 desc: "Sélectionnez la formation qui correspond à vos besoins",
                 icon: <BookOpen className="text-white" size={24} />
               },
-              { 
-                step: 2, 
-                title: "Remplir le formulaire", 
+              {
+                step: 2,
+                title: "Remplir le formulaire",
                 desc: "Complétez votre demande d'inscription en ligne",
                 icon: <FileText className="text-white" size={24} />
               },
-              { 
-                step: 3, 
-                title: "Confirmation", 
+              {
+                step: 3,
+                title: "Confirmation",
                 desc: "Recevez la confirmation et le programme détaillé",
                 icon: <Calendar className="text-white" size={24} />
               },
-              { 
-                step: 4, 
-                title: "Formation", 
+              {
+                step: 4,
+                title: "Formation",
                 desc: "Participez à votre formation et obtenez votre certificat",
                 icon: <Award className="text-white" size={24} />
               }
@@ -285,10 +298,10 @@ const Formations: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-yellow-600 text-white">
+      {/* Section CTA */}
+      <section className="bg-gradient-to-r from-techjus-blue to-techjus-green p-8 text-white shadow-2xl">
         <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 text-white">
             Prêt à Développer Votre Expertise ?
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">

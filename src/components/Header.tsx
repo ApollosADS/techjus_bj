@@ -53,7 +53,7 @@ const Header: React.FC = () => {
           <NavLink to="/formations" className={navLinkClasses}>
             Formations
           </NavLink>
-          <NavLink to="/#contact" className={navLinkClasses}>
+          <NavLink to="/contact" className={navLinkClasses}>
             Contact
           </NavLink>
         </nav>

@@ -14,8 +14,8 @@ const ContactSection: React.FC = () => {
       action: () => handleEmailClick(), color: 'text-techjus-blue'
     },
     {
-      icon: <Phone className="w-6 h-6" />, title: 'Téléphone', value: '+229 XX XX XX XX',
-      action: () => window.location.href = 'tel:+229XXXXXXXX', color: 'text-techjus-green'
+      icon: <Phone className="w-6 h-6" />, title: 'Téléphone', value: '+229 XX XX XX XX XX',
+      action: () => window.location.href = 'tel:+229XXXXXXXXXX', color: 'text-techjus-green'
     },
     {
       icon: <MapPin className="w-6 h-6" />, title: 'Localisation', value: 'Cotonou, Bénin',

@@ -1,7 +1,14 @@
 import React from 'react';
 import { Users, BookOpen, Globe, MessageSquare, Target, Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Presentation: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleContactClick = () => {
+    navigate('/contact');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Hero Section */}
@@ -34,7 +41,7 @@ const Presentation: React.FC = () => {
               
               <p className="mb-4">
                 Nous avons l'immense plaisir de vous annoncer la création d'un espace de discussion 
-                via la communauté nommée <strong className="text-blue-600">"TechJus BENIN"</strong>, 
+                via la communauté nommée <strong className="text-blue-600">"TechJus"</strong>, 
                 entièrement dédié au droit du numérique au Bénin.
               </p>
               
@@ -150,7 +157,10 @@ const Presentation: React.FC = () => {
                 Participez aux discussions, partagez vos expertises et contribuez au développement 
                 du droit numérique au Bénin
               </p>
-              <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+              <button 
+                onClick={handleContactClick}
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors cursor-pointer"
+              >
                 Nous contacter
               </button>
             </div>

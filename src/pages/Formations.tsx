@@ -118,6 +118,10 @@ const Formations: React.FC = () => {
     }
   ];
 
+  const handleContactClick = () => {
+    window.location.href = '/contact';
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section - Suppression de mt-16 pour coller au header */}
@@ -299,7 +303,7 @@ const Formations: React.FC = () => {
       </section>
 
       {/* Section CTA */}
-      <section className="bg-gradient-to-r from-techjus-blue to-techjus-green p-8 text-white shadow-2xl">
+      <section className="bg-gradient-to-r from-blue-600 to-green-600 p-8 text-white shadow-2xl">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">
             Prêt à Développer Votre Expertise ?
@@ -311,7 +315,10 @@ const Formations: React.FC = () => {
             <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
               Voir le calendrier
             </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+            <button 
+              onClick={handleContactClick}
+              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors cursor-pointer"
+            >
               Nous contacter
             </button>
           </div>

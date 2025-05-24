@@ -12,9 +12,13 @@ const Thematiques: React.FC = () => {
     <div>
       <Header />
       <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Thématiques
             </h1>
+          </div>
+        </div>
       </section>
 
       <main className="container-custom py-12">

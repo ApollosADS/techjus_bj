@@ -45,21 +45,20 @@ const Presentation: React.FC = () => {
               </p>
               
               <p className="mb-6 text-lg text-justify">
-                Nous avons l'immense plaisir de vous annoncer la création d'un espace de discussion 
-                via la communauté nommée <strong className="text-techjus-blue">"TechJus"</strong>, 
-                entièrement dédié au droit du numérique au Bénin.
+                Nous avons l'immense plaisir de vous Présentation
+                <strong className="text-techjus-blue">"TechJus"</strong>, 
+                une plateforme entièrement dédié au droit du numérique au Bénin.
               </p>
               
               <p className="mb-6 text-lg text-justify">
-                Cette initiative stratégique vise à rassembler des juristes experts, praticiens et 
-                passionnés du secteur pour créer un espace d'échange dynamique et collaboratif.
+                Elle vise à rassembler les juristes experts, et 
+                passionnés des thématique en rapport avec les nouvelles technologies pour ainsi créer un espace de travail, un incubateur de solution juridique et d'innovation technologique.
               </p>
               
               <p className="mb-0 text-lg text-justify">
                 Notre ambition est de créer une communauté scientifique pour faciliter le partage de 
                 connaissances, analyser ensemble les évolutions législatives actuelles, et stimuler 
-                des discussions enrichissantes sur les enjeux juridiques du numérique dans notre 
-                contexte béninois et international.
+                des discussions enrichissantes sur les enjeux juridiques du numérique.
               </p>
             </div>
           </div>
@@ -107,7 +106,7 @@ const Presentation: React.FC = () => {
                 Une communauté pour tous
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                TechJus s'adresse à tous les professionnels passionnés par l'intersection 
+                TechJus s'adresse à tous les juristes passionnés par l'intersection 
                 entre le droit et la technologie
               </p>
             </div>
@@ -115,8 +114,6 @@ const Presentation: React.FC = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-techjus-blue mb-4 flex items-center">
-                  <div className="w-3 h-3 bg-techjus-blue rounded-full mr-3"></div>
-                  Juristes Experts
                 </h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-center bg-techjus-light p-3 rounded-lg">
@@ -136,8 +133,6 @@ const Presentation: React.FC = () => {
 
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-techjus-blue mb-4 flex items-center">
-                  <div className="w-3 h-3 bg-techjus-green rounded-full mr-3"></div>
-                  Praticiens & Passionnés
                 </h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-center bg-techjus-light p-3 rounded-lg">
@@ -165,7 +160,7 @@ const Presentation: React.FC = () => {
                 Rejoignez notre communauté dès aujourd'hui
               </h2>
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-                Participez aux discussions, partagez vos expertises et contribuez au développement 
+                Participez aux discussions, partagez vos connaissances et contribuez au développement 
                 du droit du numérique au Bénin
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

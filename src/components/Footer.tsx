@@ -55,8 +55,7 @@ const Footer: React.FC = () => {
               />
             </div>
             <p className="mb-6 text-gray-300 text-lg leading-relaxed">
-              Une communauté dédiée au droit du numérique, rendant accessible 
-              les enjeux juridiques de notre société digitale au Bénin et en Afrique.
+              Une plateforme dédiée au droit du numérique !
             </p>
             <div>
               <h4 className="text-lg font-bold mb-4 text-white">Suivez-nous</h4>

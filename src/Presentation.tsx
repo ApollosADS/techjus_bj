@@ -5,6 +5,12 @@ import { useNavigate } from 'react-router-dom';
 const Presentation: React.FC = () => {
   const navigate = useNavigate();
 
+  const confirmJoin = () => {
+    window.open("https://chat.whatsapp.com/D5pdYuXAnTB9MaXDZO9cOc", "_blank");
+    setShowModal(false);
+  };
+
+
   const handleContactClick = () => {
     navigate('/contact');
   };

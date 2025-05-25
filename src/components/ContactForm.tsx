@@ -31,8 +31,8 @@ const ContactSection: React.FC = () => {
             Contactez-nous
           </h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Une question sur le droit du numérique ? Besoin d'accompagnement juridique ? 
-            Notre équipe est là pour vous aider.
+            AVez-vous une préocupation ? 
+            Notre équipe est disponible pour vous accompagner.
           </p>
         </div>
 
@@ -60,26 +60,6 @@ const ContactSection: React.FC = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            <div className="bg-techjus-light rounded-2xl p-8 border border-gray-200">
-              <h4 className="text-xl font-heading font-bold text-techjus-blue mb-4">
-                Horaires d'ouverture
-              </h4>
-              <div className="space-y-2 text-gray-700">
-                <div className="flex justify-between">
-                  <span>Lundi - Vendredi</span>
-                  <span className="text-gray-900 font-medium">8h00 - 18h00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Samedi</span>
-                  <span className="text-gray-900 font-medium">9h00 - 15h00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Dimanche</span>
-                  <span className="text-techjus-red font-medium">Fermé</span>
-                </div>
               </div>
             </div>
           </div>

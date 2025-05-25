@@ -164,7 +164,7 @@ const Header: React.FC = () => {
                 onClick={closeMenu}
               >
                 <ExternalLink size={18} className="mr-4 text-blue-400 flex-shrink-0" />
-                <span className="text-lg">Contact</span>
+                <span className="text-lg">Contacts</span>
               </NavLink>
             </div>
             

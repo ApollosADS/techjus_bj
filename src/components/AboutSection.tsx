@@ -1,45 +1,56 @@
 import React from 'react';
-import { BookOpen, Scale, Users, Lightbulb } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Users, BookOpen, FolderOpen, GraduationCap } from 'lucide-react';
 
 interface FeatureItem {
   icon: JSX.Element;
   title: string;
   description: string;
+  link: string;
 }
 
 const features: FeatureItem[] = [
   {
-    icon: <BookOpen className="h-12 w-12 text-techjus-yellow" />,
-    title: 'Ressources éducatives',
-    description: 'Accédez à des articles, Cours, Ouvrages, Magazine, Thèses de doctorat & mémoires de master, et formations sur les aspects juridiques du numérique.'
-  },
-  {
-    icon: <Scale className="h-12 w-12 text-techjus-yellow" />,
-    title: 'Veille juridique',
-    description: 'Suivez l\'évolution de la législation, de la jurisprudence et de la doctrine du numérique.'
-  },
-  {
     icon: <Users className="h-12 w-12 text-techjus-yellow" />,
-    title: 'Communauté d\'experts',
-    description: 'Échangez avec des professionnels du droit et des experts du numérique.'
+    title: 'Présentation',
+    description: 'Découvrez notre communauté, notre mission et nos objectifs pour le développement du droit numérique au Bénin.',
+    link: '/presentation'
   },
   {
-    icon: <Lightbulb className="h-12 w-12 text-techjus-yellow" />,
-    title: 'Événements',
-    description: 'Participez à nos conférences, ateliers et tables rondes sur les enjeux juridiques actuels.'
+    icon: <BookOpen className="h-12 w-12 text-techjus-yellow" />,
+    title: 'Ressources',
+    description: 'Accédez à des articles, cours, ouvrages, magazines, thèses de doctorat & mémoires de master, et formations sur les aspects juridiques du numérique.',
+    link: '/resources'
+  },
+  {
+    icon: <FolderOpen className="h-12 w-12 text-techjus-yellow" />,
+    title: 'Thématiques',
+    description: 'Explorez nos différentes thématiques spécialisées dans le droit du numérique et les technologies émergentes.',
+    link: '/thematiques'
+  },
+  {
+    icon: <GraduationCap className="h-12 w-12 text-techjus-yellow" />,
+    title: 'Formations',
+    description: 'Participez à nos conférences, ateliers, formations et tables rondes sur les enjeux juridiques actuels.',
+    link: '/formations'
   }
 ];
 
 const AboutSection: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (link: string) => {
+    navigate(link);
+  };
   return (
-    <section id="about" className="section bg-white">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Notre mission</h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            TechJus vise à rendre le droit du numérique accessible à tous, en créant un pont entre 
-            les experts juridiques et les acteurs du numérique pour relever ensemble les défis 
-            de la transformation digitale.
+    <section id="about" className="section bg-white py-16">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Explorez TechJus.bj
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Découvrez toutes les facettes de notre plateforme dédiée au droit numérique
           </p>
         </div>
         
@@ -47,13 +58,23 @@ const AboutSection: React.FC = () => {
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="bg-techjus-light rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
+              onClick={() => handleNavigation(feature.link)}
+              className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2 border border-gray-100 hover:border-blue-200"
             >
               <div className="flex justify-center mb-4">
-                {feature.icon}
+                <div className="bg-white p-3 rounded-full shadow-sm">
+                  {feature.icon}
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-center">{feature.title}</h3>
-              <p className="text-gray-700 text-center">{feature.description}</p>
+              <h3 className="text-xl font-semibold mb-3 text-center text-gray-800">{feature.title}</h3>
+              <p className="text-gray-600 text-center text-sm leading-relaxed">{feature.description}</p>
+              
+              {/* Indicateur de clic */}
+              <div className="mt-4 text-center">
+                <span className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors">
+                  En savoir plus →
+                </span>
+              </div>
             </div>
           ))}
         </div>

@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GraduationCap, Clock, Users, Award, BookOpen, Video, FileText, Calendar } from 'lucide-react';
+import { Navigate } from 'react-router-dom';
 
 const Formations: React.FC = () => {
+  const [shouldNavigateToContact, setShouldNavigateToContact] = useState(false);
+
+  const handleContactClick = () => {
+    setShouldNavigateToContact(true);
+  };
+
+  if (shouldNavigateToContact) {
+    return <Navigate to="/contact" replace />;
+  }
+
   const formations = [
     {
       id: 1,
@@ -118,10 +129,6 @@ const Formations: React.FC = () => {
     }
   ];
 
-  const handleContactClick = () => {
-    window.location.href = '/contact';
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section - Suppression de mt-16 pour coller au header */}
@@ -132,11 +139,11 @@ const Formations: React.FC = () => {
               <GraduationCap size={64} />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              Formations en Droit du Numérique
+              Formations en Droit
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
               Développez votre expertise juridique à l'ère du numérique avec nos
-              formations spécialisées adaptées au contexte béninois et international
+              formations spécialisées.
             </p>
           </div>
         </div>
@@ -272,7 +279,7 @@ const Formations: React.FC = () => {
               },
               {
                 step: 3,
-                title: "Confirmation",
+                title: "Confirmer",
                 desc: "Recevez la confirmation et le programme détaillé",
                 icon: <Calendar className="text-white" size={24} />
               },
@@ -309,7 +316,7 @@ const Formations: React.FC = () => {
             Prêt à Développer Votre Expertise ?
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Rejoignez nos formations et devenez un expert reconnu du droit du numérique au Bénin
+            Rejoignez nous
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Users, Target, Filter, Search, Calendar, Clock, User, Tag } from 'lucide-react';
+import { Navigate } from 'react-router-dom';
 
 // Mock FilterSection component
 const FilterSection = ({ onFilterChange }) => {
@@ -7,7 +8,7 @@ const FilterSection = ({ onFilterChange }) => {
   const [activeType, setActiveType] = useState('Tous');
 
   const categories = ['Toutes', 'Données personnelles', 'IA', 'Blockchain', 'Cybersécurité', 'E-commerce', 'Propriété Intellectuelle'];
-  const types = ['Tous', 'Guide', 'Article', 'Étude de cas'];
+  const types = ['Tous', 'Guide', 'Article', 'Étude de cas', 'Ouvrage', 'Dictionaire', 'Rapport', 'Cours', 'Documentation'];
 
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
@@ -137,10 +138,15 @@ const Header = () => {
 
 const Resources: React.FC = () => {
   const [filters, setFilters] = useState({});
+  const [shouldNavigateToContact, setShouldNavigateToContact] = useState(false);
 
   const handleContactClick = () => {
-    window.location.href = '/contact';
+    setShouldNavigateToContact(true);
   };
+
+  if (shouldNavigateToContact) {
+    return <Navigate to="/contact" replace />;
+  }
 
   const resources = [
     {
@@ -215,13 +221,13 @@ const Resources: React.FC = () => {
     {
       icon: <BookOpen className="w-8 h-8" />,
       number: "150+",
-      label: "Ressources disponibles",
+      label: "Ressources à venir",
       color: "text-blue-400"
     },
     {
       icon: <Users className="w-8 h-8" />,
       number: "500+",
-      label: "Professionnels formés",
+      label: "Professionnels à former",
       color: "text-green-400"
     },
     {
@@ -244,7 +250,7 @@ const Resources: React.FC = () => {
               Centre de <span className="text-white-400">Ressources</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Découvrez nos des articles, cours, ouvrages, magazine, thèses de doctorat & mémoires de master, et formations sur les aspects juridiques du numérique. 
+              Découvrez nos articles, cours, ouvrages, magazine, thèses de doctorat & mémoires de master, et formations sur les aspects juridiques du numérique. 
               Une bibliothèque complète pour les professionnels du droit et du digital.
             </p>
           </div>
@@ -279,9 +285,6 @@ const Resources: React.FC = () => {
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
             Toutes nos <span className="text-blue-400">ressources</span>
           </h2>
-          <p className="text-gray-600 mb-8">
-            Explorez notre collection de guides, articles et études de cas sur le droit du numérique
-          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -298,7 +301,7 @@ const Resources: React.FC = () => {
             Vous ne trouvez pas ce que vous cherchez ?
           </h3>
           <p className="text-lg mb-6 opacity-90">
-            Contactez notre équipe d'experts pour obtenir des conseils personnalisés
+            Contactez notre équipe pour obtenir des conseils personnalisés
           </p>
           <button 
             onClick={handleContactClick}

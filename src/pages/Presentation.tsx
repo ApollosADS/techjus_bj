@@ -115,7 +115,6 @@ const Presentation: React.FC = () => {
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Juristes Experts</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
@@ -133,7 +132,6 @@ const Presentation: React.FC = () => {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Praticiens & Passionnés</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>

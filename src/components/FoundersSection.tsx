@@ -40,13 +40,14 @@ const FoundersSection: React.FC = () => {
 
   return (
     <section id="founders" className="section bg-techjus-light">
-      <div className="container-custom">
+      {/* Container avec bordures réduites */}
+      <div className="w-full px-2 md:px-4 lg:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Découvrez notre équipe</h2>
         </div>
         
         {/* Container du carrousel */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden w-full">
           <div className="flex animate-scroll-slow">
             {duplicatedFounders.map((founder, index) => (
               <div key={`${founder.name}-${index}`} className="flex-shrink-0 w-80 px-4">
@@ -79,6 +80,13 @@ const FoundersSection: React.FC = () => {
         
         .animate-scroll-slow:hover {
           animation-play-state: paused;
+        }
+        
+        /* Responsive pour différentes tailles d'écran */
+        @media (max-width: 640px) {
+          .animate-scroll-slow {
+            animation-duration: 35s;
+          }
         }
       `}</style>
     </section>

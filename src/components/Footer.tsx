@@ -32,8 +32,8 @@ const Footer: React.FC = () => {
   const footerLinks = [
     { text: 'Accueil', url: '/' },
     { text: 'Présentation', url: '/presentation' },
-    { text: 'Ressources', url: '/resources' },
     { text: 'Thématiques', url: '/thematiques' },
+    { text: 'Ressources', url: '/resources' },
     { text: 'Formations', url: '/Formations' },
     { text: 'Contact', url: '/contact' },
     { text: 'Mentions légales', url: '/mentions-legales' },

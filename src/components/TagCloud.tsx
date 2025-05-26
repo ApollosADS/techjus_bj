@@ -80,9 +80,6 @@ const TagCloud: React.FC<TagCloudProps> = ({ onTagClick }) => {
           </button>
         ))}
       </div>
-      <div className="mt-6 text-center text-sm text-gray-500">
-        Cliquez sur une thématique pour voir les contenus associés
-      </div>
     </div>
   );
 };

@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, X, ExternalLink } from 'lucide-react';
+import { Menu, X, ExternalLink, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const socialLinks = [
+    { icon: <Facebook size={20} />, url: '#', label: 'Facebook' },
+    { icon: <Twitter size={20} />, url: '#', label: 'Twitter' },
+    { icon: <Linkedin size={20} />, url: '#', label: 'LinkedIn' },
+    { icon: <Instagram size={20} />, url: '#', label: 'Instagram' },
+  ];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -175,20 +182,18 @@ const Header: React.FC = () => {
                   <p className="text-gray-600 mb-6 leading-relaxed">
                     Communauté dédiée au droit du numérique au Bénin et en Afrique
                   </p>
-                  {/* Boutons sociaux */}
+                  {/* Boutons sociaux avec icônes */}
                   <div className="flex justify-center space-x-4">
-                    <button className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
-                      <span className="text-white text-sm font-bold">FB</span>
-                    </button>
-                    <button className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
-                      <span className="text-white text-sm font-bold">TW</span>
-                    </button>
-                    <button className="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors">
-                      <span className="text-white text-sm font-bold">IN</span>
-                    </button>
-                    <button className="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors">
-                      <span className="text-white text-sm font-bold">IG</span>
-                    </button>
+                    {socialLinks.map((social, index) => (
+                      <a
+                        key={index}
+                        href={social.url}
+                        aria-label={social.label}
+                        className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors text-white"
+                      >
+                        {social.icon}
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>

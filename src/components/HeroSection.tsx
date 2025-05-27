@@ -24,7 +24,7 @@ const HeroSection: React.FC = () => {
   };
 
   const confirmJoin = () => {
-    window.open("https://chat.whatsapp.com/D5pdYuXAnTB9MaXDZO9cOc", "_blank");
+    window.open("https://chat.whatsapp.com/LWSxo3cWM0X7BJacOfXBw7", "_blank");
     setShowModal(false);
   };
 

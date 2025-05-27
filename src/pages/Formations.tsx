@@ -87,7 +87,7 @@ const Formations: React.FC = () => {
         "Procédures judiciaires",
         "Épreuves pratiques"
       ],
-      color: "bg-purple-500"
+      color: "bg-yellow-500"
     },
     {
       id: 6,
@@ -118,7 +118,7 @@ const Formations: React.FC = () => {
       description: "Apprenez auprès de praticiens expérimentés du numérique"
     },
     {
-      icon: <Video className="text-purple-600" size={32} />,
+      icon: <Video className="text-yellow-600" size={32} />,
       title: "Format Hybride",
       description: "Formations en présentiel et à distance selon vos besoins"
     },

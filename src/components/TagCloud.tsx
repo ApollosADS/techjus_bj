@@ -43,7 +43,7 @@ const TagCloud: React.FC<TagCloudProps> = ({ onTagClick }) => {
     const colors = {
       data: 'text-blue-600 hover:text-blue-800',
       tech: 'text-green-600 hover:text-green-800',
-      business: 'text-purple-600 hover:text-purple-800',
+      business: 'text-yellow-600 hover:text-yellow-800',
       law: 'text-red-600 hover:text-red-800',
       security: 'text-orange-600 hover:text-orange-800'
     };

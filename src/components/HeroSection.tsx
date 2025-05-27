@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, AlertCircle } from 'lucide-react';
+import { ChevronDown, AlertCircle, ExternalLink } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isHoveringName, setIsHoveringName] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -68,15 +69,36 @@ const HeroSection: React.FC = () => {
           <div className={`absolute bottom-4 left-4 right-4 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <blockquote className="border-l-4 border-techjus-yellow pl-6 italic text-white text-sm md:text-base">
               "L'emblématique union entre le droit et le numérique a créé une nouvelle matière dynamique d'essence, parfois volatile mais surtout très subtile. Ensemble, nous pouvons mieux l'appréhender"
-              <footer className="text-sm mt-4 font-bold text-techjus-yellow">
-                <a
-                  href="https://www.linkedin.com/in/ez%C3%A9kiel-sohou-%F0%9F%87%A7%F0%9F%87%AF%F0%9F%92%AB-059126177/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline transition-all duration-300"
-                >
-                  Ezékiel T. SOHOU
-                </a>
+              <footer className="text-sm mt-4 font-bold text-techjus-yellow relative">
+                <div className="flex items-center justify-start gap-2">
+                  <a
+                    href="https://www.linkedin.com/in/ez%C3%A9kiel-sohou-%F0%9F%87%A7%F0%9F%87%AF%F0%9F%92%AB-059126177/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative inline-flex items-center gap-1 group"
+                    onMouseEnter={() => setIsHoveringName(true)}
+                    onMouseLeave={() => setIsHoveringName(false)}
+                  >
+                    <span className="relative">
+                      Ezékiel T. SOHOU
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                      <span className="absolute -inset-1 bg-white/20 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+                    </span>
+                    <ExternalLink 
+                      size={14} 
+                      className={`transition-all duration-300 ${
+                        isHoveringName 
+                          ? 'opacity-100 transform translate-x-1 text-white' 
+                          : 'opacity-70 text-techjus-yellow'
+                      }`}
+                    />
+                  </a>
+                </div>
+                <div className={`text-xs text-white/80 mt-1 transition-all duration-300 ${
+                  isHoveringName ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-2'
+                }`}>
+                  👆 Découvrir son profil LinkedIn
+                </div>
               </footer>
             </blockquote>
           </div>

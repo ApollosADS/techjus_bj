@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, X, ExternalLink, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Menu, X, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -130,7 +130,6 @@ const Header: React.FC = () => {
                   className={mobileNavLinkClasses}
                   onClick={closeMenu}
                 >
-                  <ExternalLink size={18} className="mr-4 text-blue-400 flex-shrink-0" />
                   <span className="text-lg">Accueil</span>
                 </NavLink>
                 <NavLink 
@@ -138,7 +137,6 @@ const Header: React.FC = () => {
                   className={mobileNavLinkClasses}
                   onClick={closeMenu}
                 >
-                  <ExternalLink size={18} className="mr-4 text-blue-400 flex-shrink-0" />
                   <span className="text-lg">Présentation</span>
                 </NavLink>
                 <NavLink 
@@ -146,7 +144,6 @@ const Header: React.FC = () => {
                   className={mobileNavLinkClasses}
                   onClick={closeMenu}
                 >
-                  <ExternalLink size={18} className="mr-4 text-blue-400 flex-shrink-0" />
                   <span className="text-lg">Thématiques</span>
                 </NavLink>
                 <NavLink 
@@ -154,7 +151,6 @@ const Header: React.FC = () => {
                   className={mobileNavLinkClasses}
                   onClick={closeMenu}
                 >
-                  <ExternalLink size={18} className="mr-4 text-blue-400 flex-shrink-0" />
                   <span className="text-lg">Ressources</span>
                 </NavLink>
                 <NavLink 
@@ -162,7 +158,6 @@ const Header: React.FC = () => {
                   className={mobileNavLinkClasses}
                   onClick={closeMenu}
                 >
-                  <ExternalLink size={18} className="mr-4 text-blue-400 flex-shrink-0" />
                   <span className="text-lg">Formations</span>
                 </NavLink>
                 <NavLink 
@@ -170,7 +165,6 @@ const Header: React.FC = () => {
                   className={mobileNavLinkClasses}
                   onClick={closeMenu}
                 >
-                  <ExternalLink size={18} className="mr-4 text-blue-400 flex-shrink-0" />
                   <span className="text-lg">Contacts</span>
                 </NavLink>
               </div>

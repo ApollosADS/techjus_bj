@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const SocialLinks: React.FC<{ className?: string }> = ({ className = '' }) => {
   const socialLinks = [
@@ -72,17 +72,15 @@ const Footer: React.FC = () => {
                   {link.url.startsWith('#') ? (
                     <a
                       href={link.url}
-                      className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 flex items-center py-2 px-3 rounded-lg hover:bg-gray-700"
+                      className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 block py-2 px-3 rounded-lg hover:bg-gray-700"
                     >
-                      <ExternalLink size={16} className="mr-3 text-blue-400" />
                       {link.text}
                     </a>
                   ) : (
                     <Link
                       to={link.url}
-                      className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 flex items-center py-2 px-3 rounded-lg hover:bg-gray-700"
+                      className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 block py-2 px-3 rounded-lg hover:bg-gray-700"
                     >
-                      <ExternalLink size={16} className="mr-3 text-blue-400" />
                       {link.text}
                     </Link>
                   )}

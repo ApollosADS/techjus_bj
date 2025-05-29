@@ -40,25 +40,27 @@ const FoundersSection: React.FC = () => {
 
   return (
     <section id="founders" className="section bg-techjus-light">
-      {/* Container avec bordures réduites */}
-      <div className="w-full px-2 md:px-4 lg:px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Découvrez notre équipe</h2>
-        </div>
-        
-        {/* Container du carrousel */}
-        <div className="relative overflow-hidden w-full">
-          <div className="flex animate-scroll-slow">
-            {duplicatedFounders.map((founder, index) => (
-              <div key={`${founder.name}-${index}`} className="flex-shrink-0 w-80 px-4">
-                <MemberCard 
-                  name={founder.name}
-                  role={founder.role}
-                  quote={founder.quote}
-                  imageUrl={founder.imageUrl}
-                />
-              </div>
-            ))}
+      {/* Container principal avec marges uniformes */}
+      <div className="w-full px-4 md:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Découvrez notre équipe</h2>
+          </div>
+          
+          {/* Container du carrousel */}
+          <div className="relative overflow-hidden w-full">
+            <div className="flex animate-scroll-slow">
+              {duplicatedFounders.map((founder, index) => (
+                <div key={`${founder.name}-${index}`} className="flex-shrink-0 w-80 px-4">
+                  <MemberCard 
+                    name={founder.name}
+                    role={founder.role}
+                    quote={founder.quote}
+                    imageUrl={founder.imageUrl}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

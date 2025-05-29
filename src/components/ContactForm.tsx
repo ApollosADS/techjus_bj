@@ -5,17 +5,17 @@ const ContactSection: React.FC = () => {
   const handleEmailClick = () => {
     const subject = encodeURIComponent('Contact depuis TechJus.bj');
     const body = encodeURIComponent('Bonjour,\n\nJe vous contacte depuis le site TechJus.bj.\n\n');
-    window.location.href = `mailto:benintechjus@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:contact@techjus.bj?subject=${subject}&body=${body}`;
   };
 
   const contactInfo = [
     {
-      icon: <Mail className="w-6 h-6" />, title: 'Email', value: 'benintechjus@gmail.com',
+      icon: <Mail className="w-6 h-6" />, title: 'Email', value: 'contact@techjus.bj',
       action: () => handleEmailClick(), color: 'text-techjus-blue'
     },
     {
-      icon: <Phone className="w-6 h-6" />, title: 'Téléphone', value: '+229 XX XX XX XX XX',
-      action: () => window.location.href = 'tel:+229XXXXXXXXXX', color: 'text-techjus-green'
+      icon: <Phone className="w-6 h-6" />, title: 'Téléphone', value: '+229 66 72 95 88',
+      action: () => window.location.href = 'tel:+229 66 72 95 88', color: 'text-techjus-green'
     },
     {
       icon: <MapPin className="w-6 h-6" />, title: 'Localisation', value: 'Cotonou, Bénin',

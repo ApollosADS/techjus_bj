@@ -132,9 +132,9 @@ const FormationsFAQAccordion: React.FC = () => {
                 Vous pouvez également nous joindre directement :
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm text-techjus-blue">
-                <span className="font-medium">📧 formations@techjus.org</span>
+                <span className="font-medium">📧 formations@techjus.bj</span>
                 <span className="hidden sm:block">•</span>
-                <span className="font-medium">📱 +229 XX XX XX XX</span>
+                <span className="font-medium">📱 +229 66 72 95 88</span>
               </div>
             </div>
           </div>

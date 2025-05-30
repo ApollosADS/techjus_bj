@@ -1,0 +1,41 @@
+{
+    "hero": {
+      "title": "Le droit à l'ère numérique, accessible à tous",
+      "quote": "L'emblématique union entre le droit et le numérique pour démocratiser l'accès à la justice et aux services juridiques.",
+      "button1": "Rejoindre la communauté",
+      "button2": "En savoir plus"
+    },
+    "navigation": {
+      "home": "Accueil",
+      "about": "À propos",
+      "services": "Services",
+      "contact": "Contact",
+      "blog": "Blog"
+    },
+    "common": {
+      "loading": "Chargement...",
+      "error": "Une erreur est survenue",
+      "retry": "Réessayer",
+      "close": "Fermer",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "yes": "Oui",
+      "no": "Non",
+      "next": "Suivant",
+      "previous": "Précédent",
+      "search": "Rechercher",
+      "filter": "Filtrer",
+      "clear": "Effacer"
+    },
+    "footer": {
+      "copyright": "© {{year}} - Tous droits réservés",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions d'utilisation",
+      "contact": "Nous contacter"
+    },
+    "language": {
+      "switch": "Changer de langue",
+      "current": "Français"
+    }
+  }

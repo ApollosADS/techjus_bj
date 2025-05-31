@@ -5,7 +5,7 @@ import AboutSection from '../components/AboutSection';
 import FoundersSection from '../components/FoundersSection';
 import RulesSection from '../components/RulesSection';
 import ContactForm from '../components/ContactForm';
-import Footer from '../components/Footer';
+// Footer retiré car déjà inclus dans ContactForm
 
 const Landing: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const Landing: React.FC = () => {
       <FoundersSection />
       <RulesSection />
       <ContactForm />
-      <Footer />
+      {/* Footer supprimé car déjà dans ContactForm */}
     </div>
   );
 };

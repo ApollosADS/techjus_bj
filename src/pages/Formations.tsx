@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { GraduationCap, Clock, Users, Award, BookOpen, Video, FileText, Calendar } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
+import FormationsFAQAccordion from '../components/FormationsFAQAccordion';
 
 const Formations: React.FC = () => {
   const [shouldNavigateToContact, setShouldNavigateToContact] = useState(false);
-
+  
   const handleContactClick = () => {
     setShouldNavigateToContact(true);
   };
-
+  
   if (shouldNavigateToContact) {
     return <Navigate to="/contact" replace />;
   }
-
+  
   const formations = [
     {
       id: 1,
@@ -105,7 +106,7 @@ const Formations: React.FC = () => {
       color: "bg-green-500"
     }
   ];
-
+  
   const avantages = [
     {
       icon: <Award className="text-blue-600" size={32} />,
@@ -128,10 +129,10 @@ const Formations: React.FC = () => {
       description: "Accès à une bibliothèque de ressources juridiques actuelles"
     }
   ];
-
+  
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section - Suppression de mt-16 pour coller au header */}
+      {/* 1. Section Hero */}
       <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center">
@@ -148,8 +149,8 @@ const Formations: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Formations disponibles */}
+      
+      {/* 2. Liste des formations disponibles */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
@@ -222,8 +223,8 @@ const Formations: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Avantages */}
+      
+      {/* 3. Avantages des formations */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
@@ -251,8 +252,8 @@ const Formations: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Processus d'inscription */}
+      
+      {/* 4. Processus d'inscription */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
@@ -308,8 +309,11 @@ const Formations: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Section CTA */}
+      
+      {/* 5. Nouvelle section FAQ Accordéon */}
+      <FormationsFAQAccordion />
+      
+      {/* 6. Section d'appel à l'action (CTA) */}
       <section className="bg-gradient-to-r from-blue-600 to-green-600 p-8 text-white shadow-2xl">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">

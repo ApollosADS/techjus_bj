@@ -35,8 +35,17 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
     return <Navigate to="/contact" replace />;
   }
 
+  const getTypeColor = () => {
+    switch (type) {
+      case 'Guide': return 'bg-techjus-blue text-white';
+      case 'Article': return 'bg-techjus-green text-white';
+      case 'Étude de cas': return 'bg-techjus-purple text-white';
+      default: return 'bg-gray-600 text-white';
+    }
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="bg-white rounded-lg shadow-techjus overflow-hidden hover:shadow-techjus-lg transition-all duration-300">
       {/* Image */}
       <div className="relative">
         <img 
@@ -45,11 +54,11 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
           className="w-full h-48 object-cover"
         />
         <div className="absolute top-4 left-4 flex gap-2">
-          <span className="bg-blue-600 text-white px-2 py-1 rounded text-sm">
-            {category}
-          </span>
-          <span className="bg-gray-600 text-white px-2 py-1 rounded text-sm">
+          <span className={`px-2 py-1 rounded text-sm font-medium ${getTypeColor()}`}>
             {type}
+          </span>
+          <span className="bg-techjus-gray-600 text-white px-2 py-1 rounded text-sm">
+            {category}
           </span>
         </div>
       </div>
@@ -57,7 +66,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
       {/* Contenu */}
       <div className="p-6">
         <div className="mb-4">
-          <h3 className="text-xl font-semibold mb-2 text-gray-900">
+          <h3 className="text-xl font-heading font-semibold mb-2 text-gray-900">
             {title}
           </h3>
           <p className="text-gray-600 text-sm">
@@ -87,14 +96,14 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-2 bg-techjus-blue text-white px-4 py-2 rounded hover:bg-techjus-blue-dark transition-colors"
           >
             <ExternalLink size={16} />
             Lire la suite
           </a>
           <button
             onClick={handleContactClick}
-            className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors"
+            className="bg-techjus-gray-600 text-white px-4 py-2 rounded hover:bg-techjus-gray-700 transition-colors"
           >
             Nous contacter
           </button>

@@ -1,4 +1,3 @@
-// TagCloud.tsx
 import React, { useState } from 'react';
 
 interface Tag {
@@ -41,11 +40,11 @@ const TagCloud: React.FC<TagCloudProps> = ({ onTagClick }) => {
 
   const getCategoryColor = (category: string) => {
     const colors = {
-      data: 'text-blue-600 hover:text-blue-800',
-      tech: 'text-green-600 hover:text-green-800',
-      business: 'text-yellow-600 hover:text-yellow-800',
-      law: 'text-red-600 hover:text-red-800',
-      security: 'text-orange-600 hover:text-orange-800'
+      data: 'text-techjus-blue hover:text-techjus-blue-dark',
+      tech: 'text-techjus-green hover:text-techjus-green-dark',
+      business: 'text-techjus-yellow hover:text-techjus-yellow-dark',
+      law: 'text-techjus-red hover:text-techjus-red-dark',
+      security: 'text-techjus-orange hover:text-techjus-orange-dark'
     };
     return colors[category as keyof typeof colors] || 'text-gray-600 hover:text-gray-800';
   };
@@ -56,8 +55,8 @@ const TagCloud: React.FC<TagCloudProps> = ({ onTagClick }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
-      <h2 className="text-2xl font-bold text-techjus-blue mb-6 text-center">
+    <div className="bg-white rounded-xl shadow-techjus p-8 mb-12">
+      <h2 className="text-2xl font-heading font-bold text-techjus-blue mb-6 text-center">
         Explorez nos thématiques
       </h2>
       <div className="flex flex-wrap justify-center items-center gap-4 leading-relaxed">

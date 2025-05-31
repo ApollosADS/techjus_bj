@@ -59,7 +59,7 @@ const Presentation: React.FC = () => {
                 Elle vise à rassembler les juristes experts et passionnés des thématiques en rapport avec les nouvelles technologies pour ainsi créer un espace de travail, un incubateur de solutions juridiques et d'innovation technologique.
               </p>
               <p className="mb-0 text-lg text-justify">
-                Notre ambition est de créer une communauté scientifique pour faciliter le partage de connaissances, analyser ensemble les évolutions législatives jurisprudentielles, doctrinales et stimuler des discussions enrichissantes sur les enjeux juridiques du numérique.
+                Notre ambition est de créer une communauté scientifique pour faciliter le partage de connaissances, analyser ensemble les évolutions législatives, jurisprudentielles, doctrinales et stimuler des discussions enrichissantes sur les enjeux juridiques du numérique.
               </p>
             </div>
           </div>

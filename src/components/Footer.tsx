@@ -36,8 +36,8 @@ const Footer: React.FC = () => {
     { text: 'Ressources', url: '/resources' },
     { text: 'Formations', url: '/Formations' },
     { text: 'Contact', url: '/contact' },
-    { text: 'Mentions légales', url: '/mentions-legales' },
-    { text: 'Politique de confidentialité', url: '/politique-confidentialite' },
+    //{ text: 'Mentions légales', url: '/mentions-legales' },
+    //{ text: 'Politique de confidentialité', url: '/politique-confidentialite' },
   ];
 
   return (

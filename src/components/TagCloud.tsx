@@ -21,7 +21,6 @@ const TagCloud: React.FC<TagCloudProps> = ({ onTagClick }) => {
     { name: 'Cybersécurité', count: 35, category: 'security' },
     { name: 'Droit d\'auteur', count: 29, category: 'law' },
     { name: 'Contrats numériques', count: 38, category: 'law' },
-    { name: 'Protection des données', count: 42, category: 'data' },
     { name: 'Cloud Computing', count: 25, category: 'tech' },
     { name: 'Propriété intellectuelle', count: 33, category: 'law' },
     { name: 'Fintech', count: 27, category: 'business' },

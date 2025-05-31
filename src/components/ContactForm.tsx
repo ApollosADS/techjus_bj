@@ -33,7 +33,7 @@ const ContactSection: React.FC = () => {
               Contactez-nous
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              AVez-vous une préocupation ? 
+              Avez-vous une préoccupation ? 
               Notre équipe est disponible pour vous accompagner.
             </p>
           </div>

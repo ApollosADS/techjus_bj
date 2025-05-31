@@ -2,11 +2,11 @@ import React from 'react';
 import { Check } from 'lucide-react';
 
 const rules = [
-  'Respect et bienveillance envers dans la mise en oeuvre des missions',
-  'Partage d\'informations vérifiées et fiables sur le droit du numérique',
-  'Participation active aux activités scientifiques',
-  'Promotion des valeurs de transparence et d\'équité numérique',
-  'Respect de la confidentialité et protection des données personnelles'
+  'Respect et bienveillance envers tous',
+  'Fiabilité et disponibilité de l\'information',
+  'Transparence et équité dans l\'exécution des activités',
+  'Confidentialité et protection des données',
+  'Promotion de l\'égalité sous toutes ses formes'
 ];
 
 const RulesSection: React.FC = () => {
@@ -16,7 +16,7 @@ const RulesSection: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Nos valeurs</h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            TechJus s'appuie sur des principes forts qui guident ces actions quotidiennes.
+            TechJus s'appuie sur des principes forts qui guident ses actions quotidiennes.
           </p>
         </div>
         

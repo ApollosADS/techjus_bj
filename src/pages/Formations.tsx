@@ -17,21 +17,6 @@ const Formations: React.FC = () => {
   const formations = [
     {
       id: 1,
-      title: "Fondamentaux du Droit du Numérique",
-      description: "Introduction complète aux principes de base du droit du numérique au Bénin",
-      duration: "3 Mois",
-      level: "Débutant",
-      participants: "15-20",
-      modules: [
-        "Introduction au droit du numérique",
-        "Cadre juridique béninois",
-        "Propriété intellectuelle numérique",
-        "Contrats électroniques"
-      ],
-      color: "bg-blue-500"
-    },
-    {
-      id: 2,
       title: "Masterclass : Devenir Juriste 4.0 à l'ère du digital et de l'IA",
       description: "Enjeux juridiques et éthiques de l'IA dans le contexte africain",
       duration: "1 jour",
@@ -44,6 +29,21 @@ const Formations: React.FC = () => {
         "Régulation future"
       ],
       color: "bg-red-500"
+    },
+    {
+      id: 2,
+      title: "Fondamentaux du Droit du Numérique",
+      description: "Introduction complète aux principes de base du droit du numérique au Bénin",
+      duration: "3 Mois",
+      level: "Débutant",
+      participants: "15-20",
+      modules: [
+        "Introduction au droit du numérique",
+        "Cadre juridique béninois",
+        "Propriété intellectuelle numérique",
+        "Contrats électroniques"
+      ],
+      color: "bg-blue-500"
     },
     {
       id: 3,
@@ -79,7 +79,7 @@ const Formations: React.FC = () => {
       id: 5,
       title: "Réussir au concours de magistrature",
       description: "Préparation complète au concours de magistrature",
-      duration: "3 jours",
+      duration: "3 mois",
       level: "Expert",
       participants: "5-10",
       modules: [

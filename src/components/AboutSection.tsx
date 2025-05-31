@@ -13,13 +13,13 @@ const features: FeatureItem[] = [
   {
     icon: <Users className="h-12 w-12 text-techjus-yellow" />,
     title: 'Présentation',
-    description: 'Découvrez notre communauté, notre mission et nos objectifs pour le développement du droit numérique au Bénin.',
+    description: 'Découvrez notre communauté, notre mission et nos objectifs pour le développement du droit du numérique au Bénin.',
     link: '/presentation'
   },
   {
     icon: <BookOpen className="h-12 w-12 text-techjus-yellow" />,
     title: 'Ressources',
-    description: 'Accédez à des articles, cours, ouvrages, magazines, thèses de doctorat & mémoires de master, et formations sur les aspects juridiques du numérique.',
+    description: 'Accédez à des articles, cours, ouvrages, magazines, thèses de doctorat, mémoires de master, et formations sur les aspects juridiques du numérique.',
     link: '/resources'
   },
   {
@@ -50,7 +50,7 @@ const AboutSection: React.FC = () => {
             Explorez TechJus.bj
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Découvrez toutes les facettes de notre plateforme dédiée au droit numérique
+            Découvrez toutes les facettes de notre plateforme dédiée au droit du numérique
           </p>
         </div>
         

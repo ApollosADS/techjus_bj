@@ -168,7 +168,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
           onClick={handleReadMore}
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
         >
-          Lire la suite
+          Bientôt disponible
         </button>
       </div>
     </div>
@@ -202,7 +202,7 @@ const Resources: React.FC = () => {
       description: "Découvrez tout ce que vous devez savoir sur le Règlement Général sur la Protection des Données et sa mise en application pratique.",
       category: "Données personnelles",
       type: "Guide",
-      author: "Philippe V. DJOKO",
+      author: "",
       date: "15 Nov 2024",
       readTime: "10 min",
       imageUrl: "/api/placeholder/400/200",
@@ -213,7 +213,7 @@ const Resources: React.FC = () => {
       description: "Analyse approfondie des implications juridiques de l'intelligence artificielle dans le monde des affaires.",
       category: "IA",
       type: "Article",
-      author: "Marielle I. KPASSASSI",
+      author: "",
       date: "12 Nov 2024",
       readTime: "8 min",
       imageUrl: "/api/placeholder/400/200",
@@ -224,7 +224,7 @@ const Resources: React.FC = () => {
       description: "Comprendre les aspects juridiques de la blockchain et des smart contracts dans l'écosystème numérique.",
       category: "Blockchain",
       type: "Étude de cas",
-      author: "Fidèle DOSSOU",
+      author: "",
       date: "10 Nov 2024",
       readTime: "12 min",
       imageUrl: "/api/placeholder/400/200",
@@ -235,7 +235,7 @@ const Resources: React.FC = () => {
       description: "Les obligations légales des entreprises en matière de cybersécurité et protection des données.",
       category: "Cybersécurité",
       type: "Guide",
-      author: "Philippe V. DJOKO",
+      author: "",
       date: "8 Nov 2024",
       readTime: "15 min",
       imageUrl: "/api/placeholder/400/200",
@@ -246,7 +246,7 @@ const Resources: React.FC = () => {
       description: "Réglementations et bonnes pratiques pour les plateformes de commerce électronique.",
       category: "E-commerce",
       type: "Article",
-      author: "Marielle I. KPASSASSI",
+      author: "",
       date: "5 Nov 2024",
       readTime: "9 min",
       imageUrl: "/api/placeholder/400/200",
@@ -257,7 +257,7 @@ const Resources: React.FC = () => {
       description: "Protection des créations numériques et enjeux de la propriété intellectuelle en ligne.",
       category: "Propriété Intellectuelle",
       type: "Étude de cas",
-      author: "Fidèle DOSSOU",
+      author: "",
       date: "2 Nov 2024",
       readTime: "11 min",
       imageUrl: "/api/placeholder/400/200",
@@ -307,7 +307,7 @@ const Resources: React.FC = () => {
               Centre de <span className="text-blue-400">Ressources</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Découvrez nos articles, cours, ouvrages, magazine, thèses de doctorat & mémoires de master, et formations sur les aspects juridiques du numérique. 
+              Découvrez nos articles, cours, ouvrages, magazine, thèses de doctorat, mémoires de master, et formations sur les aspects juridiques du numérique. 
               Une bibliothèque complète pour les professionnels du droit et du digital.
             </p>
           </div>

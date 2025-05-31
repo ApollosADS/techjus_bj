@@ -53,13 +53,13 @@ const Presentation: React.FC = () => {
                 Chers Membres,
               </p>
               <p className="mb-6 text-lg text-justify">
-                Nous avons l'immense plaisir de vous présenter <strong className="text-techjus-blue bg-techjus-light/50 px-1 rounded">"TechJus"</strong>, une plateforme entièrement dédiée au droit du numérique au Bénin.
+                Nous avons l'immense plaisir de vous présenter <strong className="text-techjus-blue bg-techjus-light/50 px-1 rounded">"TechJus"</strong>, une plateforme entièrement dédiée au droit du numérique.
               </p>
               <p className="mb-6 text-lg text-justify">
-                Elle vise à rassembler les juristes experts, et passionnés des thématiques en rapport avec les nouvelles technologies pour ainsi créer un espace de travail, un incubateur de solution juridique et d'innovation technologique.
+                Elle vise à rassembler les juristes experts et passionnés des thématiques en rapport avec les nouvelles technologies pour ainsi créer un espace de travail, un incubateur de solutions juridiques et d'innovation technologique.
               </p>
               <p className="mb-0 text-lg text-justify">
-                Notre ambition est de créer une communauté scientifique pour faciliter le partage de connaissances, analyser l'ensemble des évolutions législatives actuelles, et stimuler des discussions enrichissantes sur les enjeux juridiques du numérique.
+                Notre ambition est de créer une communauté scientifique pour faciliter le partage de connaissances, analyser ensemble les évolutions législatives jurisprudentielles, doctrinales et stimuler des discussions enrichissantes sur les enjeux juridiques du numérique.
               </p>
             </div>
           </div>
@@ -75,7 +75,7 @@ const Presentation: React.FC = () => {
               {
                 icon: <Scale className="text-techjus-yellow" size={24} />,
                 title: "Veille juridique",
-                description: "Suivez l'évolution de la législation et de la jurisprudence dans le domaine numérique."
+                description: "Suivez l'évolution de la législation et de la jurisprudence dans le domaine des nouvelles technologies."
               },
               {
                 icon: <Users className="text-techjus-yellow" size={24} />,
@@ -134,7 +134,7 @@ const Presentation: React.FC = () => {
 
               <div className="space-y-4">
                 <ul className="space-y-3 text-gray-700 font-body">
-                  {['Responsables de la conformité juridique', 'Consultants en transformation numérique', 'Étudiants en droit du numérique'].map((item, index) => (
+                  {['Responsables de la conformité', 'Consultants en transformation numérique', 'Étudiants en droit du numérique, etc...'].map((item, index) => (
                     <li 
                       key={index} 
                       className="flex items-center bg-techjus-light p-3 rounded-lg border border-gray-100"
@@ -156,7 +156,7 @@ const Presentation: React.FC = () => {
                 Rejoignez notre communauté dès aujourd'hui
               </h2>
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto font-body">
-                Participez aux discussions, partagez vos expertises et contribuez au développement du droit du numérique au Bénin
+                Participez aux discussions, partagez votre expertise et contribuez au développement du droit du numérique au Bénin
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button

@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
+=======
+import React from 'react';
+>>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import FoundersSection from '../components/FoundersSection';
 import RulesSection from '../components/RulesSection';
 import ContactForm from '../components/ContactForm';
+<<<<<<< HEAD
 import AnnoncePopup from '../components/AnnoncePopup';
 import { usePopup } from '../hooks/usePopup';
 
@@ -68,6 +73,11 @@ const Landing: React.FC = () => {
   // Hook pour gérer le popup
   const { isOpen, selectedAnnonce, closePopup } = usePopup(annonces);
 
+=======
+// Footer retiré car déjà inclus dans ContactForm
+
+const Landing: React.FC = () => {
+>>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -76,6 +86,7 @@ const Landing: React.FC = () => {
       <FoundersSection />
       <RulesSection />
       <ContactForm />
+<<<<<<< HEAD
       
       {/* Popup d'annonce */}
       <AnnoncePopup
@@ -83,6 +94,9 @@ const Landing: React.FC = () => {
         isOpen={isOpen}
         onClose={closePopup}
       />
+=======
+      {/* Footer supprimé car déjà dans ContactForm */}
+>>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
     </div>
   );
 };

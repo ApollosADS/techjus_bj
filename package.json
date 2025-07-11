@@ -25,7 +25,10 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
+<<<<<<< HEAD
     "@types/node": "^24.0.7",
+=======
+>>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

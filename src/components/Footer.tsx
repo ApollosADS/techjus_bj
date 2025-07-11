@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram, ChevronDown, ChevronUp } from 'lucide-react';
-=======
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
 
 const SocialLinks: React.FC<{ className?: string }> = ({ className = '' }) => {
   const socialLinks = [
@@ -35,7 +29,6 @@ const SocialLinks: React.FC<{ className?: string }> = ({ className = '' }) => {
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   
-<<<<<<< HEAD
   // Structure de navigation conforme au header
   const mainLinks = [
     { text: 'Accueil', url: '/' },
@@ -74,19 +67,6 @@ const Footer: React.FC = () => {
     setOpenDropdown(openDropdown === label ? null : label);
   };
 
-=======
-  const footerLinks = [
-    { text: 'Accueil', url: '/' },
-    { text: 'Présentation', url: '/presentation' },
-    { text: 'Thématiques', url: '/thematiques' },
-    { text: 'Ressources', url: '/resources' },
-    { text: 'Formations', url: '/Formations' },
-    { text: 'Contact', url: '/contact' },
-    //{ text: 'Mentions légales', url: '/mentions-legales' },
-    //{ text: 'Politique de confidentialité', url: '/politique-confidentialite' },
-  ];
-
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
   return (
     <footer className="bg-gray-800 text-white py-12">
       <div className="max-w-6xl mx-auto px-4">
@@ -110,7 +90,6 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-<<<<<<< HEAD
           {/* Section Navigation */}
           <div>
             <h3 className="text-2xl font-bold mb-6 text-white">Navigation</h3>
@@ -160,28 +139,6 @@ const Footer: React.FC = () => {
                         </Link>
                       ))}
                     </div>
-=======
-          {/* Section Liens rapides */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6 text-white">Liens rapides</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {footerLinks.map((link, index) => (
-                <div key={index}>
-                  {link.url.startsWith('#') ? (
-                    <a
-                      href={link.url}
-                      className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 block py-2 px-3 rounded-lg hover:bg-gray-700"
-                    >
-                      {link.text}
-                    </a>
-                  ) : (
-                    <Link
-                      to={link.url}
-                      className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 block py-2 px-3 rounded-lg hover:bg-gray-700"
-                    >
-                      {link.text}
-                    </Link>
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
                   )}
                 </div>
               ))}
@@ -192,11 +149,7 @@ const Footer: React.FC = () => {
         {/* Ligne de séparation et copyright */}
         <div className="pt-8 border-t border-gray-700 text-center">
           <p className="text-gray-400 text-lg">
-<<<<<<< HEAD
             © {currentYear} <span className="text-yellow-400 font-semibold">TechJus</span> - Tous droits réservés.
-=======
-            © {currentYear} <span className="text-400 font-semibold">TechJus</span> - Tous droits réservés.
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
           </p>
         </div>
       </div>

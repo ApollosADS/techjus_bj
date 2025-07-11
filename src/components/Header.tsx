@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { 
@@ -61,8 +60,6 @@ const Header: React.FC = () => {
     { icon: Instagram, href: '#', label: 'Instagram' }
   ];
 
-  // ===== STRUCTURE DE NAVIGATION =====
-  
   // Pages principales (navigation directe)
   const mainPages: NavPage[] = [
     { path: '/', label: 'Accueil', icon: Home },
@@ -134,41 +131,6 @@ const Header: React.FC = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
-=======
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Menu, X, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-
-const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-  // Configuration des liens sociaux
-  const socialLinks = [
-    { icon: <Facebook size={20} />, url: '#', label: 'Facebook' },
-    { icon: <Twitter size={20} />, url: '#', label: 'Twitter' },
-    { icon: <Linkedin size={20} />, url: '#', label: 'LinkedIn' },
-    { icon: <Instagram size={20} />, url: '#', label: 'Instagram' },
-  ];
-
-  // Classes CSS réutilisables
-  const navLinkClasses = ({ isActive }: { isActive: boolean }) => 
-    `relative text-gray-700 font-medium hover:text-blue-600 transition-all duration-200 py-2 px-3 rounded-lg hover:bg-blue-50 ${
-      isActive 
-        ? 'text-blue-600 after:absolute after:bottom-0 after:left-1/2 after:transform after:-translate-x-1/2 after:w-6 after:h-0.5 after:bg-blue-600 after:rounded-full' 
-        : ''
-    }`;
-
-  const mobileNavLinkClasses = ({ isActive }: { isActive: boolean }) => 
-    `flex items-center w-full px-6 py-4 text-left text-gray-700 font-medium hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 border-b border-gray-100 ${
-      isActive ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : ''
-    }`;
-
-  // Gestion du menu
-  const toggleMenu = () => {
-    const newState = !isMenuOpen;
-    setIsMenuOpen(newState);
-    document.body.style.overflow = newState ? 'hidden' : 'unset';
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
   };
 
   const closeMenu = () => {
@@ -176,7 +138,6 @@ const Header: React.FC = () => {
     document.body.style.overflow = 'unset';
   };
 
-<<<<<<< HEAD
   // Gestion des dropdowns
   const toggleDropdown = (groupLabel: string) => {
     setOpenDropdown(openDropdown === groupLabel ? null : groupLabel);
@@ -199,14 +160,12 @@ const Header: React.FC = () => {
   // Fermer le dropdown quand on clique à l'extérieur
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Vérifie si un dropdown est ouvert et si le clic est à l'extérieur de ce dropdown
       if (openDropdown && dropdownRefs.current[openDropdown]) {
         if (!dropdownRefs.current[openDropdown]?.contains(event.target as Node)) {
           closeDropdown();
         }
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -217,6 +176,24 @@ const Header: React.FC = () => {
   useEffect(() => {
     closeDropdown();
   }, [location.pathname]);
+
+  // Gestion du redimensionnement
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        closeMenu();
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Nettoyage à la destruction du composant
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   // Fonction de rendu du menu mobile
   const renderMobileMenu = (): React.ReactNode => {
@@ -335,31 +312,6 @@ const Header: React.FC = () => {
     );
   };
 
-=======
-  // Gestion du redimensionnement
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        closeMenu();
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-<<<<<<< HEAD
-=======
-  // Nettoyage à la destruction du composant
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
-
-<<<<<<< HEAD
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
@@ -369,67 +321,6 @@ const Header: React.FC = () => {
             to="/" 
             className="flex items-center gap-3" 
           >
-=======
-  // Rendu du menu mobile
-  const renderMobileMenu = () => (
-    <div 
-      className="lg:hidden fixed inset-0 z-40 bg-black bg-opacity-50" 
-      onClick={closeMenu}
-    >
-      <div 
-        className="fixed top-[72px] left-0 right-0 bottom-0 bg-white shadow-xl" 
-        onClick={(e) => e.stopPropagation()}
-      >
-        <nav className="h-full flex flex-col">
-          <div className="flex-1 overflow-y-auto">
-            {['/', '/presentation', '/thematiques', '/resources', '/formations', '/contact'].map((path, index) => (
-              <NavLink
-                key={path}
-                to={path}
-                end={path === '/'}
-                className={mobileNavLinkClasses}
-                onClick={closeMenu}
-              >
-                <span className="text-lg">
-                  {['Accueil', 'Présentation', 'Thématiques', 'Ressources', 'Formations', 'Contacts'][index]}
-                </span>
-              </NavLink>
-            ))}
-          </div>
-
-          {/* Pied de page mobile */}
-          <div className="px-6 py-8 bg-gray-50 border-t border-gray-200">
-            <div className="text-center">
-              <h4 className="font-bold text-gray-800 text-lg mb-2">TechJus</h4>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Communauté dédiée au droit du numérique au Bénin et en Afrique
-              </p>
-              <div className="flex justify-center space-x-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.url}
-                    aria-label={social.label}
-                    className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors text-white"
-                  >
-                    {social.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </div>
-  );
-
-  return (
-    <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 lg:px-8 py-3 flex justify-between items-center">
-          {/* Logo */}
-          <NavLink to="/" className="flex items-center gap-3" onClick={closeMenu}>
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
             <img 
               src="/logo-techjus.png" 
               alt="Logo TechJus" 
@@ -439,7 +330,6 @@ const Header: React.FC = () => {
 
           {/* Navigation Bureau */}
           <nav className="hidden lg:flex gap-2 items-center">
-<<<<<<< HEAD
             {/* Pages principales */}
             {mainPages.map((page) => (
               <NavLink
@@ -511,18 +401,6 @@ const Header: React.FC = () => {
                 )}
               </div>
             ))}
-=======
-            {['/', '/presentation', '/thematiques', '/resources', '/formations', '/contact'].map((path, index) => (
-              <NavLink
-                key={path}
-                to={path}
-                end={path === '/'}
-                className={navLinkClasses}
-              >
-                {['Accueil', 'Présentation', 'Thématiques', 'Ressources', 'Formations', 'Contacts'][index]}
-              </NavLink>
-            ))}
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
           </nav>
 
           {/* Bouton Menu Mobile */}

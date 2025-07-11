@@ -70,41 +70,5 @@
     "featured": true,
     "createdAt": "2025-10-15T10:00:00Z",
     "updatedAt": "2025-10-15T10:00:00Z"
-  },
-  {
-    "id": "4",
-    "title": "Partenariat : Hackathon Cybersécurité",
-    "description": "Hackathon en partenariat avec le Ministère de la Sécurité Numérique pour développer des solutions de cybersécurité.",
-    "excerpt": "Hackathon cybersécurité en partenariat avec le gouvernement",
-    "date": "2025-12-20",
-    "dateDebut": "2025-12-20",
-    "dateFin": "2025-12-22",
-    "heureDebut": "08:00",
-    "heureFin": "18:00",
-    "lieu": "Centre de Formation en Informatique, Cotonou",
-    "type": "partenariat",
-    "statut": "a_venir",
-    "imageUrl": "/images/events/hackathon-cyber.jpg",
-    "images": [
-      "/images/events/hackathon-cyber-1.jpg",
-      "/images/events/hackathon-cyber-2.jpg",
-      "/images/events/hackathon-cyber-3.jpg"
-    ],
-    "organisateur": "Ministère de la Sécurité Numérique",
-    "partenaires": ["TechJus.bj", "ANSSI Bénin"],
-    "prix": "Gratuit",
-    "capacite": 100,
-    "inscrits": 85,
-    "tags": [
-      { "name": "Cybersécurité", "variant": "danger" },
-      { "name": "Hackathon", "variant": "primary" },
-      { "name": "Partenariat", "variant": "warning" }
-    ],
-    "lienInscription": "https://hackathon-cyber.bj",
-    "lienPlusInfo": "/events/hackathon-cyber",
-    "urgent": true,
-    "featured": true,
-    "createdAt": "2025-11-05T10:00:00Z",
-    "updatedAt": "2025-11-05T10:00:00Z"
   }
 ]

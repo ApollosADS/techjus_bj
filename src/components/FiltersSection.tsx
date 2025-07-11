@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Filter } from 'lucide-react';
 
-<<<<<<< HEAD
 interface FilterState {
   search: string;
   category: string;
@@ -10,10 +9,6 @@ interface FilterState {
 
 interface FilterSectionProps {
   onFilterChange: (filters: FilterState) => void;
-=======
-interface FilterSectionProps {
-  onFilterChange: (filters: any) => void;
->>>>>>> 03165f1a4a7f6e93679023d749bd62bab0652d35
 }
 
 const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {

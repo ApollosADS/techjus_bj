@@ -1,0 +1,41 @@
+{
+    "hero": {
+      "title": "Digital-age law, accessible to everyone",
+      "quote": "The emblematic union between law and digital technology to democratize access to justice and legal services.",
+      "button1": "Join the community",
+      "button2": "Learn more"
+    },
+    "navigation": {
+      "home": "Home",
+      "about": "About",
+      "services": "Services",
+      "contact": "Contact",
+      "blog": "Blog"
+    },
+    "common": {
+      "loading": "Loading...",
+      "error": "An error occurred",
+      "retry": "Retry",
+      "close": "Close",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "yes": "Yes",
+      "no": "No",
+      "next": "Next",
+      "previous": "Previous",
+      "search": "Search",
+      "filter": "Filter",
+      "clear": "Clear"
+    },
+    "footer": {
+      "copyright": "© {{year}} - All rights reserved",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "contact": "Contact us"
+    },
+    "language": {
+      "switch": "Switch language",
+      "current": "English"
+    }
+  }

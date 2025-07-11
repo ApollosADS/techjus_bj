@@ -1,0 +1,38 @@
+[
+    {
+      "id": 1,
+      "slug": "nouvelle-loi-protection-donnees-benin",
+      "titre": "Nouvelle loi sur la protection des données personnelles au Bénin",
+      "extrait": "Le gouvernement béninois adopte une nouvelle réglementation sur la protection des données personnelles, alignée sur les standards internationaux.",
+      "contenu": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=400&fit=crop",
+      "date": "2024-06-15",
+      "auteur": "TechJus Team",
+      "tags": ["Droit", "Protection des données", "Réglementation"],
+      "tempsLecture": 5
+    },
+    {
+      "id": 2,
+      "slug": "intelligence-artificielle-secteur-juridique",
+      "titre": "L'IA révolutionne le secteur juridique africain",
+      "extrait": "Découvrez comment l'intelligence artificielle transforme les pratiques juridiques en Afrique de l'Ouest.",
+      "contenu": "L'intelligence artificielle (IA) représente une révolution majeure dans le secteur juridique africain. Les cabinets d'avocats et les institutions judiciaires commencent à adopter des outils d'IA pour améliorer leur efficacité.\n\nParmi les applications les plus prometteuses, on trouve l'analyse automatisée de documents juridiques, la recherche jurisprudentielle assistée par IA, et les systèmes de prédiction des décisions judiciaires.\n\nCependant, cette transformation soulève également des questions importantes concernant l'éthique, la transparence et l'accès à la justice.",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+      "date": "2024-06-10",
+      "auteur": "Dr. Amina Kone",
+      "tags": ["Intelligence Artificielle", "Innovation", "Afrique"],
+      "tempsLecture": 8
+    },
+    {
+      "id": 3,
+      "slug": "ethique-numerique-entreprises-benin",
+      "titre": "L'éthique numérique dans les entreprises béninoises",
+      "extrait": "Une analyse des enjeux éthiques liés à la transformation numérique des entreprises au Bénin.",
+      "contenu": "La transformation numérique des entreprises béninoises s'accélère, mais elle s'accompagne de nouveaux défis éthiques. Les questions de confidentialité, de transparence algorithmique et de responsabilité sociale deviennent cruciales.\n\nLes entreprises doivent développer des frameworks éthiques robustes pour naviguer dans ce nouveau paysage numérique tout en respectant les valeurs locales et les réglementations internationales.",
+      "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop",
+      "date": "2024-06-05",
+      "auteur": "Prof. Jean-Baptiste Akogbeto",
+      "tags": ["Éthique", "Numérique", "Entreprises"],
+      "tempsLecture": 6
+    }
+  ]

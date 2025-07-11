@@ -1,0 +1,142 @@
+[
+    {
+      "id": "1",
+      "title": "2 Assistant.e.s de Recherche",
+      "organization": "OpenGovLab Africa & TechJus Bénin",
+      "type": "CDD",
+      "duration": "2 mois (Hybride)",
+      "deadline": "2025-07-15",
+      "datePublication": "2025-06-28",
+      "location": "Cotonou, Bénin",
+      "salary": "À négocier",
+      "theme": "Éthique",
+      "categories": ["Éthique", "Intelligence Artificielle"],
+      "files": {
+        "image": "/OpenGovLab_Techjus.png",
+        "pdf": "/OpenGovLab_Techjus.pdf"
+      },
+      "description": "Assistant·e·s de Recherche pour une mission stratégique sur la régulation éthique de l’IA en Afrique de l’Ouest.",
+      "skills": [
+        "Diplôme en droit, éthique, science politique",
+        "Expérience en recherche ou rédaction",
+        "Excellente capacité de synthèse",
+        "Rédaction claire et rigoureuse",
+        "Discrétion professionnelle",
+        "Intérêt pour l’IA, l’éthique, la régulation"
+      ],
+      "avantages": [
+        "Télétravail hybride",
+        "Communauté engagée",
+        "Cadre exigeant mais stimulant",
+        "Attestation de mission délivrée"
+      ],
+      "contact": {
+        "email": "recrutement@techjus.bj ou contact.opengovlabafrica@gmail.com",
+        "telephone": "+229 62 72 95 88"
+      },
+      "image": "public/images/recrutements/OpenGovLab_Techjus.png",
+      "pdf": "public/documents/recrutements/OpenGovLab_Techjus.pdf",
+      "urgent": true,
+      "tags": ["AI", "LegalTech"],
+      "createdAt": "2025-06-28"
+    },
+    {
+      "id": "2",
+      "title": "Développeur Legal Tech",
+      "organisation": "TechJus Innovation",
+      "type": "CDD",
+      "duree": "12 mois",
+      "deadline": "2025-06-10",
+      "datePublication": "2025-06-01",
+      "lieu": "Porto-Novo, Bénin",
+      "salaire": "800 000 - 1 200 000 FCFA",
+      "theme": "Technologie",
+      "categories": ["Développement", "Legal Tech", "Innovation"],
+      "description": "Rejoignez notre équipe pour développer des solutions technologiques innovantes pour le secteur juridique béninois. Vous travaillerez sur des projets passionnants alliant droit et technologie.",
+      "competences": [
+        "BAC+3/5 en informatique ou équivalent",
+        "Maîtrise de React, Node.js, Python",
+        "Expérience en développement d'applications web",
+        "Intérêt pour le domaine juridique"
+      ],
+      "avantages": [
+        "Équipe jeune et dynamique",
+        "Projets innovants",
+        "Formation aux enjeux juridiques",
+        "Possibilité d'évolution rapide"
+      ],
+      "contact": {
+        "email": "jobs@techjus.bj",
+        "telephone": "+229 YY YY YY YY"
+      },
+      "urgent": true,
+      "tags": ["LegalTech", "Développement"],
+      "createdAt": "2025-06-01"
+    },
+    {
+      "id": "3",
+      "title": "Juriste Spécialisé Droit Numérique",
+      "organisation": "Ministère du Numérique",
+      "type": "Fonction publique",
+      "duree": "Permanent",
+      "deadline": "2025-06-28",
+      "datePublication": "2025-06-15",
+      "lieu": "Cotonou, Bénin",
+      "salaire": "Selon grille fonction publique",
+      "theme": "Droit",
+      "categories": ["Droit", "Numérique", "Fonction publique"],
+      "description": "Le Ministère du Numérique recrute un juriste spécialisé pour accompagner l'élaboration et la mise en œuvre des politiques publiques numériques au Bénin.",
+      "competences": [
+        "Master 2 en droit du numérique ou équivalent",
+        "5+ années d'expérience en droit numérique",
+        "Connaissance des réglementations CEDEAO",
+        "Expérience en administration publique appréciée"
+      ],
+      "avantages": [
+        "Statut fonction publique",
+        "Impact sur les politiques publiques",
+        "Formation continue garantie",
+        "Évolution de carrière structurée"
+      ],
+      "contact": {
+        "email": "recrutement@numerique.gouv.bj",
+        "telephone": "+229 ZZ ZZ ZZ ZZ"
+      },
+      "urgent": false,
+      "tags": ["AI", "LegalTech"],
+      "createdAt": "2025-06-20"
+    },
+    {
+      "id": "4",
+      "title": "Consultant en Gouvernance des Données",
+      "organization": "ONG DataRights Africa",
+      "type": "Mission",
+      "duration": "6 mois",
+      "deadline": "2025-06-20",
+      "datePublication": "2025-06-15",
+      "location": "Lomé, Togo",
+      "salary": "1500€/mois",
+      "theme": "Gouvernance des Données",
+      "categories": ["Gouvernance", "Protection des Données"],
+      "description": "Recherche d'un consultant expert en gouvernance des données pour accompagner les organisations dans le respect des réglementations africaines en matière de protection des données.",
+      "skills": [
+        "Expertise en RGPD et réglementations africaines",
+        "5+ années d'expérience en conseil",
+        "Maîtrise des outils de gestion des données",
+        "Capacité à travailler en équipe multiculturelle"
+      ],
+      "avantages": [
+        "Mission à impact social",
+        "Travail international",
+        "Réseau professionnel étendu",
+        "Flexibilité horaire"
+      ],
+      "contact": {
+        "email": "careers@datarightsafrica.org",
+        "telephone": "+229 AA AA AA AA"
+      },
+      "urgent": true,
+      "tags": ["LegalTech", "Développement"],
+      "createdAt": "2025-05-15"
+    }
+  ]

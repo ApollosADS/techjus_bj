@@ -1,0 +1,110 @@
+[
+  {
+    "id": "1",
+    "title": "Webinaire : L'IA est-elle réellement utile au juriste ?",
+    "description": "Webinaire gratuit avec Ezekiel SOHOU (TechJus) et Boris HOUNDIGANDE (Themislab), magistrats, modéré par M. TOÏ MILONON, juriste expert du droit du numérique au Bénin, pour répondre à la question cruciale : L'intelligence artificielle est-elle réellement utile au juriste ? Découvrez ce que l'IA change concrètement dans la pratique juridique, distinguez les outils utiles du simple buzz, et anticipez les mutations du métier de juriste. Une occasion unique d'enrichir vos pratiques et de nourrir votre veille technologique !",
+    "excerpt": "Webinaire gratuit avec des magistrats experts et M. TOÏ MILONON sur l'IA et la pratique juridique",
+    "date": "2025-07-11",
+    "dateDebut": "2025-07-11",
+    "dateFin": "2025-07-11",
+    "heureDebut": "19:00",
+    "heureFin": "20:30",  
+    "lieu": "En ligne - Google Meet",
+    "type": "webinaire",
+    "statut": "a_venir",
+    "imageUrl": "/Webinaire_techjus-themislab_officielle_.webp",
+    "images": [
+      "/Webinaire_techjus-themislab_officielle_.webp",
+      "/webinaire_techjus-themislab_moderateur_.webp"
+    ],  
+    "organisateur": "Themislab",
+    "partenaires": ["TechJus.bj"],
+    "prix": "Gratuit",
+    "capacite": 999,
+    "inscrits": -1,
+    "tags": [
+      { "name": "IA", "variant": "primary" },
+      { "name": "Webinaire", "variant": "success" },
+      { "name": "Gratuit", "variant": "success" },
+      { "name": "Pratique Juridique", "variant": "secondary" },
+      { "name": "Innovation", "variant": "warning" }
+    ],
+    "lienInscription": "https://urlz.fr/uE1l",
+    "lienPlusInfo": "/events/webinar-ia-juriste",
+    "urgent": true,
+    "featured": true,
+    "createdAt": "2025-12-01T10:00:00Z",
+    "updatedAt": "2025-12-01T10:00:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Webinaire : Protection des Données Personnelles",
+    "description": "Webinaire gratuit sur la protection des données personnelles et la conformité RGPD pour les entreprises béninoises.",
+    "excerpt": "Webinaire gratuit sur la protection des données personnelles",
+    "date": "2025-11-25",
+    "dateDebut": "2025-11-25",
+    "dateFin": "2025-11-25",
+    "heureDebut": "14:00",
+    "heureFin": "16:00",
+    "lieu": "En ligne (Zoom)",
+    "type": "webinaire",
+    "statut": "a_venir",
+    "imageUrl": "/images/events/webinar-donnees.jpg",
+    "images": [
+      "/images/events/webinar-donnees-1.jpg",
+      "/images/events/webinar-donnees-2.jpg"
+    ],
+    "organisateur": "TechJus.bj",
+    "partenaires": ["ARCEP Bénin"],
+    "prix": "Gratuit",
+    "capacite": 500,
+    "inscrits": 320,
+    "tags": [
+      { "name": "RGPD", "variant": "warning" },
+      { "name": "Webinaire", "variant": "primary" },
+      { "name": "Gratuit", "variant": "success" }
+    ],
+    "lienInscription": "https://zoom.us/example",
+    "lienPlusInfo": "/events/webinar-donnees",
+    "urgent": false,
+    "featured": true,
+    "createdAt": "2025-10-15T10:00:00Z",
+    "updatedAt": "2025-10-15T10:00:00Z"
+  },
+  {
+    "id": "4",
+    "title": "Partenariat : Hackathon Cybersécurité",
+    "description": "Hackathon en partenariat avec le Ministère de la Sécurité Numérique pour développer des solutions de cybersécurité.",
+    "excerpt": "Hackathon cybersécurité en partenariat avec le gouvernement",
+    "date": "2025-12-20",
+    "dateDebut": "2025-12-20",
+    "dateFin": "2025-12-22",
+    "heureDebut": "08:00",
+    "heureFin": "18:00",
+    "lieu": "Centre de Formation en Informatique, Cotonou",
+    "type": "partenariat",
+    "statut": "a_venir",
+    "imageUrl": "/images/events/hackathon-cyber.jpg",
+    "images": [
+      "/images/events/hackathon-cyber-1.jpg",
+      "/images/events/hackathon-cyber-2.jpg",
+      "/images/events/hackathon-cyber-3.jpg"
+    ],
+    "organisateur": "Ministère de la Sécurité Numérique",
+    "partenaires": ["TechJus.bj", "ANSSI Bénin"],
+    "prix": "Gratuit",
+    "capacite": 100,
+    "inscrits": 85,
+    "tags": [
+      { "name": "Cybersécurité", "variant": "danger" },
+      { "name": "Hackathon", "variant": "primary" },
+      { "name": "Partenariat", "variant": "warning" }
+    ],
+    "lienInscription": "https://hackathon-cyber.bj",
+    "lienPlusInfo": "/events/hackathon-cyber",
+    "urgent": true,
+    "featured": true,
+    "createdAt": "2025-11-05T10:00:00Z",
+    "updatedAt": "2025-11-05T10:00:00Z"
+  }
+]

@@ -1,0 +1,10 @@
+# Plesk — si le site est servi par Nginx (ou « Proxy Nginx → Apache » et les règles .htaccess ne s’appliquent pas comme prévu)
+#
+# Plesk : Domaines → techjus.bj → Apache et nginx → Directives nginx supplémentaires
+# Coller le bloc location ci-dessous (sans les # de titre).
+#
+# Adapter si l’app est dans un sous-dossier : remplacer /index.html par /sous-dossier/index.html
+
+location / {
+  try_files $uri $uri/ /index.html;
+}

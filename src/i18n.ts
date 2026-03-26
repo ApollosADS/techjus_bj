@@ -36,7 +36,7 @@ i18n
 
     interpolation: {
       escapeValue: false, // React échappe déjà les valeurs
-      format: function(value, format) {
+      format: function(value, format, lng) {
         if (format === 'uppercase') return value.toUpperCase();
         if (format === 'lowercase') return value.toLowerCase();
         return value;
@@ -53,7 +53,7 @@ i18n
 
     // Gestion des clés manquantes
     saveMissing: false,
-    missingKeyHandler: (lng, ns, key) => {
+    missingKeyHandler: (lng, ns, key, fallbackValue) => {
       if (process.env.NODE_ENV === 'development') {
         console.warn(`Clé de traduction manquante: ${key} pour la langue: ${lng}`);
       }

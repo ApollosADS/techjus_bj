@@ -56,8 +56,6 @@ const Header: React.FC = () => {
     { icon: Instagram, href: '#', label: 'Instagram' }
   ];
 
-  // ===== STRUCTURE DE NAVIGATION =====
-  
   // Pages principales (navigation directe)
   const mainPages: NavPage[] = [
     { path: '/', label: 'Accueil', icon: Home },
@@ -150,14 +148,12 @@ const Header: React.FC = () => {
   // Fermer le dropdown quand on clique à l'extérieur
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Vérifie si un dropdown est ouvert et si le clic est à l'extérieur de ce dropdown
       if (openDropdown && dropdownRefs.current[openDropdown]) {
         if (!dropdownRefs.current[openDropdown]?.contains(event.target as Node)) {
           closeDropdown();
         }
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -168,6 +164,24 @@ const Header: React.FC = () => {
   useEffect(() => {
     closeDropdown();
   }, [location.pathname]);
+
+  // Gestion du redimensionnement
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        closeMenu();
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Nettoyage à la destruction du composant
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   // Fonction de rendu du menu mobile
   const renderMobileMenu = (): React.ReactNode => {

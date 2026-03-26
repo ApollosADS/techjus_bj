@@ -1,5 +1,7 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Lightbulb } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 const ContactSection: React.FC = () => {
   const handleEmailClick = () => {
@@ -24,7 +26,7 @@ const ContactSection: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="border-t border-slate-200/80 bg-white/95 py-16 md:py-20 backdrop-blur-sm">
       {/* Container principal avec marges uniformes */}
       <div className="w-full px-4 md:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -78,21 +80,29 @@ const ContactSection: React.FC = () => {
                   Cliquez sur le bouton ci-dessous pour nous envoyer un email depuis votre boîte mail.
                 </p>
               </div>
-              <button
+              <Button
+                size="lg"
+                className="mx-auto flex bg-techjus-blue px-12 py-6 text-xl font-bold hover:bg-blue-700"
                 onClick={handleEmailClick}
-                className="bg-techjus-blue hover:bg-blue-700 text-white font-bold text-xl px-12 py-4 rounded-xl shadow-lg hover:shadow-xl transition duration-300 flex items-center mx-auto"
               >
-                <Mail className="w-6 h-6 mr-3" />
+                <Mail className="mr-3 h-6 w-6" />
                 Envoyer un email
-              </button>
+              </Button>
               <p className="text-gray-500 text-sm mt-6">
                 Cela ouvrira votre client mail avec notre adresse pré-remplie.
               </p>
-              <div className="mt-8 p-4 bg-yellow-100 border border-yellow-300 rounded-xl">
-                <p className="text-yellow-700 font-medium">
-                  💡 <strong>Conseil :</strong> Précisez votre domaine d'activité et votre besoin juridique.
-                </p>
-              </div>
+              <Card className="mt-8 border-amber-200 bg-amber-50 shadow-none">
+                <CardContent className="flex gap-3 pt-6 text-left">
+                  <Lightbulb
+                    className="mt-0.5 h-5 w-5 shrink-0 text-amber-600"
+                    aria-hidden
+                  />
+                  <p className="font-medium text-amber-900">
+                    <strong>Conseil :</strong> Précisez votre domaine
+                    d&apos;activité et votre besoin juridique.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
 

@@ -1,111 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GraduationCap, Clock, Users, Award, BookOpen, Video, FileText, Calendar } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
 import FormationsFAQAccordion from '../components/FormationsFAQAccordion';
+import { Button } from '@/components/ui/button';
+
+interface Formation {
+  id: number;
+  title: string;
+  description: string;
+  duration: string;
+  level: string;
+  participants: string;
+  modules: string[];
+  color: string;
+}
 
 const Formations: React.FC = () => {
   const [shouldNavigateToContact, setShouldNavigateToContact] = useState(false);
-  
+  const [formations, setFormations] = useState<Formation[]>([]);
+  useEffect(() => {
+    import('../data/formations.json').then((data) => {
+      setFormations(data.default || data);
+    });
+  }, []);
+
   const handleContactClick = () => {
     setShouldNavigateToContact(true);
   };
-  
+
   if (shouldNavigateToContact) {
     return <Navigate to="/contact" replace />;
   }
-  
-  const formations = [
-    {
-      id: 1,
-      title: "Masterclass : Devenir Juriste 4.0 à l'ère du digital et de l'IA",
-      description: "Enjeux juridiques et éthiques de l'IA dans le contexte africain",
-      duration: "1 jour",
-      level: "Intermédiaire",
-      participants: "5-10",
-      modules: [
-        "IA et droit africain",
-        "Éthique de l'IA",
-        "Responsabilité algorithmique",
-        "Régulation future"
-      ],
-      color: "bg-red-500"
-    },
-    {
-      id: 2,
-      title: "Fondamentaux du Droit du Numérique",
-      description: "Introduction complète aux principes de base du droit du numérique au Bénin",
-      duration: "3 Mois",
-      level: "Débutant",
-      participants: "15-20",
-      modules: [
-        "Introduction au droit du numérique",
-        "Cadre juridique béninois",
-        "Propriété intellectuelle numérique",
-        "Contrats électroniques"
-      ],
-      color: "bg-blue-500"
-    },
-    {
-      id: 3,
-      title: "Cybersécurité et Droit",
-      description: "Aspects juridiques de la cybersécurité et gestion des incidents",
-      duration: "7 jours",
-      level: "Avancé",
-      participants: "8-12",
-      modules: [
-        "Cadre légal cybersécurité",
-        "Gestion des incidents",
-        "Responsabilités juridiques",
-        "Audit et conformité"
-      ],
-      color: "bg-yellow-500"
-    },
-    {
-      id: 4,
-      title: "Intelligence Artificielle et Éthique",
-      description: "Enjeux juridiques et éthiques de l'IA dans le contexte africain",
-      duration: "1 jour",
-      level: "Expert",
-      participants: "5-10",
-      modules: [
-        "IA et droit africain",
-        "Éthique de l'IA",
-        "Responsabilité algorithmique",
-        "Régulation future"
-      ],
-      color: "bg-red-500"
-    },
-    {
-      id: 5,
-      title: "Réussir au concours de magistrature",
-      description: "Préparation complète au concours de magistrature",
-      duration: "3 mois",
-      level: "Expert",
-      participants: "5-10",
-      modules: [
-        "Méthodologie juridique",
-        "Droit civil et pénal",
-        "Procédures judiciaires",
-        "Épreuves pratiques"
-      ],
-      color: "bg-yellow-500"
-    },
-    {
-      id: 6,
-      title: "Protection des données à caractère personnel",
-      description: "Maîtrisez la réglementation sur la protection des données personnelles",
-      duration: "2 jours",
-      level: "Intermédiaire",
-      participants: "10-15",
-      modules: [
-        "Principes de protection des données",
-        "Mise en conformité",
-        "Droits des personnes",
-        "Sanctions et recours"
-      ],
-      color: "bg-green-500"
-    }
-  ];
   
   const avantages = [
     {
@@ -131,18 +56,24 @@ const Formations: React.FC = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* 1. Section Hero */}
-      <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20">
-        <div className="container mx-auto px-4 max-w-6xl">
+    <div className="page-canvas">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-techjus-blue to-slate-900 py-20 text-white">
+        <div className="bg-opportunites-mesh absolute inset-0 opacity-20" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-white/5" aria-hidden />
+        <div className="relative container mx-auto max-w-6xl px-4">
           <div className="text-center">
-            <div className="flex justify-center mb-6">
-              <GraduationCap size={64} />
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-techjus-yellow/90">
+              Parcours & certifications
+            </p>
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-2xl border border-white/15 bg-white/10 p-4 shadow-lg backdrop-blur-sm">
+                <GraduationCap className="text-white" size={56} />
+              </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+            <h1 className="mb-6 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">
               Formations en Droit
             </h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+            <p className="mx-auto mb-8 max-w-3xl text-lg text-slate-200 md:text-xl">
               Développez votre expertise juridique à l'ère du numérique avec nos
               formations spécialisées.
             </p>
@@ -151,21 +82,21 @@ const Formations: React.FC = () => {
       </section>
       
       {/* 2. Liste des formations disponibles */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+      <section className="border-t border-slate-200/80 py-16">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 font-heading text-3xl font-bold tracking-tight text-slate-900">
               Nos Formations Disponibles
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-lg text-slate-600">
               Des programmes adaptés à tous les niveaux, du débutant à l'expert
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {formations.map((formation) => (
-              <div
+              <article
                 key={formation.id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+                className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 shadow-techjus transition-all duration-300 hover:-translate-y-1 hover:shadow-techjus-lg"
               >
                 <div className={`${formation.color} h-2`}></div>
                 <div className="p-6">
@@ -201,7 +132,7 @@ const Formations: React.FC = () => {
                   <div className="mb-6">
                     <h4 className="font-semibold text-gray-800 mb-2">Modules inclus :</h4>
                     <ul className="text-sm text-gray-600 space-y-1">
-                      {formation.modules.map((module, index) => (
+                      {formation.modules.map((module: string, index: number) => (
                         <li key={index} className="flex items-center">
                           <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
                           {module}
@@ -210,22 +141,55 @@ const Formations: React.FC = () => {
                     </ul>
                   </div>
                   <div className="flex gap-3">
-                    <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-                      À venir
-                    </button>
-                    <button className="border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors">
-                      En savoir plus
-                    </button>
+                    {formation.id === 1 ? (
+                      <>
+                        <Button
+                          type="button"
+                          className="flex-1 bg-green-600 hover:bg-green-700"
+                          onClick={() =>
+                            window.open(
+                              'https://drive.google.com/file/d/1z9dUFo9qXHHzI7_-gpbxOR--5Z2-T4Ju/view?usp=sharing',
+                              '_blank'
+                            )
+                          }
+                        >
+                          Disponible
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="flex-1 border-gray-300"
+                          onClick={() =>
+                            window.open('/Masterclass_IA_2025.PDF', '_blank')
+                          }
+                        >
+                          En savoir plus
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button
+                          type="button"
+                          className="flex-1 bg-blue-600 hover:bg-blue-700"
+                          disabled
+                        >
+                          À venir
+                        </Button>
+                        <Button type="button" variant="outline" className="flex-1 border-gray-300" disabled>
+                          En savoir plus
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
       
       {/* 3. Avantages des formations */}
-      <section className="py-16 bg-white">
+      <section className="border-t border-slate-200/80 bg-white/80 py-16 backdrop-blur-sm">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
@@ -322,16 +286,24 @@ const Formations: React.FC = () => {
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Rejoignez nous
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <Button
+              type="button"
+              size="lg"
+              variant="secondary"
+              className="bg-white font-semibold text-blue-600 hover:bg-blue-50"
+            >
               Voir le calendrier
-            </button>
-            <button 
+            </Button>
+            <Button
+              type="button"
+              size="lg"
+              variant="outline"
+              className="border-2 border-white bg-transparent font-semibold text-white hover:bg-white hover:text-blue-600"
               onClick={handleContactClick}
-              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors cursor-pointer"
             >
               Nous contacter
-            </button>
+            </Button>
           </div>
         </div>
       </section>

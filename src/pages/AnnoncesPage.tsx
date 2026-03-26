@@ -1,15 +1,23 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
-import { Calendar, Clock, TrendingUp, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import {
+  Calendar,
+  Clock,
+  TrendingUp,
+  AlertTriangle,
+  CircleDot,
+  CalendarDays,
+  History,
+} from 'lucide-react';
 import { Annonce } from '../types/annonce';
 import AnnonceCard from '../components/annonces/AnnonceCard';
 import LoadingSpinner from '../components/shared/LoadingSpinner';
 import EmptyState from '../components/shared/EmptyState';
 import AnnonceDiaporama from '../components/annonces/AnnonceDiaporama';
 import AnnonceMoreInfo from '../components/annonces/AnnonceMoreInfo';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
-// Import des données (à remplacer par un appel API en production)
-import annoncesData from '../data/annonces.json';
+// Type pour les données brutes importées du fichier JSON
 
 interface FilterOptions {
   searchTerm: string;
@@ -21,7 +29,15 @@ interface FilterOptions {
   featured: boolean;
 }
 
-const AnnoncesPage: React.FC = () => {
+interface AnnoncesPageProps {
+  /** Masque le hero plein écran (utilisé sous la page Opportunités) */
+  embedded?: boolean;
+}
+
+const AnnoncesPage: React.FC<AnnoncesPageProps> = ({ embedded = false }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const annonceIdFromUrl = embedded ? (searchParams.get('annonce') ?? '') : '';
+
   const [annonces, setAnnonces] = useState<Annonce[]>([]);
   const [filteredAnnonces, setFilteredAnnonces] = useState<Annonce[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -31,7 +47,6 @@ const AnnoncesPage: React.FC = () => {
   const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false);
   
   // États pour le diaporama des cartes
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const cardsPerView = Math.min(3, filteredAnnonces.length); // Nombre de cartes visibles à la fois, adaptatif
   
   const [filters] = useState<FilterOptions>({
@@ -45,52 +60,190 @@ const AnnoncesPage: React.FC = () => {
   });
 
   // Référence pour le conteneur du diaporama
-  const carouselRef = useRef<HTMLDivElement>(null);
 
   // Fonctions de navigation du diaporama des cartes
-  const nextCards = useCallback(() => {
-    const maxIndex = Math.max(0, filteredAnnonces.length - cardsPerView);
-    setCurrentCardIndex(prev => prev >= maxIndex ? 0 : prev + 1);
-  }, [filteredAnnonces.length, cardsPerView]);
+  const nextCards = useCallback(() => {}, []);
 
-  const prevCards = useCallback(() => {
-    const maxIndex = Math.max(0, filteredAnnonces.length - cardsPerView);
-    setCurrentCardIndex(prev => prev <= 0 ? maxIndex : prev - 1);
-  }, [filteredAnnonces.length, cardsPerView]);
+  const prevCards = useCallback(() => {}, []);
 
-  const goToCardIndex = useCallback((index: number) => {
-    const maxIndex = Math.max(0, filteredAnnonces.length - cardsPerView);
-    setCurrentCardIndex(Math.min(index, maxIndex));
-  }, [filteredAnnonces.length, cardsPerView]);
-
-
+  useEffect(() => {
+    if (!embedded || !annonceIdFromUrl || loading || annonces.length === 0) return;
+    const found = annonces.find((a) => a.id === annonceIdFromUrl);
+    if (found) {
+      setMoreInfoAnnonce(found);
+      setIsMoreInfoOpen(true);
+    }
+  }, [embedded, annonceIdFromUrl, loading, annonces]);
 
   // Charger les données au montage du composant
   useEffect(() => {
     const loadAnnonces = async () => {
       try {
         // Simuler un délai de chargement
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 500));
         
-        // En production, remplacer par un appel API
-        // Adapter les données au nouveau format
-        const adaptedData = annoncesData.map(item => ({
-          ...item,
-          heure: item.heureDebut || '14:00',
-          tags: item.tags?.map(tag => tag.name) || []
-        })) as Annonce[];
-        setAnnonces(adaptedData);
-        setLoading(false);
+        // Charger les données depuis le fichier JSON
+        const data = await import('../data/annonces.json');
+        // Assertion de type pour les données importées
+        const annoncesData = data.default as Array<{
+          id: string;
+          title: string;
+          description: string;
+          excerpt: string;
+          date: string;
+          dateDebut?: string;
+          dateFin?: string;
+          heureDebut?: string;
+          heureFin?: string;
+          lieu: string;
+          type: string;
+          statut: string;
+          imageUrl?: string;
+          images?: string[];
+          organisateur: string;
+          partenaires?: string[];
+          prix?: string;
+          capacite?: number;
+          inscrits?: number;
+          tags?: Array<{
+            name: string;
+            variant: 'primary' | 'secondary' | 'default' | 'success' | 'warning' | 'danger';
+          }>;
+          lienInscription?: string;
+          lienPlusInfo?: string;
+          urgent?: boolean;
+          featured?: boolean;
+          contact?: {
+            telephone?: string;
+            email?: string;
+            website?: string;
+          };
+          programme?: Array<{
+            heure: string;
+            titre: string;
+            description?: string;
+            intervenant?: string;
+          }>;
+          createdAt?: string;
+          updatedAt?: string;
+          dateLabel?: string;
+          heureLabel?: string;
+          popupBannerUrl?: string;
+        }>;
+        
+        const annoncesWithIcons = annoncesData.map((item) => {
+          // Gestion du statut basé sur dateDebut/dateFin et heureDebut/heureFin
+          const nowISO = new Date().toISOString();
+          
+          // Fonction utilitaire pour créer une date complète à partir d'une date et d'une heure
+          const createFullDate = (dateStr: string, timeStr?: string): Date => {
+            const [year, month, day] = dateStr.split('-').map(Number);
+            const date = new Date(Date.UTC(year, month - 1, day));
+            
+            if (timeStr) {
+              const [hours, minutes] = timeStr.split(':').map(Number);
+              date.setUTCHours(hours, minutes, 0, 0);
+            } else {
+              date.setUTCHours(0, 0, 0, 0);
+            }
+            
+            return date;
+          };
+          
+          // S'assurer que la date actuelle est en UTC pour une comparaison cohérente
+          const currentDate = new Date();
+          currentDate.setUTCHours(currentDate.getHours(), currentDate.getMinutes(), 0, 0);
+          
+          // Déterminer les dates de début et de fin
+          const debutDate = item.dateDebut || item.date;
+          const finDate = item.dateFin || item.dateDebut || item.date;
+          
+          // Créer les dates complètes avec heures
+          const dateDebutComplete = createFullDate(debutDate, item.heureDebut);
+          const dateFinComplete = createFullDate(finDate, item.heureFin || item.heureDebut);
+          
+          // Si on a une heure de début mais pas de fin, on ajoute 1h par défaut
+          if (item.heureDebut && !item.heureFin) {
+            dateFinComplete.setHours(dateDebutComplete.getHours() + 1);
+          }
+          
+          // Si pas d'heure de début, on considère la journée entière (de 00:00 à 23:59)
+          if (!item.heureDebut) {
+            dateDebutComplete.setHours(0, 0, 0, 0);
+            dateFinComplete.setHours(23, 59, 59, 999);
+          }
+          
+          // Déterminer le statut
+          let statut: 'a_venir' | 'en_cours' | 'termine' | 'annule' = 'a_venir';
+          
+          // Définir le statut en fonction de la date actuelle
+          const currentTime = currentDate.getTime();
+          const debutTime = dateDebutComplete.getTime();
+          const finTime = dateFinComplete.getTime();
+          
+          if (currentTime > finTime) {
+            statut = 'termine';  // Après la fin de l'événement
+          } else if (currentTime >= debutTime && currentTime <= finTime) {
+            statut = 'en_cours'; // Pendant l'événement
+          } else if (currentTime < debutTime) {
+            statut = 'a_venir';  // Avant le début de l'événement
+          }
+          const annonce: Annonce = {
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            excerpt: item.excerpt,
+            date: item.date,
+            heure: item.heureDebut || '14:00',
+            dateLabel: item.dateLabel,
+            heureLabel: item.heureLabel,
+            lieu: item.lieu,
+            type: (item.type || 'evenement') as 'evenement' | 'partenariat' | 'formation' | 'conference' | 'webinar' | 'atelier',
+            statut: (['en_cours', 'a_venir', 'termine', 'annule'].includes(item.statut) 
+              ? item.statut 
+              : statut) as 'en_cours' | 'a_venir' | 'termine' | 'annule',
+            imageUrl: item.imageUrl || '/placeholder-annonce.jpg',
+            images: item.images || [],
+            popupBannerUrl: item.popupBannerUrl,
+            organisateur: item.organisateur || 'TechJus',
+            partenaires: item.partenaires || [],
+            prix: item.prix || 'Gratuit',
+            capacite: item.capacite,
+            inscrits: item.inscrits || 0,
+            tags: (Array.isArray(item.tags) 
+              ? item.tags.map(tag => {
+                  if (typeof tag === 'string') return tag;
+                  const validVariants = ['primary', 'secondary', 'default', 'success', 'warning', 'danger'] as const;
+                  // Vérification du variant valide
+                  if (!validVariants.includes(tag.variant as any)) {
+                    console.warn(`Variant invalide pour le tag ${tag.name}: ${tag.variant}`);
+                  }
+                  return tag.name;
+                })
+              : []),
+            lienInscription: item.lienInscription,
+            urgent: item.urgent || false,
+            featured: item.featured || false,
+            contact: item.contact || {},
+            programme: item.programme || [],
+            createdAt: item.createdAt || nowISO,
+            updatedAt: item.updatedAt || nowISO
+          };
+          
+          return annonce;
+        });
+        
+        setAnnonces(annoncesWithIcons);
+        setFilteredAnnonces(annoncesWithIcons); // Initialiser les annonces filtrées
       } catch (error) {
         console.error('Erreur lors du chargement des annonces:', error);
+      } finally {
         setLoading(false);
       }
     };
 
     loadAnnonces();
   }, []);
-
-
 
   // Navigation au clavier
   useEffect(() => {
@@ -171,7 +324,7 @@ const AnnoncesPage: React.FC = () => {
   // Mettre à jour les annonces filtrées
   useEffect(() => {
     setFilteredAnnonces(filterAnnonces);
-    setCurrentCardIndex(0); // Reset l'index quand les filtres changent
+    // setCurrentCardIndex(0); // Reset l'index quand les filtres changent // This line is removed
   }, [filterAnnonces]);
 
   // Statistiques
@@ -183,6 +336,13 @@ const AnnoncesPage: React.FC = () => {
 
     return { total, aVenir, urgents, gratuits };
   }, [annonces]);
+
+  // Séparation des annonces par statut
+  const annoncesEnCours = filteredAnnonces.filter(a => a.statut === 'en_cours');
+  const annoncesAVenir = filteredAnnonces
+    .filter(a => a.statut === 'a_venir')
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const annoncesPassees = filteredAnnonces.filter(a => a.statut === 'termine' || a.statut === 'annule');
 
   // Gestionnaire de clic sur une annonce
   const handleAnnonceClick = (annonce: Annonce) => {
@@ -206,62 +366,102 @@ const AnnoncesPage: React.FC = () => {
   const closeMoreInfo = () => {
     setIsMoreInfoOpen(false);
     setMoreInfoAnnonce(null);
+    if (embedded && searchParams.get('annonce')) {
+      setSearchParams({}, { replace: true });
+    }
   };
 
   // Calculer le nombre total de pages
-  const totalPages = Math.ceil(filteredAnnonces.length / cardsPerView);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div
+        className={
+          embedded
+            ? 'flex min-h-[280px] items-center justify-center'
+            : 'flex min-h-screen items-center justify-center'
+        }
+      >
         <LoadingSpinner />
       </div>
     );
   }
 
+  const statsBlocks = (
+    <>
+      <div className="text-center rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+        <Calendar className="mx-auto mb-2 h-8 w-8 text-blue-300" />
+        <div className="text-2xl font-bold">{stats.total}</div>
+        <div className="text-sm text-blue-200">Événements</div>
+      </div>
+      <div className="text-center rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+        <Clock className="mx-auto mb-2 h-8 w-8 text-green-300" />
+        <div className="text-2xl font-bold">{stats.aVenir}</div>
+        <div className="text-sm text-blue-200">À venir</div>
+      </div>
+      <div className="text-center rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+        <AlertTriangle className="mx-auto mb-2 h-8 w-8 text-red-400" />
+        <div className="text-2xl font-bold">{stats.urgents}</div>
+        <div className="text-sm text-blue-200">Urgents</div>
+      </div>
+      <div className="text-center rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+        <TrendingUp className="mx-auto mb-2 h-8 w-8 text-yellow-300" />
+        <div className="text-2xl font-bold">{stats.gratuits}</div>
+        <div className="text-sm text-blue-200">Gratuits</div>
+      </div>
+    </>
+  );
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-6">
-              Annonces & <span className="text-blue-300">Événements</span>
-            </h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Découvrez tous les événements, conférences, webinars et partenariats de la communauté TechJus. 
-              Restez informé des dernières opportunités dans le domaine du droit numérique.
-            </p>
+    <div className={embedded ? '' : 'min-h-screen bg-gray-50'}>
+      {!embedded && (
+        <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 py-20 text-white">
+          <div className="mx-auto max-w-6xl px-4">
+            <div className="mb-12 text-center">
+              <h1 className="mb-6 text-5xl font-bold">
+                Annonces & <span className="text-blue-300">Événements</span>
+              </h1>
+              <p className="mx-auto max-w-3xl text-xl leading-relaxed text-blue-100">
+                Découvrez tous les événements, conférences, webinars et partenariats de la communauté TechJus.
+                Restez informé des dernières opportunités dans le domaine du droit numérique.
+              </p>
+            </div>
+            <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">{statsBlocks}</div>
           </div>
+        </section>
+      )}
 
-          {/* Statistiques */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-            <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-              <Calendar className="w-8 h-8 text-blue-300 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{stats.total}</div>
-              <div className="text-blue-200 text-sm">Événements</div>
+      <main
+        className={
+          embedded
+            ? 'mx-auto max-w-none px-0 py-0'
+            : 'mx-auto max-w-6xl px-4 py-12'
+        }
+      >
+        {embedded && (
+          <div className="mb-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+            <div className="rounded-xl border border-techjus-blue/10 bg-techjus-light/80 p-4 text-center shadow-sm">
+              <Calendar className="mx-auto mb-2 h-7 w-7 text-techjus-blue" />
+              <div className="text-xl font-bold text-gray-900">{stats.total}</div>
+              <div className="text-xs font-medium text-gray-500">Événements</div>
             </div>
-            <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-              <Clock className="w-8 h-8 text-green-300 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{stats.aVenir}</div>
-              <div className="text-blue-200 text-sm">À venir</div>
+            <div className="rounded-xl border border-techjus-blue/10 bg-techjus-light/80 p-4 text-center shadow-sm">
+              <Clock className="mx-auto mb-2 h-7 w-7 text-techjus-green" />
+              <div className="text-xl font-bold text-gray-900">{stats.aVenir}</div>
+              <div className="text-xs font-medium text-gray-500">À venir</div>
             </div>
-            <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-              <AlertTriangle className="w-8 h-8 text-red-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{stats.urgents}</div>
-              <div className="text-blue-200 text-sm">Urgents</div>
+            <div className="rounded-xl border border-techjus-blue/10 bg-techjus-light/80 p-4 text-center shadow-sm">
+              <AlertTriangle className="mx-auto mb-2 h-7 w-7 text-techjus-red" />
+              <div className="text-xl font-bold text-gray-900">{stats.urgents}</div>
+              <div className="text-xs font-medium text-gray-500">Urgents</div>
             </div>
-            <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-              <TrendingUp className="w-8 h-8 text-yellow-300 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{stats.gratuits}</div>
-              <div className="text-blue-200 text-sm">Gratuits</div>
+            <div className="rounded-xl border border-techjus-blue/10 bg-techjus-light/80 p-4 text-center shadow-sm">
+              <TrendingUp className="mx-auto mb-2 h-7 w-7 text-techjus-yellow" />
+              <div className="text-xl font-bold text-gray-900">{stats.gratuits}</div>
+              <div className="text-xs font-medium text-gray-500">Gratuits</div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-12">
+        )}
         {/* Filtres */}
         {/* Supprimer l'utilisation du filtre d'annonces dans le rendu (recherche de balises <AnnonceFilterBar ... /> ou similaires) */}
 
@@ -287,109 +487,128 @@ const AnnoncesPage: React.FC = () => {
         </div>
 
         {/* Affichage des cartes */}
-        {filteredAnnonces.length > 0 ? (
-          <div className="relative">
-            {/* Si moins de 3 annonces, affichage simple en grille */}
-            {filteredAnnonces.length <= 3 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredAnnonces.map((annonce) => (
-                  <div key={annonce.id} className="transform hover:scale-105 transition-all duration-300">
+        {/* Section En cours */}
+        <section className="mb-12">
+          <h3 className="text-xl font-bold text-green-700 mb-4">Événements en cours</h3>
+          {annoncesEnCours.length > 0 ? (
+            annoncesEnCours.length <= 3 ? (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                {annoncesEnCours.map((annonce) => (
+                  <AnnonceCard
+                    key={annonce.id}
+                    annonce={annonce}
+                    onClick={() => handleAnnonceClick(annonce)}
+                    onMoreInfo={() => openMoreInfo(annonce)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="relative overflow-hidden rounded-xl">
+                {/* Navigation gauche/droite */}
+                {/* ... Vous pouvez réutiliser la logique de diaporama ici si besoin ... */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                  {annoncesEnCours.map((annonce) => (
                     <AnnonceCard
+                      key={annonce.id}
                       annonce={annonce}
                       onClick={() => handleAnnonceClick(annonce)}
                       onMoreInfo={() => openMoreInfo(annonce)}
                     />
-                  </div>
+                  ))}
+                </div>
+              </div>
+            )
+          ) : (
+            <EmptyState
+              icon={CircleDot}
+              iconClassName="text-green-600"
+              title="Aucun événement en cours"
+              description="Il n'y a pas d'événement en cours actuellement."
+            />
+          )}
+        </section>
+
+        {/* Section À venir */}
+        <section className="mb-12">
+          <h3 className="text-xl font-bold text-blue-700 mb-4">Événements à venir</h3>
+          {annoncesAVenir.length > 0 ? (
+            annoncesAVenir.length <= 3 ? (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                {annoncesAVenir.map((annonce) => (
+                  <AnnonceCard
+                    key={annonce.id}
+                    annonce={annonce}
+                    onClick={() => handleAnnonceClick(annonce)}
+                    onMoreInfo={() => openMoreInfo(annonce)}
+                  />
                 ))}
               </div>
             ) : (
-              /* Diaporama pour plus de 3 annonces */
-              <div 
-                ref={carouselRef}
-                className="relative overflow-hidden rounded-xl"
-              >
+              <div className="relative overflow-hidden rounded-xl">
                 {/* Navigation gauche/droite */}
-                <button
-                  onClick={prevCards}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full hover:bg-white transition-colors shadow-lg z-10 border border-gray-200"
-                  title="Précédent"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <button
-                  onClick={nextCards}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm text-gray-700 p-3 rounded-full hover:bg-white transition-colors shadow-lg z-10 border border-gray-200"
-                  title="Suivant"
-                >
-                  <ChevronRight size={20} />
-                </button>
-
-                {/* Grille des cartes avec transition */}
-                <div className="overflow-hidden">
-                  <div 
-                    className="flex transition-transform duration-500 ease-in-out"
-                    style={{
-                      transform: `translateX(-${currentCardIndex * (100 / cardsPerView)}%)`,
-                      width: `${(filteredAnnonces.length / cardsPerView) * 100}%`
-                    }}
-                  >
-                    {filteredAnnonces.map((annonce) => (
-                      <div 
-                        key={annonce.id} 
-                        className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4"
-                        style={{ minWidth: `${100 / cardsPerView}%` }}
-                      >
-                        <div className="transform hover:scale-105 transition-all duration-300">
-                          <AnnonceCard
-                            annonce={annonce}
-                            onClick={() => handleAnnonceClick(annonce)}
-                            onMoreInfo={() => openMoreInfo(annonce)}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Indicateurs de navigation */}
-                <div className="flex justify-center mt-8">
-                  <div className="flex space-x-2">
-                    {Array.from({ length: totalPages }, (_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => goToCardIndex(index)}
-                        className={`w-4 h-4 rounded-full transition-all duration-200 border-2 ${
-                          Math.floor(currentCardIndex / cardsPerView) === index
-                            ? 'bg-blue-600 border-blue-600 shadow-lg' 
-                            : 'bg-white border-gray-300 hover:border-blue-400 hover:bg-blue-50'
-                        }`}
-                        title={`Page ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Compteur de position et instructions */}
-                <div className="text-center mt-4 space-y-2">
-                  <div className="text-sm text-gray-500">
-                    {currentCardIndex + 1} - {Math.min(currentCardIndex + cardsPerView, filteredAnnonces.length)} sur {filteredAnnonces.length} annonces
-                  </div>
-                  <div className="text-xs text-gray-400 flex items-center justify-center gap-4">
-                    <span>← → Navigation manuelle</span>
-                    <span>Cliquez sur les points pour aller à une page spécifique</span>
-                    <span>Cliquez sur une carte pour voir les images</span>
-                  </div>
+                {/* ... Vous pouvez réutiliser la logique de diaporama ici si besoin ... */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                  {annoncesAVenir.map((annonce) => (
+                    <AnnonceCard
+                      key={annonce.id}
+                      annonce={annonce}
+                      onClick={() => handleAnnonceClick(annonce)}
+                      onMoreInfo={() => openMoreInfo(annonce)}
+                    />
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
-        ) : (
-          <EmptyState
-            icon="📅"
-            title="Aucune annonce trouvée"
-            description="Aucune annonce ne correspond aux critères de recherche sélectionnés."
-          />
-        )}
+            )
+          ) : (
+            <EmptyState
+              icon={CalendarDays}
+              iconClassName="text-techjus-blue"
+              title="Aucun événement à venir"
+              description="Il n'y a pas d'événement à venir pour le moment."
+            />
+          )}
+        </section>
+
+        {/* Section Passés */}
+        <section className="mb-12">
+          <h3 className="text-xl font-bold text-gray-700 mb-4">Événements passés</h3>
+          {annoncesPassees.length > 0 ? (
+            annoncesPassees.length <= 3 ? (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                {annoncesPassees.map((annonce) => (
+                  <AnnonceCard
+                    key={annonce.id}
+                    annonce={annonce}
+                    onClick={() => handleAnnonceClick(annonce)}
+                    onMoreInfo={() => openMoreInfo(annonce)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="relative overflow-hidden rounded-xl">
+                {/* Navigation gauche/droite */}
+                {/* ... Vous pouvez réutiliser la logique de diaporama ici si besoin ... */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                  {annoncesPassees.map((annonce) => (
+                    <AnnonceCard
+                      key={annonce.id}
+                      annonce={annonce}
+                      onClick={() => handleAnnonceClick(annonce)}
+                      onMoreInfo={() => openMoreInfo(annonce)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )
+          ) : (
+            <EmptyState
+              icon={History}
+              iconClassName="text-slate-400"
+              title="Aucun événement passé"
+              description="Aucun événement passé n'est affiché."
+            />
+          )}
+        </section>
 
         {/* Diaporama en plein écran */}
         {selectedAnnonce && (
@@ -412,15 +631,20 @@ const AnnoncesPage: React.FC = () => {
         {/* Call to Action */}
         {annonces.length > 0 && (
           <div className="mt-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-center text-white">
-            <h3 className="text-2xl font-bold mb-4">
+            <h3 className="mb-4 text-2xl font-bold text-white">
               Vous organisez un événement ?
             </h3>
             <p className="text-lg mb-6 opacity-90">
               Contactez-nous pour publier votre annonce et rejoindre notre communauté d'événements
             </p>
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
-              <Link to="/contact" className="block w-full h-full">Publier une annonce</Link>
-            </button>
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="bg-white font-semibold text-techjus-blue hover:bg-slate-100"
+            >
+              <Link to="/contact">Publier une annonce</Link>
+            </Button>
           </div>
         )}
       </main>

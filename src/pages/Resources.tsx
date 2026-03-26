@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { BookOpen, Users, Target, Filter, Calendar, Clock, User } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 // Types pour TypeScript
 interface FilterState {
@@ -52,17 +53,16 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
         <label className="block text-sm font-medium text-gray-700 mb-3">Catégorie</label>
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
-            <button
+            <Button
               key={category}
+              type="button"
+              size="sm"
+              variant={activeCategory === category ? 'default' : 'secondary'}
+              className={`rounded-full ${activeCategory === category ? 'bg-blue-500 hover:bg-blue-600' : ''}`}
               onClick={() => handleCategoryChange(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeCategory === category
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
             >
               {category}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -71,17 +71,16 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
         <label className="block text-sm font-medium text-gray-700 mb-3">Type de contenu</label>
         <div className="flex flex-wrap gap-2">
           {types.map((type) => (
-            <button
+            <Button
               key={type}
+              type="button"
+              size="sm"
+              variant={activeType === type ? 'default' : 'secondary'}
+              className={`rounded-full ${activeType === type ? 'bg-green-600 hover:bg-green-700' : ''}`}
               onClick={() => handleTypeChange(type)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeType === type
-                  ? 'bg-green-500 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
             >
               {type}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -158,24 +157,17 @@ const ResourceCard: React.FC<Resource> = ({
           </div>
         </div>
         
-        <button 
-          onClick={handleReadMore}
+        <Button
+          type="button"
+          variant="secondary"
+          className="w-full cursor-not-allowed bg-gray-400 text-white hover:bg-gray-400"
           disabled
-          className="w-full bg-gray-400 text-white py-2 px-4 rounded-lg cursor-not-allowed transition-colors font-medium opacity-75"
+          onClick={handleReadMore}
         >
           Bientôt disponible
-        </button>
+        </Button>
       </div>
     </div>
-  );
-};
-
-// Header component
-const Header: React.FC = () => {
-  return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      {/* Contenu du header si nécessaire */}
-    </header>
   );
 };
 
@@ -285,26 +277,28 @@ const Resources: React.FC = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-6">
-              Centre de <span className="text-blue-400">Ressources</span>
+    <div className="page-canvas">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-techjus-blue to-slate-900 py-20 text-white">
+        <div className="bg-opportunites-mesh absolute inset-0 opacity-20" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-techjus-blue/20" aria-hidden />
+        <div className="relative mx-auto max-w-6xl px-4">
+          <div className="mb-12 text-center">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-techjus-yellow/90">
+              Documentation & veille
+            </p>
+            <h1 className="mb-6 font-heading text-4xl font-bold tracking-tight md:text-5xl">
+              Centre de <span className="text-blue-300">Ressources</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-200 md:text-xl">
               Découvrez nos articles, cours, ouvrages, magazine, thèses de doctorat, mémoires de master, et formations sur les aspects juridiques du numérique. 
               Une bibliothèque complète pour les professionnels du droit et du digital.
             </p>
           </div>
           
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <div key={index} className="rounded-2xl border border-white/15 bg-white/10 p-6 text-center shadow-lg backdrop-blur-md transition-transform duration-300 hover:-translate-y-1">
                 <div className={`${stat.color} flex justify-center mb-4`}>
                   {stat.icon}
                 </div>
@@ -316,11 +310,9 @@ const Resources: React.FC = () => {
         </div>
       </section>
       
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-16">
-        {/* Filters Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12 border border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-16">
+        <div className="mb-12 rounded-2xl border border-slate-200/90 bg-white/90 p-8 shadow-techjus backdrop-blur-sm">
+          <h2 className="mb-6 flex items-center text-2xl font-bold text-slate-900">
             <div className="w-1 h-8 bg-gradient-to-b from-blue-400 to-green-400 rounded-full mr-4"></div>
             Filtrer les ressources
           </h2>
@@ -329,7 +321,7 @@ const Resources: React.FC = () => {
         
         {/* Resources Grid */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+          <h2 className="mb-2 font-heading text-3xl font-bold tracking-tight text-slate-900">
             {filteredResources.length > 0 ? (
               <>Nos <span className="text-blue-400">ressources</span> ({filteredResources.length})</>
             ) : (
@@ -355,21 +347,23 @@ const Resources: React.FC = () => {
         )}
         
         {/* Call to Action */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-green-500 rounded-2xl p-8 text-center text-white">
-          <h3 className="text-2xl font-bold mb-4">
+        <div className="mt-16 rounded-2xl bg-gradient-to-r from-techjus-blue to-techjus-green p-8 text-center text-white shadow-techjus-lg">
+          <h3 className="mb-4 text-2xl font-bold text-white">
             Vous ne trouvez pas ce que vous cherchez ?
           </h3>
-          <p className="text-lg mb-6 opacity-90">
+          <p className="mb-6 text-lg text-white/90">
             Contactez notre équipe pour obtenir des conseils personnalisés
           </p>
-          <button 
+          <Button
+            size="lg"
+            variant="secondary"
+            className="bg-white font-semibold text-blue-600 hover:bg-gray-100"
             onClick={handleContactClick}
-            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
           >
             Nous contacter
-          </button>
+          </Button>
           </div>
-      </main>
+      </div>
     </div>
   );
 };

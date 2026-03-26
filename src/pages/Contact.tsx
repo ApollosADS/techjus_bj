@@ -1,17 +1,13 @@
 import React from 'react';
-// Components
-import Header from '../components/Header';
 import ContactForm from '../components/ContactForm';
 
 const Contact: React.FC = () => {
   return (
-    <>
-      <Header />
-      
-      <main>
+    <div className="page-canvas">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <ContactForm />
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 

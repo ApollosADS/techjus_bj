@@ -1,5 +1,7 @@
-// src/components/shared/Card.tsx
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+
+import { Card as ShadCard, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 interface CardProps {
   children: ReactNode;
@@ -10,24 +12,20 @@ interface CardProps {
   rounded?: string;
 }
 
-const Card = ({ 
-  children, 
-  className = "", 
-  hover = false, 
-  padding = "p-6",
-  shadow = "shadow-md",
-  rounded = "rounded-lg"
+const Card = ({
+  children,
+  className = '',
+  hover = false,
+  padding = 'p-6',
+  shadow = '',
+  rounded = '',
 }: CardProps) => {
   return (
-    <div 
-      className={`
-        bg-white border border-gray-200 ${rounded} ${shadow} ${padding}
-        ${hover ? 'hover:shadow-lg transition-shadow duration-300 cursor-pointer' : ''}
-        ${className}
-      `}
+    <ShadCard
+      className={cn(shadow, rounded, hover && 'cursor-pointer transition-shadow hover:shadow-md', className)}
     >
-      {children}
-    </div>
+      <CardContent className={cn('p-6', padding)}>{children}</CardContent>
+    </ShadCard>
   );
 };
 

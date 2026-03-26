@@ -1,20 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Button } from '@/components/ui/button';
 
 // Import direct des composants (sans lazy loading)
 import Landing from './pages/Landing';
 import Contact from './pages/Contact';
-import LaCommunaute from './pages/LaCommunaute';
 
 // Groupe Contenus
-import Thematiques from './pages/Thematiques';
 import ActualitesPage from './pages/ActualitesPage';
 
 // Groupe Opportunités
-import AnnoncesPage from './pages/AnnoncesPage';
-import Recrutements from './pages/RecrutementsPage';
+import OpportunitesPage from './pages/OpportunitesPage';
 
 // Groupe Ressources & Aide
 import Formations from './pages/Formations';
@@ -28,21 +26,19 @@ const App: React.FC = () => {
         <Header />
         
         {/* Contenu principal */}
-        <main className="flex-grow pt-16 md:pt-20">
+        <main className="flex-grow scroll-smooth pt-16 md:pt-20">
           <Routes>
             {/* Pages principales (sans dropdown) */}
             <Route path="/" element={<Landing />} />
-            <Route path="/communaute" element={<LaCommunaute />} />
             <Route path="/contact" element={<Contact />} />
             
             {/* Groupe Contenus */}
-            <Route path="/thematiques" element={<Thematiques />} />
             <Route path="/actualites" element={<ActualitesPage />} />
             <Route path="/actualites/:slug" element={<ActualitesPage />} />
             
             {/* Groupe Opportunités */}
-            <Route path="/annonces" element={<AnnoncesPage />} />
-            <Route path="/recrutements" element={<Recrutements />} />
+            <Route path="/opportunites" element={<OpportunitesPage />} />
+            <Route path="/annonces" element={<Navigate to="/opportunites" replace />} />
             
             {/* Groupe Ressources & Aide */}
             <Route path="/formations" element={<Formations />} />
@@ -50,17 +46,19 @@ const App: React.FC = () => {
             
             {/* Gestion des routes non trouvées */}
             <Route path="*" element={
-              <div className="max-w-4xl mx-auto px-4 py-20 text-center">
-                <h1 className="text-4xl font-bold text-gray-800 mb-6">Page non trouvée</h1>
-                <p className="text-xl text-gray-600 mb-8">
-                  La page que vous recherchez semble introuvable.
+              <div className="page-canvas flex min-h-[70vh] flex-col items-center justify-center px-4 py-20 text-center">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-techjus-blue">
+                  Erreur 404
                 </p>
-                <a 
-                  href="/" 
-                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300"
-                >
-                  Retour à l'accueil
-                </a>
+                <h1 className="mb-4 max-w-lg font-heading text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+                  Page non trouvée
+                </h1>
+                <p className="mb-10 max-w-md text-lg text-slate-600">
+                  La page demandée n&apos;existe pas ou a été déplacée.
+                </p>
+                <Button asChild size="lg" className="font-semibold shadow-techjus">
+                  <Link to="/">Retour à l&apos;accueil</Link>
+                </Button>
               </div>
             } />
           </Routes>

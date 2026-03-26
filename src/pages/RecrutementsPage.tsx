@@ -1,5 +1,6 @@
 // src/pages/RecrutementsPage.tsx
 import React, { useState, useEffect } from 'react';
+import { Inbox, Search } from 'lucide-react';
 import { Recrutement } from '../types/recrutement';
 import FilterBar from '../components/recrutements/FilterBar';
 import LoadingSpinner from '../components/shared/LoadingSpinner';
@@ -14,7 +15,11 @@ interface FilterOptions {
   showExpired: boolean;
 }
 
-const RecrutementsPage: React.FC = () => {
+interface RecrutementsPageProps {
+  embedded?: boolean;
+}
+
+const RecrutementsPage: React.FC<RecrutementsPageProps> = ({ embedded = false }) => {
   const [recrutements, setRecrutements] = useState<Recrutement[]>([]);
   const [filteredRecrutements, setFilteredRecrutements] = useState<Recrutement[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
@@ -171,7 +176,13 @@ const RecrutementsPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div
+        className={
+          embedded
+            ? 'flex min-h-[280px] items-center justify-center'
+            : 'flex min-h-screen items-center justify-center'
+        }
+      >
         <LoadingSpinner />
       </div>
     );
@@ -180,17 +191,17 @@ const RecrutementsPage: React.FC = () => {
   const sortedRecrutements = sortRecrutements(filteredRecrutements);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Offres d'emploi
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Découvrez les opportunités de carrière dans le domaine du droit et de la technologie
-          </p>
-        </div>
-        
+    <div className={embedded ? '' : 'min-h-screen bg-gray-50 py-8'}>
+      <div className={embedded ? 'mx-auto max-w-none px-0' : 'container mx-auto px-4'}>
+        {!embedded && (
+          <div className="mb-12 text-center">
+            <h1 className="mb-4 text-4xl font-bold text-gray-900">Offres d'emploi</h1>
+            <p className="mx-auto max-w-3xl text-xl text-gray-600">
+              Découvrez les opportunités de carrière dans le domaine du droit et de la technologie
+            </p>
+          </div>
+        )}
+
         <FilterBar
           categories={categories}
           selectedCategories={selectedCategories}
@@ -227,16 +238,17 @@ const RecrutementsPage: React.FC = () => {
         {sortedRecrutements.length === 0 ? (
           <div>
             {recrutements.length === 0 ? (
-              <EmptyState 
-                title="Aucune offre d'emploi disponible" 
+              <EmptyState
+                title="Aucune offre d'emploi disponible"
                 description="Les données de recrutement ne sont pas disponibles pour le moment"
-                icon="📭"
+                icon={Inbox}
               />
             ) : (
-              <EmptyState 
-                title="Aucune offre d'emploi correspondant à vos critères" 
+              <EmptyState
+                title="Aucune offre d'emploi correspondant à vos critères"
                 description="Essayez d'ajuster vos filtres de recherche ou activez l'affichage des offres expirées"
-                icon="🔍"
+                icon={Search}
+                iconClassName="text-techjus-blue"
               />
             )}
           </div>

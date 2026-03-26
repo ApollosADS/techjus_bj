@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { 
   Menu, 
   X, 
@@ -9,17 +9,12 @@ import {
   Instagram, 
   ChevronDown, 
   ChevronUp,
-  FileText,
   Newspaper,
   Briefcase,
-  Users,
   BookOpen,
   Home,
-  Heart,
   MessageSquare,
-  Calendar,
-  Search,
-  Settings
+  Search
 } from 'lucide-react';
 
 interface SocialLink {
@@ -49,6 +44,7 @@ const Header: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   // Un ref par dropdown pour éviter les conflits
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -65,27 +61,12 @@ const Header: React.FC = () => {
   // Pages principales (navigation directe)
   const mainPages: NavPage[] = [
     { path: '/', label: 'Accueil', icon: Home },
-    { path: '/communaute', label: 'La Communauté', icon: Heart }
+    { path: '/actualites', label: 'Actualités', icon: Newspaper },
+    { path: '/opportunites', label: 'Opportunités', icon: Briefcase }
   ];
 
   // Groupes de navigation (avec dropdowns)
   const navGroups: NavGroup[] = [
-    {
-      label: 'Contenus',
-      icon: FileText,
-      items: [
-        { path: '/thematiques', label: 'Thématiques', icon: Settings },
-        { path: '/actualites', label: 'Actualités', icon: Newspaper }
-      ]
-    },
-    {
-      label: 'Opportunités',
-      icon: Briefcase,
-      items: [
-        { path: '/annonces', label: 'Annonces', icon: Calendar },
-        { path: '/recrutements', label: 'Recrutements', icon: Users }
-      ]
-    },
     {
       label: 'Ressources',
       icon: BookOpen,
@@ -107,10 +88,6 @@ const Header: React.FC = () => {
         : ''
     }`;
 
-  const mobileNavLinkClasses = ({ isActive }: NavLinkProps) =>
-    `block py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg font-medium border-b border-gray-100 transition-colors flex items-center gap-3 ${
-      isActive ? 'text-techjus-blue bg-techjus-light' : 'text-gray-700 hover:bg-gray-50'
-    }`;
 
   // Fonction pour déterminer si un lien est actif
   const isActiveLink = (path: string): boolean => {
@@ -125,19 +102,30 @@ const Header: React.FC = () => {
     return group.items.some(item => isActiveLink(item.path));
   };
 
-  // Gestion du menu
+  // Fonction pour gérer le menu
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    if (!isMenuOpen) {
+    const newState = !isMenuOpen;
+    setIsMenuOpen(newState);
+    
+    // Gestion du défilement du body
+    if (newState) {
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
     } else {
       document.body.style.overflow = 'unset';
+      document.body.style.position = 'static';
+      document.body.style.width = 'auto';
+    }
+    
+    if (!newState) {
+      closeDropdown();
     }
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-    document.body.style.overflow = 'unset';
+    closeDropdown();
   };
 
   // Gestion des dropdowns
@@ -183,19 +171,18 @@ const Header: React.FC = () => {
 
   // Fonction de rendu du menu mobile
   const renderMobileMenu = (): React.ReactNode => {
+    if (!isMenuOpen) return null;
+    
     return (
       <div 
-        className="md:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            closeMenu();
-          }
-        }}
+        className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm transition-opacity"
+        onClick={closeMenu}
       >
         <div 
-          className="fixed top-[72px] left-0 right-0 bg-white shadow-xl border-t border-gray-100 h-[calc(100vh-72px)] overflow-y-auto" 
+          className="fixed top-[72px] left-0 right-0 bottom-0 bg-white shadow-xl overflow-y-auto transform transition-transform duration-300 ease-in-out"
+          onClick={(e) => e.stopPropagation()}
         >
-          <nav className="h-full flex flex-col overflow-y-auto">
+          <nav className="h-full flex flex-col">
             <div className="p-4 border-b border-gray-100">
               <NavLink 
                 to="/" 
@@ -205,92 +192,130 @@ const Header: React.FC = () => {
                 <img 
                   src="/logo-techjus.png" 
                   alt="Logo TechJus" 
-                  className="h-10 md:h-12 w-auto" 
+                  className="h-10 w-auto"
                 />
               </NavLink>
             </div>
 
-            <div className="p-4 space-y-2">
+            <div className="flex-1 overflow-y-auto py-2">
               {/* Pages principales */}
-              {mainPages.map((page) => (
-                <NavLink
-                  key={page.path}
-                  to={page.path}
-                  end={page.path === '/'}
-                  className={mobileNavLinkClasses({ isActive: isActiveLink(page.path) })}
-                  onClick={closeMenu}
-                >
-                  {page.label}
-                </NavLink>
-              ))}
-
-              {/* Page de contact */}
-              <NavLink
-                to={contactPage.path}
-                className={mobileNavLinkClasses({ isActive: isActiveLink(contactPage.path) })}
-                onClick={closeMenu}
-              >
-                {contactPage.label}
-              </NavLink>
+              <div className="space-y-1 px-2 py-3">
+                {mainPages.map((page) => (
+                  <NavLink
+                    key={page.path}
+                    to={page.path}
+                    end={page.path === '/'}
+                    onClick={closeMenu}
+                    className={({ isActive }) => 
+                      `flex items-center px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                        isActive 
+                          ? 'bg-blue-50 text-techjus-blue' 
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`
+                    }
+                  >
+                    {page.icon && <page.icon className="mr-3 h-5 w-5 flex-shrink-0" />}
+                    {page.label}
+                  </NavLink>
+                ))}
+              </div>
 
               {/* Groupes avec dropdowns */}
-              {navGroups.map((group) => (
-                <div key={group.label} className="border-b border-gray-100">
-                  <button
-                    onClick={() => toggleDropdown(group.label)}
-                    className={`w-full text-left py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg font-medium flex items-center justify-between ${
-                      isGroupActive(group) ? 'text-techjus-blue bg-techjus-light' : 'text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {group.label}
-                    </div>
-                    {openDropdown === group.label ? (
-                      <ChevronUp className="h-5 w-5" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5" />
-                    )}
-                  </button>
-                  
-                  {openDropdown === group.label && (
-                    <div className="bg-gray-50 border-t border-gray-100">
-                      {group.items.map((item) => (
-                        <NavLink
-                          key={item.path}
-                          to={item.path}
-                          className={`py-3 px-8 text-sm font-medium transition-colors flex items-center gap-3 ${
-                            isActiveLink(item.path) ? 'text-techjus-blue bg-blue-50' : 'text-gray-600 hover:text-techjus-blue hover:bg-gray-100'
-                          }`}
-                          onClick={() => {
-                            // Permettre à la navigation de se déclencher d'abord
-                            setTimeout(() => {
+              <div className="space-y-1 px-2 py-3 border-t border-gray-100">
+                {navGroups.map((group) => (
+                  <div key={group.label} className="space-y-1">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // Empêche la propagation du clic
+                        toggleDropdown(group.label);
+                      }}
+                      className={`w-full text-left py-3 px-4 text-base font-medium flex items-center justify-between rounded-lg ${
+                        isGroupActive(group) 
+                          ? 'text-techjus-blue bg-blue-50' 
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      <div className="flex items-center">
+                        {group.icon && <group.icon className="mr-3 h-5 w-5 flex-shrink-0" />}
+                        {group.label}
+                      </div>
+                      {openDropdown === group.label ? (
+                        <ChevronUp className="h-5 w-5" />
+                      ) : (
+                        <ChevronDown className="h-5 w-5" />
+                      )}
+                    </button>
+                    
+                    {openDropdown === group.label && (
+                      <div className="space-y-1 py-2 pl-8">
+                        {group.items.map((item) => (
+                          <NavLink
+                            key={item.path}
+                            to={item.path}
+                            className={({ isActive }) =>
+                              `flex items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                                isActive
+                                  ? 'bg-blue-50 text-techjus-blue'
+                                  : 'text-gray-600 hover:bg-gray-50'
+                              }`
+                            }
+                            onClick={(e) => {
+                              e.preventDefault();
                               closeDropdown();
                               closeMenu();
-                            }, 0);
-                          }}
-                        >
-                          {item.label}
-                        </NavLink>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+                              navigate(item.path);
+                            }}
+                          >
+                            {item.icon && (
+                              <item.icon className="mr-3 h-4 w-4 flex-shrink-0" />
+                            )}
+                            {item.label}
+                          </NavLink>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Page de contact */}
+              <div className="px-2 py-3 border-t border-gray-100">
+                <NavLink
+                  to={contactPage.path}
+                  className={({ isActive }) => 
+                    `flex items-center px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                      isActive 
+                        ? 'bg-blue-50 text-techjus-blue' 
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`
+                  }
+                  onClick={closeMenu}
+                >
+                  <MessageSquare className="mr-3 h-5 w-5 flex-shrink-0" />
+                  {contactPage.label}
+                </NavLink>
+              </div>
             </div>
 
-            <div className="mt-auto p-4 border-t border-gray-100 flex flex-wrap gap-4 justify-center">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
-                  aria-label={link.label}
-                >
-                  <link.icon className="h-6 w-6" />
-                </a>
-              ))}
+            {/* Pied de page mobile */}
+            <div className="p-4 border-t border-gray-100 mt-auto">
+              <div className="flex justify-center space-x-4">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-gray-600 hover:text-techjus-blue hover:bg-gray-100 rounded-full transition-colors duration-200"
+                    aria-label={link.label}
+                  >
+                    <link.icon className="h-5 w-5" />
+                  </a>
+                ))}
+              </div>
+              <p className="mt-4 text-center text-sm text-gray-500">
+                {new Date().getFullYear()} TechJus. Tous droits réservés.
+              </p>
             </div>
           </nav>
         </div>
@@ -307,18 +332,21 @@ const Header: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [closeMenu]);
 
+  // Nettoyage des styles au démontage du composant
   useEffect(() => {
     return () => {
       document.body.style.overflow = 'unset';
+      document.body.style.position = 'static';
+      document.body.style.width = 'auto';
     };
   }, []);
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-3 flex justify-between items-center">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200/70 bg-white/85 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-white/75">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
           {/* Logo */}
           <NavLink 
             to="/" 
@@ -344,14 +372,6 @@ const Header: React.FC = () => {
                 {page.label}
               </NavLink>
             ))}
-
-            {/* Page de contact */}
-            <NavLink
-              to={contactPage.path}
-              className={navLinkClasses({ isActive: isActiveLink(contactPage.path) })}
-            >
-              {contactPage.label}
-            </NavLink>
 
             {/* Groupes avec dropdowns */}
             {navGroups.map((group) => (
@@ -380,7 +400,7 @@ const Header: React.FC = () => {
 
                 {/* Dropdown Menu */}
                 {(openDropdown === group.label || hoveredDropdown === group.label) && (
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 py-3 z-50 animate-in slide-in-from-top-2 duration-200">
+                  <div className="absolute left-0 top-full z-50 mt-2 w-56 rounded-xl border border-slate-200/80 bg-white/95 py-3 shadow-techjus-lg backdrop-blur-md animate-in slide-in-from-top-2 duration-200">
                     <div className="px-3 py-2 mb-2 border-b border-gray-100">
                       <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                         {group.label}
@@ -404,6 +424,14 @@ const Header: React.FC = () => {
                 )}
               </div>
             ))}
+
+            {/* Lien Contact */}
+            <NavLink
+              to={contactPage.path}
+              className={navLinkClasses({ isActive: isActiveLink(contactPage.path) })}
+            >
+              {contactPage.label}
+            </NavLink>
           </nav>
 
           {/* Bouton Menu Mobile */}

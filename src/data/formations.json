@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Masterclass : Devenir Juriste 4.0 à l'ère du digital et de l'IA",
+    "description": "Enjeux juridiques et éthiques de l'IA dans le contexte africain",
+    "duration": "1 jour",
+    "level": "Intermédiaire",
+    "participants": "5-10",
+    "modules": [
+      "IA et droit africain",
+      "Éthique de l'IA",
+      "Responsabilité algorithmique",
+      "Régulation future"
+    ],
+    "color": "bg-red-500"
+  },
+  {
+    "id": 2,
+    "title": "Fondamentaux du Droit du Numérique",
+    "description": "Introduction complète aux principes de base du droit du numérique au Bénin",
+    "duration": "3 Mois",
+    "level": "Débutant",
+    "participants": "15-20",
+    "modules": [
+      "Introduction au droit du numérique",
+      "Cadre juridique béninois",
+      "Propriété intellectuelle numérique",
+      "Contrats électroniques"
+    ],
+    "color": "bg-blue-500"
+  },
+  {
+    "id": 3,
+    "title": "Cybersécurité et Droit",
+    "description": "Aspects juridiques de la cybersécurité et gestion des incidents",
+    "duration": "7 jours",
+    "level": "Avancé",
+    "participants": "8-12",
+    "modules": [
+      "Cadre légal cybersécurité",
+      "Gestion des incidents",
+      "Responsabilités juridiques",
+      "Audit et conformité"
+    ],
+    "color": "bg-yellow-500"
+  },
+  {
+    "id": 4,
+    "title": "Intelligence Artificielle et Éthique",
+    "description": "Enjeux juridiques et éthiques de l'IA dans le contexte africain",
+    "duration": "1 jour",
+    "level": "Expert",
+    "participants": "5-10",
+    "modules": [
+      "IA et droit africain",
+      "Éthique de l'IA",
+      "Responsabilité algorithmique",
+      "Régulation future"
+    ],
+    "color": "bg-red-500"
+  },
+  {
+    "id": 5,
+    "title": "Réussir au concours de magistrature",
+    "description": "Préparation complète au concours de magistrature",
+    "duration": "3 mois",
+    "level": "Expert",
+    "participants": "5-10",
+    "modules": [
+      "Méthodologie juridique",
+      "Droit civil et pénal",
+      "Procédures judiciaires",
+      "Épreuves pratiques"
+    ],
+    "color": "bg-yellow-500"
+  },
+  {
+    "id": 6,
+    "title": "Protection des données à caractère personnel",
+    "description": "Maîtrisez la réglementation sur la protection des données personnelles",
+    "duration": "2 jours",
+    "level": "Intermédiaire",
+    "participants": "10-15",
+    "modules": [
+      "Principes de protection des données",
+      "Mise en conformité",
+      "Droits des personnes",
+      "Sanctions et recours"
+    ],
+    "color": "bg-green-500"
+  }
+] 

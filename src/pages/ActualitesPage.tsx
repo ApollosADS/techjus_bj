@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { FileX, Search } from 'lucide-react';
 import { Actualite } from '../components/actualites/types';
 import ActualiteCard from '../components/actualites/ActualiteCard';
 import ActualiteDetail from '../components/actualites/ActualiteDetail';
 import LoadingSpinner from '../components/shared/LoadingSpinner';
 import EmptyState from '../components/shared/EmptyState';
 import Tag from '../components/shared/Tag';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 
 // Import des données (à remplacer par un appel API)
 import actualitesData from '../data/actualites.json';
@@ -41,8 +45,8 @@ const ActualitesPage: React.FC = () => {
     
     if (loading) {
       return (
-        <div className="min-h-screen bg-gray-50 py-12">
-          <div className="max-w-4xl mx-auto px-4">
+        <div className="page-canvas flex min-h-[50vh] items-center justify-center py-16">
+          <div className="max-w-4xl px-4">
             <LoadingSpinner size="lg" />
           </div>
         </div>
@@ -51,12 +55,13 @@ const ActualitesPage: React.FC = () => {
 
     if (!actualite) {
       return (
-        <div className="min-h-screen bg-gray-50 py-12">
-          <div className="max-w-4xl mx-auto px-4">
-            <EmptyState 
+        <div className="page-canvas py-16">
+          <div className="mx-auto max-w-4xl px-4">
+            <EmptyState
               title="Article non trouvé"
               description="L'article que vous cherchez n'existe pas ou a été supprimé."
-              icon="❌"
+              icon={FileX}
+              iconClassName="text-destructive"
             />
           </div>
         </div>
@@ -64,8 +69,8 @@ const ActualitesPage: React.FC = () => {
     }
 
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-4xl mx-auto px-4">
+      <div className="page-canvas py-12 md:py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <ActualiteDetail actualite={actualite} />
         </div>
       </div>
@@ -87,8 +92,8 @@ const ActualitesPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4">
+      <div className="page-canvas flex min-h-[50vh] items-center justify-center py-16">
+        <div className="max-w-7xl px-4">
           <LoadingSpinner size="lg" />
         </div>
       </div>
@@ -96,94 +101,100 @@ const ActualitesPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+    <div className="page-canvas py-12 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-techjus-blue">
+            Veille &amp; analyses
+          </p>
+          <h1 className="mb-4 font-heading text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
             Actualités TechJus
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="mx-auto max-w-3xl text-lg text-slate-600 md:text-xl">
             Restez informé des dernières évolutions en matière de droit, technologie et éthique numérique
           </p>
         </div>
 
         {/* Filtres */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
-          {/* Barre de recherche */}
-          <div className="mb-6">
+        <Card className="mb-8 shadow-sm">
+          <CardHeader>
+            <CardTitle className="font-heading text-xl text-techjus-blue">
+              Filtrer les articles
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
             <div className="relative max-w-md">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <input
-                type="text"
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                type="search"
                 placeholder="Rechercher un article..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value || '')}
-                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="pl-9"
               />
             </div>
-          </div>
 
-          {/* Tags */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">
-              Filtrer par catégorie
-            </label>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setSelectedTag('')}
-                className={`px-3 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                  !selectedTag 
-                    ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-200' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Tous
-              </button>
-              {allTags.map(tag => (
-                <button
-                  key={tag}
-                  onClick={() => setSelectedTag(tag === selectedTag ? '' : tag || '')}
-                  className={`px-3 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                    selectedTag === tag
-                      ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-200'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+            <div>
+              <label className="mb-3 block text-sm font-medium text-foreground">
+                Filtrer par catégorie
+              </label>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  size="sm"
+                  variant={!selectedTag ? 'default' : 'outline'}
+                  className="rounded-full"
+                  onClick={() => setSelectedTag('')}
                 >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Résumé des filtres */}
-          {(selectedTag || searchTerm) && (
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm text-gray-500">Filtres actifs :</span>
-                {searchTerm && (
-                  <Tag variant="primary" size="sm">"{searchTerm}"</Tag>
-                )}
-                {selectedTag && (
-                  <Tag variant={selectedTag} size="sm">{selectedTag}</Tag>
-                )}
-                <button
-                  onClick={() => {
-                    setSelectedTag('');
-                    setSearchTerm('');
-                  }}
-                  className="text-sm text-blue-600 hover:text-blue-700 font-medium ml-2"
-                >
-                  Effacer tous
-                </button>
+                  Tous
+                </Button>
+                {allTags.map((tag) => (
+                  <Button
+                    key={tag}
+                    type="button"
+                    size="sm"
+                    variant={selectedTag === tag ? 'default' : 'outline'}
+                    className="rounded-full"
+                    onClick={() => setSelectedTag(tag === selectedTag ? '' : tag || '')}
+                  >
+                    {tag}
+                  </Button>
+                ))}
               </div>
             </div>
-          )}
-        </div>
+
+            {(selectedTag || searchTerm) && (
+              <div className="border-t border-border pt-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm text-muted-foreground">
+                    Filtres actifs :
+                  </span>
+                  {searchTerm && (
+                    <Tag variant="primary" size="sm">
+                      &quot;{searchTerm}&quot;
+                    </Tag>
+                  )}
+                  {selectedTag && (
+                    <Tag variant={selectedTag} size="sm">
+                      {selectedTag}
+                    </Tag>
+                  )}
+                  <Button
+                    type="button"
+                    variant="link"
+                    className="h-auto p-0 text-primary"
+                    onClick={() => {
+                      setSelectedTag('');
+                      setSearchTerm('');
+                    }}
+                  >
+                    Effacer tous
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Statistiques */}
         <div className="mb-8">
@@ -195,10 +206,11 @@ const ActualitesPage: React.FC = () => {
 
         {/* Grille d'articles */}
         {filteredActualites.length === 0 ? (
-          <EmptyState 
+          <EmptyState
             title="Aucun article trouvé"
             description="Essayez d'ajuster vos filtres ou votre recherche."
-            icon="🔍"
+            icon={Search}
+            iconClassName="text-techjus-blue"
           />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

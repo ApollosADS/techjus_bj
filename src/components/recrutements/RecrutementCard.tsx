@@ -1,6 +1,8 @@
 // src/components/recrutements/RecrutementCard.tsx
 import { Link } from 'react-router-dom';
+import { Briefcase, Clock, Calendar } from 'lucide-react';
 import Card from '../shared/Card';
+import { Button } from '@/components/ui/button';
 import Tag from '../shared/Tag';
 import { Recrutement } from '../../types/recrutement';
 
@@ -121,9 +123,7 @@ const RecrutementCard: React.FC<RecrutementCardProps> = ({ recrutement }) => {
       <div className="space-y-4 mb-6 flex-1">
         <div className="flex items-center gap-6 text-sm text-gray-600">
           <div className="flex items-center gap-3">
-            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M8 6v10a2 2 0 002 2h4a2 2 0 002-2V6" />
-            </svg>
+            <Briefcase className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
             <div className="flex items-center gap-2">
               <span className="font-medium">{recrutement.type}</span>
               <span className="text-gray-400">•</span>
@@ -131,9 +131,7 @@ const RecrutementCard: React.FC<RecrutementCardProps> = ({ recrutement }) => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <Clock className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
             <span className="font-medium">{recrutement.salary}</span>
           </div>
         </div>
@@ -148,9 +146,7 @@ const RecrutementCard: React.FC<RecrutementCardProps> = ({ recrutement }) => {
         <div className="flex items-center justify-between">
           <div className="text-sm text-gray-500">
             <div className="flex items-center gap-3">
-              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+              <Calendar className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
               <span>Publié le {formatDate(recrutement.datePublication)}</span>
             </div>
           </div>
@@ -167,13 +163,15 @@ const RecrutementCard: React.FC<RecrutementCardProps> = ({ recrutement }) => {
             
             <div className="flex items-center gap-6">
               {/* Bouton Voir détails */}
-              <button
-                onClick={() => window.open(recrutement.files?.pdf || '', '_blank')}
-                className="px-6 py-2.5 bg-techjus-blue/10 hover:bg-techjus-blue/20 text-techjus-blue rounded-md transition-all duration-200 text-sm font-medium shadow-sm hover:shadow-md"
+              <Button
+                type="button"
+                variant="outline"
+                className="border-techjus-blue/20 bg-techjus-blue/10 text-techjus-blue hover:bg-techjus-blue/20"
                 title="Ouvrir le PDF dans un nouvel onglet"
+                onClick={() => window.open(recrutement.files?.pdf || '', '_blank')}
               >
                 Voir détails
-              </button>
+              </Button>
             </div>
           </div>
         </div>

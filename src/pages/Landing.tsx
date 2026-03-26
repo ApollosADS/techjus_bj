@@ -1,26 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
 import FoundersSection from '../components/FoundersSection';
 import RulesSection from '../components/RulesSection';
-import ContactForm from '../components/ContactForm';
 import AnnoncePopup from '../components/AnnoncePopup';
+import CommunityHero from '../components/community/CommunityHero';
+import CommunityGoals from '../components/community/CommunityGoals';
+import CommunityTarget from '../components/community/CommunityTarget';
+import CommunityCTA from '../components/community/CommunityCTA';
+import TrustPartners from '../components/community/TrustPartners';
+import ScrollReveal from '../components/shared/ScrollReveal';
 import { usePopup } from '../hooks/usePopup';
 
-interface Annonce {
+// Utilisation de l'interface Annonce depuis usePopup
+import type { Annonce } from '../hooks/usePopup';
+
+// Type pour les tags qui peuvent être soit un objet avec une propriété name, soit une chaîne
+type TagType = { name: string } | string;
+
+// Interface pour les données JSON brutes
+interface AnnonceJson {
   id: string;
   title: string;
   description: string;
   excerpt: string;
   date: string;
-  heure: string;
+  dateDebut: string;
+  dateFin: string;
+  heureDebut: string;
+  heureFin: string;
   lieu: string;
   type: string;
   organisateur: string;
-  tags?: string[];
+  tags: TagType[];
   lienInscription?: string;
   featured?: boolean;
+  statut: 'en_cours' | 'a_venir' | 'termine' | 'annule';
+  imageUrl?: string;
+  images?: string[];
+  /** Bannière uniquement pour le popup (Landing) */
+  popupBannerUrl?: string;
+  dateLabel?: string;
+  heureLabel?: string;
+  urgent?: boolean;
+  partenaires?: string[];
+  prix?: string;
+  capacite?: number;
+  inscrits?: number;
+  updatedAt?: string;
 }
 
 const Landing: React.FC = () => {
@@ -28,40 +54,39 @@ const Landing: React.FC = () => {
   
   // Charger les annonces
   useEffect(() => {
-    import('../data/annonces.json').then((data) => {
-      const adaptedData: Annonce[] = data.default.map((item: {
-        id: string;
-        title: string;
-        description: string;
-        excerpt: string;
-        date: string;
-        heureDebut?: string;
-        lieu: string;
-        type: string;
-        organisateur: string;
-        tags?: Array<{ name: string } | string>;
-        lienInscription?: string;
-        featured?: boolean;
-      }) => ({
+    // Définir le type attendu pour les données importées
+    type ImportedAnnonce = Omit<AnnonceJson, 'statut'> & {
+      statut: string;
+    };
+
+    import('../data/annonces.json').then((data: { default: ImportedAnnonce[] }) => {
+      const adaptedData: Annonce[] = data.default.map((item) => ({
         id: item.id,
         title: item.title,
         description: item.description,
         excerpt: item.excerpt,
         date: item.date,
         heure: item.heureDebut || '14:00',
+        dateLabel: item.dateLabel,
+        heureLabel: item.heureLabel,
         lieu: item.lieu,
         type: item.type,
         organisateur: item.organisateur,
-        tags: Array.isArray(item.tags) 
-          ? item.tags.map((tag) => 
-              typeof tag === 'object' && tag && 'name' in tag ? tag.name : String(tag || '')
-            )
-          : [],
+        tags: (item.tags || []).map((tag: TagType) => 
+          typeof tag === 'object' ? tag.name : String(tag || '')
+        ),
         lienInscription: item.lienInscription,
-        featured: item.featured
+        featured: item.featured,
+        imageUrl: item.imageUrl,
+        popupBannerUrl: item.popupBannerUrl,
+        statut: (['en_cours', 'a_venir', 'termine', 'annule'].includes(item.statut) 
+          ? item.statut 
+          : 'a_venir') as Annonce['statut']
       }));
       
       setAnnonces(adaptedData);
+    }).catch(error => {
+      console.error('Erreur lors du chargement des annonces:', error);
     });
   }, []);
 
@@ -69,13 +94,33 @@ const Landing: React.FC = () => {
   const { isOpen, selectedAnnonce, closePopup } = usePopup(annonces);
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <div className="min-h-screen overflow-x-hidden bg-white">
       <HeroSection />
-      <AboutSection />
-      <FoundersSection />
-      <RulesSection />
-      <ContactForm />
+
+      {/* Section Communauté */}
+      <ScrollReveal>
+        <CommunityHero />
+      </ScrollReveal>
+      <ScrollReveal>
+        <CommunityTarget />
+      </ScrollReveal>
+      <ScrollReveal>
+        <CommunityGoals />
+      </ScrollReveal>
+      <ScrollReveal>
+        <TrustPartners />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <FoundersSection />
+      </ScrollReveal>
+      <ScrollReveal>
+        <RulesSection />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <CommunityCTA />
+      </ScrollReveal>
       
       {/* Popup d'annonce */}
       <AnnoncePopup

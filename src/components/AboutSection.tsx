@@ -67,7 +67,7 @@ const AboutSection: React.FC = () => {
                 </div>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-center text-gray-800">{feature.title}</h3>
-              <p className="text-gray-600 text-center text-sm leading-relaxed">{feature.description}</p>
+              .      <p className="text-gray-600 text-center text-sm leading-relaxed">{feature.description}</p>
               
               {/* Indicateur de clic */}
               <div className="mt-4 text-center">

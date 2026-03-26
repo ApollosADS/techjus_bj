@@ -196,7 +196,7 @@ const Header: React.FC = () => {
           className="fixed top-[72px] left-0 right-0 bottom-0 bg-white shadow-xl overflow-y-auto transform transition-transform duration-300 ease-in-out"
           onClick={(e) => e.stopPropagation()}
         >
-          <nav className="h-full flex flex-col">
+          <nav id="techjus-mobile-menu" className="h-full flex flex-col" aria-label="Navigation mobile">
             <div className="p-4 border-b border-gray-100">
               <NavLink 
                 to="/" 
@@ -357,6 +357,9 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  const mobileMenuButtonClass =
+    'lg:hidden p-3 rounded-xl transition-all duration-200 min-w-[48px] min-h-[48px] flex items-center justify-center';
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200/70 bg-white/85 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-white/75">
@@ -448,19 +451,29 @@ const Header: React.FC = () => {
             </NavLink>
           </nav>
 
-          {/* Bouton Menu Mobile */}
-          <button
-            onClick={toggleMenu}
-            className={`lg:hidden p-3 rounded-xl transition-all duration-200 min-w-[48px] min-h-[48px] flex items-center justify-center ${
-              isMenuOpen 
-                ? 'bg-blue-600 text-white shadow-lg' 
-                : 'hover:bg-gray-100 text-gray-700'
-            }`}
-            aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Bouton Menu Mobile — deux instances pour aria-expanded en littéraux (validateurs statiques) */}
+          {isMenuOpen ? (
+            <button
+              type="button"
+              onClick={toggleMenu}
+              className={`${mobileMenuButtonClass} bg-blue-600 text-white shadow-lg`}
+              aria-label="Fermer le menu"
+              aria-expanded="true"
+              aria-controls="techjus-mobile-menu"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={toggleMenu}
+              className={`${mobileMenuButtonClass} text-gray-700 hover:bg-gray-100`}
+              aria-label="Ouvrir le menu"
+              aria-expanded="false"
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+          )}
         </div>
       </header>
 

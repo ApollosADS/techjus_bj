@@ -34,7 +34,8 @@ interface AnnonceJson {
   tags: TagType[];
   lienInscription?: string;
   featured?: boolean;
-  statut: 'en_cours' | 'a_venir' | 'termine' | 'annule';
+  /** Optionnel dans le JSON : défaut appliqué au mapping */
+  statut?: 'en_cours' | 'a_venir' | 'termine' | 'annule';
   imageUrl?: string;
   images?: string[];
   /** Bannière uniquement pour le popup (Landing) */
@@ -54,13 +55,14 @@ const Landing: React.FC = () => {
   
   // Charger les annonces
   useEffect(() => {
-    // Définir le type attendu pour les données importées
-    type ImportedAnnonce = Omit<AnnonceJson, 'statut'> & {
-      statut: string;
-    };
+    import('../data/annonces.json').then((module) => {
+      const rows = module.default as AnnonceJson[];
+      const statutPopup = (s: AnnonceJson['statut']): Annonce['statut'] =>
+        s === 'en_cours' || s === 'a_venir' || s === 'termine' || s === 'annule'
+          ? s
+          : 'a_venir';
 
-    import('../data/annonces.json').then((data: { default: ImportedAnnonce[] }) => {
-      const adaptedData: Annonce[] = data.default.map((item) => ({
+      const adaptedData: Annonce[] = rows.map((item) => ({
         id: item.id,
         title: item.title,
         description: item.description,
@@ -79,9 +81,7 @@ const Landing: React.FC = () => {
         featured: item.featured,
         imageUrl: item.imageUrl,
         popupBannerUrl: item.popupBannerUrl,
-        statut: (['en_cours', 'a_venir', 'termine', 'annule'].includes(item.statut) 
-          ? item.statut 
-          : 'a_venir') as Annonce['statut']
+        statut: statutPopup(item.statut)
       }));
       
       setAnnonces(adaptedData);

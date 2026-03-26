@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { BookOpen, Users, Target, Filter, Search, Calendar, Clock, User, Tag } from 'lucide-react';
+import { BookOpen, Users, Target, Filter, Calendar, Clock, User } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -25,7 +25,7 @@ interface FilterSectionProps {
   onFilterChange: (filters: FilterState) => void;
 }
 
-interface ResourceCardProps extends Resource {}
+type ResourceCardProps = Resource;
 
 // FilterSection component
 const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
@@ -92,16 +92,15 @@ const FilterSection: React.FC<FilterSectionProps> = ({ onFilterChange }) => {
 };
 
 // ResourceCard component
-const ResourceCard: React.FC<ResourceCardProps> = ({ 
-  title, 
-  description, 
-  category, 
-  type, 
-  author, 
-  date, 
-  readTime, 
-  imageUrl, 
-  link 
+const ResourceCard: React.FC<ResourceCardProps> = ({
+  title,
+  description,
+  category,
+  type,
+  author,
+  date,
+  readTime,
+  link,
 }) => {
   const getTypeColor = (type: string): string => {
     switch (type) {
@@ -179,95 +178,104 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
   );
 };
 
+/** Données statiques : hors composant pour stabilité des dépendances du filtre */
+const RESOURCES_DATA: Resource[] = [
+  {
+    title: "Guide complet sur la protection des données personnelles",
+    description:
+      "Découvrez tout ce que vous devez savoir sur le Règlement Général sur la Protection des Données et sa mise en application pratique.",
+    category: "Données personnelles",
+    type: "Guide",
+    author: "",
+    date: "15 Nov 2024",
+    readTime: "10 min",
+    imageUrl: "/api/placeholder/400/200",
+    link: "/resources/donnees-personnelles-guide",
+  },
+  {
+    title: "L'IA et le droit : enjeux et perspectives",
+    description:
+      "Analyse approfondie des implications juridiques de l'intelligence artificielle dans le monde des affaires.",
+    category: "IA",
+    type: "Article",
+    author: "",
+    date: "12 Nov 2024",
+    readTime: "8 min",
+    imageUrl: "/api/placeholder/400/200",
+    link: "/resources/ia-droit",
+  },
+  {
+    title: "Blockchain et contrats intelligents",
+    description:
+      "Comprendre les aspects juridiques de la blockchain et des smart contracts dans l'écosystème numérique.",
+    category: "Blockchain",
+    type: "Étude de cas",
+    author: "",
+    date: "10 Nov 2024",
+    readTime: "12 min",
+    imageUrl: "/api/placeholder/400/200",
+    link: "/resources/blockchain-contrats",
+  },
+  {
+    title: "Cybersécurité et responsabilité juridique",
+    description:
+      "Les obligations légales des entreprises en matière de cybersécurité et protection des données.",
+    category: "Cybersécurité",
+    type: "Guide",
+    author: "",
+    date: "8 Nov 2024",
+    readTime: "15 min",
+    imageUrl: "/api/placeholder/400/200",
+    link: "/resources/cybersecurite-juridique",
+  },
+  {
+    title: "E-commerce et droit de la consommation",
+    description:
+      "Réglementations et bonnes pratiques pour les plateformes de commerce électronique.",
+    category: "E-commerce",
+    type: "Article",
+    author: "",
+    date: "5 Nov 2024",
+    readTime: "9 min",
+    imageUrl: "/api/placeholder/400/200",
+    link: "/resources/ecommerce-droit",
+  },
+  {
+    title: "Propriété intellectuelle et Intelligence artificielle",
+    description:
+      "Protection des créations numériques et enjeux de la propriété intellectuelle en ligne.",
+    category: "Propriété Intellectuelle",
+    type: "Étude de cas",
+    author: "",
+    date: "2 Nov 2024",
+    readTime: "11 min",
+    imageUrl: "/api/placeholder/400/200",
+    link: "/resources/propriete-intellectuelle",
+  },
+];
+
 const Resources: React.FC = () => {
   const [filters, setFilters] = useState<FilterState>({ category: 'Toutes', type: 'Tous' });
   const [shouldNavigateToContact, setShouldNavigateToContact] = useState<boolean>(false);
-  
+
   const handleContactClick = () => {
     setShouldNavigateToContact(true);
   };
-  
+
+  const filteredResources = useMemo(
+    () =>
+      RESOURCES_DATA.filter((resource) => {
+        const categoryMatch =
+          filters.category === 'Toutes' || resource.category === filters.category;
+        const typeMatch = filters.type === 'Tous' || resource.type === filters.type;
+        return categoryMatch && typeMatch;
+      }),
+    [filters]
+  );
+
   if (shouldNavigateToContact) {
     return <Navigate to="/contact" replace />;
   }
-  
-  const resources: Resource[] = [
-    {
-      title: "Guide complet sur la protection des données personnelles",
-      description: "Découvrez tout ce que vous devez savoir sur le Règlement Général sur la Protection des Données et sa mise en application pratique.",
-      category: "Données personnelles",
-      type: "Guide",
-      author: "",
-      date: "15 Nov 2024",
-      readTime: "10 min",
-      imageUrl: "/api/placeholder/400/200",
-      link: "/resources/donnees-personnelles-guide"
-    },
-    {
-      title: "L'IA et le droit : enjeux et perspectives",
-      description: "Analyse approfondie des implications juridiques de l'intelligence artificielle dans le monde des affaires.",
-      category: "IA",
-      type: "Article",
-      author: "",
-      date: "12 Nov 2024",
-      readTime: "8 min",
-      imageUrl: "/api/placeholder/400/200",
-      link: "/resources/ia-droit"
-    },
-    {
-      title: "Blockchain et contrats intelligents",
-      description: "Comprendre les aspects juridiques de la blockchain et des smart contracts dans l'écosystème numérique.",
-      category: "Blockchain",
-      type: "Étude de cas",
-      author: "",
-      date: "10 Nov 2024",
-      readTime: "12 min",
-      imageUrl: "/api/placeholder/400/200",
-      link: "/resources/blockchain-contrats"
-    },
-    {
-      title: "Cybersécurité et responsabilité juridique",
-      description: "Les obligations légales des entreprises en matière de cybersécurité et protection des données.",
-      category: "Cybersécurité",
-      type: "Guide",
-      author: "",
-      date: "8 Nov 2024",
-      readTime: "15 min",
-      imageUrl: "/api/placeholder/400/200",
-      link: "/resources/cybersecurite-juridique"
-    },
-    {
-      title: "E-commerce et droit de la consommation",
-      description: "Réglementations et bonnes pratiques pour les plateformes de commerce électronique.",
-      category: "E-commerce",
-      type: "Article",
-      author: "",
-      date: "5 Nov 2024",
-      readTime: "9 min",
-      imageUrl: "/api/placeholder/400/200",
-      link: "/resources/ecommerce-droit"
-    },
-    {
-      title: "Propriété intellectuelle et Intelligence artificielle",
-      description: "Protection des créations numériques et enjeux de la propriété intellectuelle en ligne.",
-      category: "Propriété Intellectuelle",
-      type: "Étude de cas",
-      author: "",
-      date: "2 Nov 2024",
-      readTime: "11 min",
-      imageUrl: "/api/placeholder/400/200",
-      link: "/resources/propriete-intellectuelle"
-    }
-  ];
-  
-  // Filtrage des ressources avec useMemo pour optimiser les performances
-  const filteredResources = useMemo(() => {
-    return resources.filter(resource => {
-      const categoryMatch = filters.category === 'Toutes' || resource.category === filters.category;
-      const typeMatch = filters.type === 'Tous' || resource.type === filters.type;
-      return categoryMatch && typeMatch;
-    });
-  }, [resources, filters]);
   
   const stats = [
     {
